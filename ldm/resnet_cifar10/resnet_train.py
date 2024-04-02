@@ -25,16 +25,16 @@ cifar10_valid_transforms = torchvision.transforms.Compose([
 ])
 
 dataset_train = torchvision.datasets.CIFAR10(
-    root = "/nfs_shared/LLM_practice/resnet_cifar10/cifar10_dataset", 
+    root = "./cifar10_dataset", 
     train = True,
     transform = cifar10_train_transforms,
-    download=False,
+    download=True,
 )
 dataset_test = torchvision.datasets.CIFAR10(
-    root = "/nfs_shared/LLM_practice/resnet_cifar10/cifar10_dataset", 
+    root = "./cifar10_dataset", 
     train = False,
     transform = cifar10_valid_transforms,
-    download=False,
+    download=True,
 )
 
 train_loader = torch.utils.data.DataLoader(
