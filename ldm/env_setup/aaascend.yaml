@@ -35,6 +35,7 @@ dependencies:
   - joblib 
   - jinja2
   - tensorboard
+  - tensorboardx
   - pip:
       - huggingface-hub==0.22.2
       - pytorch-lightning==2.1.2
