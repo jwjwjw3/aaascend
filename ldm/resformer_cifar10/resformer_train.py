@@ -48,7 +48,7 @@ valid_loader = torch.utils.data.DataLoader(
     shuffle=False
 )
 
-model = resformer_tiny_patch16(num_classes=10)
+model = resformer_base_patch16(num_classes=10)
 # model.eval()
 model.train()
 
@@ -91,4 +91,5 @@ for epoch in range(epochs):
     "valid_loss": valid_loss,
 }
 
-torch.save(single_gpu_resnet_cifar10_results, "single_gpu_resnet_cifar10_results.torch")
+torch.save(single_gpu_resnet_cifar10_results, "resformer_cifar10_results.torch")
+torch.save(model.state_dict(), "resformer_cifar10.ckpt")

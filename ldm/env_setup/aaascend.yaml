@@ -55,3 +55,4 @@ dependencies:
       - nvidia-nvtx-cu11==11.7.91
       - torch-summary
       - setproctitle
+      - onnx

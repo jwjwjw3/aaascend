@@ -5,9 +5,9 @@ from matplotlib import pyplot as plt
 from resnet import resnet18, resnet50
 from utils import train, validate
 
-train_batch_size = 256
+train_batch_size = 64
 test_batch_size = 100
-epochs = 100
+epochs = 50
 device = "cuda:0"
 
 
@@ -91,4 +91,11 @@ for epoch in range(epochs):
     "valid_loss": valid_loss,
 }
 
-torch.save(single_gpu_resnet_cifar10_results, "single_gpu_resnet_cifar10_results.torch")
+# torch.save(single_gpu_resnet_cifar10_results, "single_gpu_resnet_cifar10_results.torch")
+torch.save(model.state_dict(), "resnet18_cifar10.ckpt")
+
+# save ONNX model
+
+export_model = model.cpu()
+dummy_input = torch.randn(1, 3, 224, 224)
+onnx_program = torch.onnx.export(export_model, dummy_input, "./resnet18_early_test.onnx")
