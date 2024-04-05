@@ -9,17 +9,17 @@ train_batch_size = 64
 test_batch_size = 100
 epochs = 50
 device = "cuda:0"
-
+image_size = 64
 
 cifar10_train_transforms = torchvision.transforms.Compose([
-    torchvision.transforms.Resize(size=(224, 224), antialias=True),
+    torchvision.transforms.Resize(size=(image_size, image_size), antialias=True),
     torchvision.transforms.RandomHorizontalFlip(p=0.5),
     torchvision.transforms.ToTensor(),
     torchvision.transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
 
 cifar10_valid_transforms = torchvision.transforms.Compose([
-    torchvision.transforms.Resize(size=(224, 224), antialias=True),
+    torchvision.transforms.Resize(size=(image_size, image_size), antialias=True),
     torchvision.transforms.ToTensor(),
     torchvision.transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
@@ -48,7 +48,7 @@ valid_loader = torch.utils.data.DataLoader(
     shuffle=False
 )
 
-model = resformer_base_patch16(num_classes=10)
+model = resformer_small_patch16(num_classes=10)
 # model.eval()
 model.train()
 
