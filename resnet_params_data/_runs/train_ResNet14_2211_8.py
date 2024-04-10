@@ -3,7 +3,7 @@ import sys, os
 sys.path.append("../utils")
 from utils import *
 
-model_name = "ResNet18_2211_4"
+model_name = "ResNet14_2211_8"
 all_models_folder = "../models"
 dataset_folder = "../cifar10_dataset"
 
