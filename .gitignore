@@ -168,3 +168,6 @@ cifar10_dataset
 
 # remove resnet models folder
 resnet_params_data/models
+
+aie_deploy/data
+aie_deploy/models

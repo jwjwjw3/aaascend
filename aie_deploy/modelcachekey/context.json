@@ -1,0 +1,3471 @@
+{
+ "metaDef": [
+  {
+   "id": "subgraph_/AveragePool_output_0_DequantizeLinear_Output_vaip_76",
+   "inputs": [
+    "input_QuantizeLinear_Output"
+   ],
+   "outputs": [
+    "output_QuantizeLinear_Output"
+   ],
+   "nodes": [
+    "output_QuantizeLinear_Output",
+    "output_QuantizeLinear_Input",
+    "linear.bias_DequantizeLinear_Output",
+    "linear.weight_DequantizeLinear_Output",
+    "/Reshape_output_0_DequantizeLinear_Output",
+    "/Reshape_output_0_QuantizeLinear_Output",
+    "/Reshape_output_0",
+    "/AveragePool_output_0_DequantizeLinear_Output",
+    "/AveragePool_output_0_QuantizeLinear_Output",
+    "/AveragePool_output_0_Mul",
+    "/blks/blks.3/Relu_1_output_0_DequantizeLinear_Output",
+    "/blks/blks.3/Relu_1_output_0_QuantizeLinear_Output",
+    "/blks/blks.3/Relu_1_output_0",
+    "/blks/blks.3/Add_output_0",
+    "/blks/blks.3/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output",
+    "/blks/blks.3/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output",
+    "/blks/blks.3/shortcut/shortcut.0/Conv_output_0",
+    "onnx::Conv_169_DequantizeLinear_Output",
+    "onnx::Conv_170_DequantizeLinear_Output",
+    "/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output",
+    "/blks/blks.2/Relu_1_output_0_QuantizeLinear_Output",
+    "/blks/blks.2/Relu_1_output_0",
+    "/blks/blks.2/Add_output_0",
+    "/blks/blks.2/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output",
+    "/blks/blks.2/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output",
+    "/blks/blks.2/shortcut/shortcut.0/Conv_output_0",
+    "onnx::Conv_160_DequantizeLinear_Output",
+    "onnx::Conv_161_DequantizeLinear_Output",
+    "/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output",
+    "/blks/blks.1/Relu_1_output_0_QuantizeLinear_Output",
+    "/blks/blks.1/Relu_1_output_0",
+    "/blks/blks.1/Add_output_0",
+    "/blks/blks.1/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output",
+    "/blks/blks.1/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output",
+    "/blks/blks.1/shortcut/shortcut.0/Conv_output_0",
+    "onnx::Conv_151_DequantizeLinear_Output",
+    "onnx::Conv_152_DequantizeLinear_Output",
+    "/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output",
+    "/blks/blks.0/Relu_1_output_0_QuantizeLinear_Output",
+    "/blks/blks.0/Relu_1_output_0",
+    "/blks/blks.0/Add_output_0",
+    "/blks/blks.0/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output",
+    "/blks/blks.0/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output",
+    "/blks/blks.0/shortcut/shortcut.0/Conv_output_0",
+    "onnx::Conv_142_DequantizeLinear_Output",
+    "onnx::Conv_143_DequantizeLinear_Output",
+    "/Relu_output_0_DequantizeLinear_Output",
+    "/Relu_output_0_QuantizeLinear_Output",
+    "/Relu_output_0",
+    "/conv1/Conv_output_0",
+    "onnx::Conv_133_DequantizeLinear_Output",
+    "onnx::Conv_134_DequantizeLinear_Output",
+    "input_DequantizeLinear_Output",
+    "/blks/blks.0/conv2/Conv_output_0_DequantizeLinear_Output",
+    "/blks/blks.0/conv2/Conv_output_0_QuantizeLinear_Output",
+    "/blks/blks.0/conv2/Conv_output_0",
+    "onnx::Conv_139_DequantizeLinear_Output",
+    "onnx::Conv_140_DequantizeLinear_Output",
+    "/blks/blks.0/Relu_output_0_DequantizeLinear_Output",
+    "/blks/blks.0/Relu_output_0_QuantizeLinear_Output",
+    "/blks/blks.0/Relu_output_0",
+    "/blks/blks.0/conv1/Conv_output_0",
+    "onnx::Conv_136_DequantizeLinear_Output",
+    "onnx::Conv_137_DequantizeLinear_Output",
+    "/Relu_output_0_DequantizeLinear_Output/duplicated",
+    "/blks/blks.1/conv2/Conv_output_0_DequantizeLinear_Output",
+    "/blks/blks.1/conv2/Conv_output_0_QuantizeLinear_Output",
+    "/blks/blks.1/conv2/Conv_output_0",
+    "onnx::Conv_148_DequantizeLinear_Output",
+    "onnx::Conv_149_DequantizeLinear_Output",
+    "/blks/blks.1/Relu_output_0_DequantizeLinear_Output",
+    "/blks/blks.1/Relu_output_0_QuantizeLinear_Output",
+    "/blks/blks.1/Relu_output_0",
+    "/blks/blks.1/conv1/Conv_output_0",
+    "onnx::Conv_145_DequantizeLinear_Output",
+    "onnx::Conv_146_DequantizeLinear_Output",
+    "/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output/duplicated",
+    "/blks/blks.2/conv2/Conv_output_0_DequantizeLinear_Output",
+    "/blks/blks.2/conv2/Conv_output_0_QuantizeLinear_Output",
+    "/blks/blks.2/conv2/Conv_output_0",
+    "onnx::Conv_157_DequantizeLinear_Output",
+    "onnx::Conv_158_DequantizeLinear_Output",
+    "/blks/blks.2/Relu_output_0_DequantizeLinear_Output",
+    "/blks/blks.2/Relu_output_0_QuantizeLinear_Output",
+    "/blks/blks.2/Relu_output_0",
+    "/blks/blks.2/conv1/Conv_output_0",
+    "onnx::Conv_154_DequantizeLinear_Output",
+    "onnx::Conv_155_DequantizeLinear_Output",
+    "/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output/duplicated",
+    "/blks/blks.3/conv2/Conv_output_0_DequantizeLinear_Output",
+    "/blks/blks.3/conv2/Conv_output_0_QuantizeLinear_Output",
+    "/blks/blks.3/conv2/Conv_output_0",
+    "onnx::Conv_166_DequantizeLinear_Output",
+    "onnx::Conv_167_DequantizeLinear_Output",
+    "/blks/blks.3/Relu_output_0_DequantizeLinear_Output",
+    "/blks/blks.3/Relu_output_0_QuantizeLinear_Output",
+    "/blks/blks.3/Relu_output_0",
+    "/blks/blks.3/conv1/Conv_output_0",
+    "onnx::Conv_163_DequantizeLinear_Output",
+    "onnx::Conv_164_DequantizeLinear_Output",
+    "/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output/duplicated"
+   ],
+   "constantInitializers": [
+    "/Relu_output_0_zero_point",
+    "/blks/blks.0/Relu_1_output_0_zero_point",
+    "/blks/blks.0/Relu_output_0_zero_point",
+    "/blks/blks.0/conv2/Conv_output_0_zero_point",
+    "/blks/blks.0/shortcut/shortcut.0/Conv_output_0_zero_point",
+    "/blks/blks.1/Relu_1_output_0_zero_point",
+    "/blks/blks.1/Relu_output_0_zero_point",
+    "/blks/blks.1/conv2/Conv_output_0_zero_point",
+    "/blks/blks.1/shortcut/shortcut.0/Conv_output_0_zero_point",
+    "/blks/blks.2/Relu_1_output_0_zero_point",
+    "/blks/blks.2/Relu_output_0_zero_point",
+    "/blks/blks.2/conv2/Conv_output_0_zero_point",
+    "/blks/blks.2/shortcut/shortcut.0/Conv_output_0_zero_point",
+    "/blks/blks.3/Relu_1_output_0_zero_point",
+    "/blks/blks.3/Relu_output_0_zero_point",
+    "/blks/blks.3/conv2/Conv_output_0_zero_point",
+    "/blks/blks.3/shortcut/shortcut.0/Conv_output_0_zero_point",
+    "input_zero_point",
+    "linear.bias_quantized",
+    "linear.bias_zero_point",
+    "linear.weight_quantized",
+    "linear.weight_zero_point",
+    "onnx::Conv_133_quantized",
+    "onnx::Conv_133_zero_point",
+    "onnx::Conv_134_quantized",
+    "onnx::Conv_134_zero_point",
+    "onnx::Conv_136_quantized",
+    "onnx::Conv_136_zero_point",
+    "onnx::Conv_137_quantized",
+    "onnx::Conv_137_zero_point",
+    "onnx::Conv_139_quantized",
+    "onnx::Conv_139_zero_point",
+    "onnx::Conv_140_quantized",
+    "onnx::Conv_140_zero_point",
+    "onnx::Conv_142_quantized",
+    "onnx::Conv_142_zero_point",
+    "onnx::Conv_143_quantized",
+    "onnx::Conv_143_zero_point",
+    "onnx::Conv_145_quantized",
+    "onnx::Conv_145_zero_point",
+    "onnx::Conv_146_quantized",
+    "onnx::Conv_146_zero_point",
+    "onnx::Conv_148_quantized",
+    "onnx::Conv_148_zero_point",
+    "onnx::Conv_149_quantized",
+    "onnx::Conv_149_zero_point",
+    "onnx::Conv_151_quantized",
+    "onnx::Conv_151_zero_point",
+    "onnx::Conv_152_quantized",
+    "onnx::Conv_152_zero_point",
+    "onnx::Conv_154_quantized",
+    "onnx::Conv_154_zero_point",
+    "onnx::Conv_155_quantized",
+    "onnx::Conv_155_zero_point",
+    "onnx::Conv_157_quantized",
+    "onnx::Conv_157_zero_point",
+    "onnx::Conv_158_quantized",
+    "onnx::Conv_158_zero_point",
+    "onnx::Conv_160_quantized",
+    "onnx::Conv_160_zero_point",
+    "onnx::Conv_161_quantized",
+    "onnx::Conv_161_zero_point",
+    "onnx::Conv_163_quantized",
+    "onnx::Conv_163_zero_point",
+    "onnx::Conv_164_quantized",
+    "onnx::Conv_164_zero_point",
+    "onnx::Conv_166_quantized",
+    "onnx::Conv_166_zero_point",
+    "onnx::Conv_167_quantized",
+    "onnx::Conv_167_zero_point",
+    "onnx::Conv_169_quantized",
+    "onnx::Conv_169_zero_point",
+    "onnx::Conv_170_quantized",
+    "onnx::Conv_170_zero_point",
+    "ortshared_1_0_1_0_token_64",
+    "ortshared_1_0_1_1_token_65",
+    "ortshared_1_0_1_2_token_66",
+    "ortshared_1_0_1_3_token_67",
+    "ortshared_1_0_1_4_token_68",
+    "ortshared_1_0_1_5_token_69",
+    "ortshared_1_0_1_6_token_71",
+    "ortshared_7_1_2_0_token_70",
+    "output_zero_point"
+   ],
+   "device": "DPU",
+   "dpuParam": {
+    "compiledXmodel": "compiled.AMD_AIE2_Nx4_Overlay.xmodel",
+    "subgraphName": "subgraph_/AveragePool_output_0_DequantizeLinear_Output_vaip_76",
+    "inputSchedule": [
+     {
+      "fromTbParam": {
+       "tbType": "ONNX_INPUT",
+       "tensorName": "input_QuantizeLinear_Output"
+      },
+      "toTbParam": {
+       "tbType": "XIR_INPUT",
+       "tensorName": "input_DequantizeLinear_Output"
+      }
+     }
+    ],
+    "outputSchedule": [
+     {
+      "fromTbParam": {
+       "tbType": "XIR_OUTPUT",
+       "tensorName": "output"
+      },
+      "toTbParam": {
+       "tbType": "ONNX_OUTPUT",
+       "tensorName": "output_QuantizeLinear_Output",
+       "onnxShape": [
+        "-1",
+        "10"
+       ]
+      }
+     }
+    ]
+   }
+  }
+ ],
+ "config": {
+  "passes": [
+   {
+    "name": "init",
+    "plugin": "vaip-pass_init"
+   },
+   {
+    "name": "fuse_resize_norm",
+    "plugin": "vaip-pass_py_ext",
+    "pyExt": {
+     "moduleName": "voe.passes.fuse_resize_norm",
+     "methodName": "rules"
+    }
+   },
+   {
+    "name": "fuse_softmax",
+    "plugin": "vaip-pass_py_ext",
+    "pyExt": {
+     "moduleName": "voe.passes.fuse_softmax",
+     "methodName": "rules"
+    }
+   },
+   {
+    "name": "fuse_topk",
+    "plugin": "vaip-pass_py_ext",
+    "pyExt": {
+     "moduleName": "voe.passes.fuse_topk",
+     "methodName": "rules"
+    }
+   },
+   {
+    "name": "fuse_decode_filter_boxes",
+    "plugin": "vaip-pass_py_ext",
+    "pyExt": {
+     "moduleName": "voe.passes.fuse_decode_filter_boxes",
+     "methodName": "rules"
+    }
+   },
+   {
+    "name": "fuse_NMS",
+    "plugin": "vaip-pass_py_ext",
+    "disabled": true,
+    "pyExt": {
+     "moduleName": "voe.passes.fuse_NMS",
+     "methodName": "rules"
+    }
+   },
+   {
+    "name": "fuse_DPU",
+    "plugin": "vaip-pass_level1_dpu",
+    "passDpuParam": {
+     "subPass": [
+      {
+       "name": "convert_ending_blacklist_ops_to_unknown_op",
+       "plugin": "vaip-pass_convert_ending_blacklist_ops_to_unknown_op"
+      },
+      {
+       "name": "manual_partition",
+       "plugin": "vaip-pass_manual_partition",
+       "disabled": true,
+       "manualPartition": {
+        "fromOps": [
+         "1745/duplicated_token_14",
+         "1764/duplicated_token_10",
+         "1783/duplicated_token_6",
+         "1802/duplicated_token_2"
+        ],
+        "toOps": [
+         "2895"
+        ]
+       }
+      },
+      {
+       "name": "dynamic_input_batch",
+       "plugin": "vaip-pass_dynamic_input_batch"
+      },
+      {
+       "name": "convert_qlinear_to_qdq",
+       "plugin": "vaip-pass_py_ext",
+       "enableGc": true,
+       "disabled": true,
+       "pyExt": {
+        "moduleName": "voe.passes.convert_qlinear_to_qdq",
+        "methodName": "rules"
+       }
+      },
+      {
+       "name": "create_const_op",
+       "plugin": "vaip-pass_create_const_op"
+      },
+      {
+       "name": "convert_to_xir_op",
+       "plugin": "vaip-pass_py_ext",
+       "pyExt": {
+        "moduleName": "voe.passes.convert_to_xir_op",
+        "methodName": "rules"
+       }
+      },
+      {
+       "name": "to_xir",
+       "plugin": "vaip-pass_to_xir_ops"
+      },
+      {
+       "name": "remove_extra_q_dq",
+       "plugin": "vaip-pass_remove_extra_q_dq"
+      },
+      {
+       "name": "merge_add_into_conv_bias",
+       "plugin": "vaip-pass_merge_add_into_conv_bias"
+      },
+      {
+       "name": "merge_fix",
+       "plugin": "vaip-pass_py_ext",
+       "enableGc": true,
+       "pyExt": {
+        "moduleName": "voe.passes.merge_fix",
+        "methodName": "rules"
+       }
+      },
+      {
+       "name": "layoutransform",
+       "plugin": "vaip-pass_layout_transform_via_adding_transpose"
+      },
+      {
+       "name": "gc_after_layout_transform",
+       "plugin": "vaip-pass_remove_isolated_node"
+      },
+      {
+       "name": "fuse_transpose",
+       "plugin": "vaip-pass_fuse_transpose",
+       "enableGc": true
+      },
+      {
+       "name": "gc_after_fuse_transpose",
+       "plugin": "vaip-pass_remove_isolated_node"
+      },
+      {
+       "name": "remove_identity",
+       "plugin": "vaip-pass_remove_identity",
+       "logVerbosity": 1
+      },
+      {
+       "name": "add_fix_after_const",
+       "plugin": "vaip-pass_const_add_fix"
+      },
+      {
+       "name": "merge_duplicated_fix",
+       "plugin": "vaip-pass_merge_duplicated_fix",
+       "enableGc": true,
+       "disabled": true
+      },
+      {
+       "name": "remove_reshape_fix",
+       "plugin": "vaip-pass_py_ext",
+       "pyExt": {
+        "moduleName": "voe.passes.remove_reshape_fix",
+        "methodName": "rules"
+       }
+      },
+      {
+       "name": "const_fold_batchnorm_to_scale",
+       "plugin": "vaip-pass_py_ext",
+       "pyExt": {
+        "moduleName": "voe.passes.const_fold_batchnorm_to_scale",
+        "methodName": "rules"
+       }
+      },
+      {
+       "name": "const_fold_transpose",
+       "plugin": "vaip-pass_const_fold_transpose"
+      },
+      {
+       "name": "merge_pad",
+       "plugin": "vaip-pass_merge_pad"
+      },
+      {
+       "name": "merge_hard_sigmoid",
+       "plugin": "vaip-pass_merge_hard_sigmoid"
+      },
+      {
+       "name": "merge_mul",
+       "plugin": "vaip-pass_py_ext",
+       "pyExt": {
+        "moduleName": "voe.passes.merge_mul",
+        "methodName": "rules"
+       }
+      },
+      {
+       "name": "merge_consecutive_fix",
+       "plugin": "vaip-pass_merge_consecutive_fix",
+       "enableLog": true,
+       "logVerbosity": 1,
+       "disabled": true
+      },
+      {
+       "name": "graph_output_add_node",
+       "plugin": "vaip-pass_graph_output_add_node",
+       "disabled": true
+      },
+      {
+       "name": "convert_transpose_add_fix_input_fix_input",
+       "plugin": "vaip-pass_py_ext",
+       "disabled": true,
+       "pyExt": {
+        "moduleName": "voe.passes.convert_transpose_add_fix_input_fix_input",
+        "methodName": "process"
+       }
+      },
+      {
+       "name": "convert_transpose_fix_pad_fix_input",
+       "plugin": "vaip-pass_py_ext",
+       "disabled": true,
+       "pyExt": {
+        "moduleName": "voe.passes.convert_transpose_fix_pad_fix_input",
+        "methodName": "process"
+       }
+      },
+      {
+       "name": "convert_transpose_fix_input",
+       "plugin": "vaip-pass_py_ext",
+       "enableGc": true,
+       "disabled": true,
+       "pyExt": {
+        "moduleName": "voe.passes.convert_transpose_fix_input",
+        "methodName": "process"
+       }
+      },
+      {
+       "name": "convert_softmax_to_hard_softmax",
+       "plugin": "vaip-pass_py_ext",
+       "disabled": true,
+       "pyExt": {
+        "moduleName": "voe.passes.convert_softmax_to_hard_softmax",
+        "methodName": "rules"
+       }
+      },
+      {
+       "name": "remove_top_transpose",
+       "plugin": "vaip-pass_merge_input_transpose",
+       "enableGc": true,
+       "disabled": true
+      },
+      {
+       "name": "remove_bottom_transpose",
+       "plugin": "vaip-pass_remove_bottom_transpose",
+       "enableGc": true,
+       "disabled": true
+      },
+      {
+       "name": "final_gc",
+       "plugin": "vaip-pass_remove_isolated_node"
+      }
+     ],
+     "xcompilerAttrs": {
+      "disable_std_quant": {
+       "boolValue": false
+      },
+      "profile": {
+       "intValue": 0
+      },
+      "preassign": {
+       "boolValue": false
+      },
+      "debug_mode": {
+       "stringValue": "performance"
+      },
+      "dump_subgraph_ops": {
+       "boolValue": false
+      },
+      "dpu_subgraph_num": {
+       "intValue": 32
+      },
+      "prefetch": {
+       "boolValue": false
+      },
+      "opt_level": {
+       "intValue": 0
+      },
+      "concat_skip_code_gen": {
+       "boolValue": false
+      }
+     },
+     "minimumNumOfConv": 2
+    }
+   }
+  ],
+  "cacheDir": "./",
+  "cacheKey": "modelcachekey",
+  "version": {
+   "versionInfos": [
+    {
+     "packageName": "vaip",
+     "commit": "1ceff64122082fdd5005f1bf81c8cafea30a1f0e",
+     "version": "vaip.1.0.0"
+    },
+    {
+     "packageName": "target_factory",
+     "commit": "2a29c4509074d1ac8cdae627150fa9f6cb18d36f",
+     "version": "target-factory.3.5.0"
+    },
+    {
+     "packageName": "vart",
+     "commit": "7b44d3c12ac1e0f018d169dc593745ea22e1eda0",
+     "version": "vart"
+    },
+    {
+     "packageName": "xcompiler",
+     "commit": "0d23b257c519cac2cc70c5cbc0ece610c74c4308",
+     "version": "xcompiler.3.5.0"
+    },
+    {
+     "packageName": "onnxrutnime",
+     "commit": "baeece44ba075009c6bfe95891a8c1b3d4571cb3",
+     "version": "onnxruntime.1.15.1"
+    },
+    {
+     "packageName": "xir",
+     "commit": "5885e222d99604084b39e54f6123df01d12c5f7e",
+     "version": "xir.3.5.0"
+    },
+    {
+     "packageName": "xrt",
+     "commit": "a4d3aba39d68550c537a7e7b258d08351f794374",
+     "version": "xrt.2.17.0"
+    },
+    {
+     "packageName": "graph_engine",
+     "commit": "d42034adbc8854cdbd6dc755df5dbe887788c48c",
+     "version": "graph_engine"
+    }
+   ]
+  },
+  "onnxPath": "N/A",
+  "sessionOptions": {
+   "cacheKey": "modelcachekey",
+   "config_file": "vaip_config.json",
+   "cacheDir": "./"
+  }
+ },
+ "originNodes": {
+  "/blks/blks.2/Relu_output_0_DequantizeLinear_Output_vaip_61": {
+   "name": "/blks/blks.2/Relu_output_0_DequantizeLinear_Output_vaip_61",
+   "opType": "transpose",
+   "originNode": "/blks/blks.2/Relu_output_0_DequantizeLinear_Output",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.2/Relu_output_0_DequantizeLinear_Output_vaip_25": {
+   "name": "/blks/blks.2/Relu_output_0_DequantizeLinear_Output_vaip_25",
+   "opType": "transpose",
+   "originNode": "/blks/blks.2/Relu_output_0_DequantizeLinear_Output",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output_vaip_19": {
+   "name": "/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output_vaip_19",
+   "opType": "transpose",
+   "originNode": "/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/AveragePool_output_0_Mul_vaip_41": {
+   "name": "/AveragePool_output_0_Mul_vaip_41",
+   "opType": "transpose",
+   "originNode": "/AveragePool_output_0_Mul",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.1/conv1/Conv_output_0_vaip_15": {
+   "name": "/blks/blks.1/conv1/Conv_output_0_vaip_15",
+   "opType": "transpose",
+   "originNode": "/blks/blks.1/conv1/Conv_output_0",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_136_DequantizeLinear_Output_vaip_5": {
+   "name": "onnx::Conv_136_DequantizeLinear_Output_vaip_5",
+   "opType": "transpose",
+   "originNode": "onnx::Conv_136_DequantizeLinear_Output",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_167_DequantizeLinear_Output_vaip_102": {
+   "name": "onnx::Conv_167_DequantizeLinear_Output_vaip_102",
+   "opType": "fix",
+   "originNode": "onnx::Conv_167_DequantizeLinear_Output",
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "5"
+    }
+   }
+  },
+  "onnx::Conv_166_DequantizeLinear_Output_vaip_35": {
+   "name": "onnx::Conv_166_DequantizeLinear_Output_vaip_35",
+   "opType": "transpose",
+   "originNode": "onnx::Conv_166_DequantizeLinear_Output",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.0/shortcut/shortcut.0/Conv_output_0_vaip_12": {
+   "name": "/blks/blks.0/shortcut/shortcut.0/Conv_output_0_vaip_12",
+   "opType": "transpose",
+   "originNode": "/blks/blks.0/shortcut/shortcut.0/Conv_output_0",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.2/Relu_output_0_vaip_60": {
+   "name": "/blks/blks.2/Relu_output_0_vaip_60",
+   "opType": "transpose",
+   "originNode": "/blks/blks.2/Relu_output_0",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.2/Relu_1_output_0_vaip_66": {
+   "name": "/blks/blks.2/Relu_1_output_0_vaip_66",
+   "opType": "transpose",
+   "originNode": "/blks/blks.2/Relu_1_output_0",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.0/Relu_output_0_DequantizeLinear_Output_vaip_7": {
+   "name": "/blks/blks.0/Relu_output_0_DequantizeLinear_Output_vaip_7",
+   "opType": "transpose",
+   "originNode": "/blks/blks.0/Relu_output_0_DequantizeLinear_Output",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_170_DequantizeLinear_Output_vaip_98": {
+   "name": "onnx::Conv_170_DequantizeLinear_Output_vaip_98",
+   "opType": "fix",
+   "originNode": "onnx::Conv_170_DequantizeLinear_Output",
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "5"
+    }
+   }
+  },
+  "onnx::Conv_157_DequantizeLinear_Output_vaip_95": {
+   "name": "onnx::Conv_157_DequantizeLinear_Output_vaip_95",
+   "opType": "fix",
+   "next": {
+    "name": "onnx::Conv_157_DequantizeLinear_Output_vaip_26",
+    "opType": "transpose",
+    "originNode": "onnx::Conv_157_DequantizeLinear_Output",
+    "pass": "layoutransform",
+    "attribute": {
+     "transposeAttr": {
+      "order": [
+       "0",
+       "2",
+       "3",
+       "1"
+      ]
+     }
+    }
+   },
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "8"
+    }
+   }
+  },
+  "/blks/blks.0/Relu_output_0_DequantizeLinear_Output_vaip_45": {
+   "name": "/blks/blks.0/Relu_output_0_DequantizeLinear_Output_vaip_45",
+   "opType": "transpose",
+   "originNode": "/blks/blks.0/Relu_output_0_DequantizeLinear_Output",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.3/Add_output_0_vaip_73": {
+   "name": "/blks/blks.3/Add_output_0_vaip_73",
+   "opType": "transpose",
+   "originNode": "/blks/blks.3/Add_output_0",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output/duplicated_vaip_51": {
+   "name": "/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output/duplicated_vaip_51",
+   "opType": "transpose",
+   "originNode": "/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output/duplicated",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output_vaip_28": {
+   "name": "/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output_vaip_28",
+   "opType": "transpose",
+   "originNode": "/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_154_DequantizeLinear_Output_vaip_93": {
+   "name": "onnx::Conv_154_DequantizeLinear_Output_vaip_93",
+   "opType": "fix",
+   "next": {
+    "name": "onnx::Conv_154_DequantizeLinear_Output_vaip_23",
+    "opType": "transpose",
+    "originNode": "onnx::Conv_154_DequantizeLinear_Output",
+    "pass": "layoutransform",
+    "attribute": {
+     "transposeAttr": {
+      "order": [
+       "0",
+       "2",
+       "3",
+       "1"
+      ]
+     }
+    }
+   },
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "8"
+    }
+   }
+  },
+  "onnx::Conv_133_DequantizeLinear_Output_vaip_77": {
+   "name": "onnx::Conv_133_DequantizeLinear_Output_vaip_77",
+   "opType": "fix",
+   "next": {
+    "name": "onnx::Conv_133_DequantizeLinear_Output_vaip_2",
+    "opType": "transpose",
+    "originNode": "onnx::Conv_133_DequantizeLinear_Output",
+    "pass": "layoutransform",
+    "attribute": {
+     "transposeAttr": {
+      "order": [
+       "0",
+       "2",
+       "3",
+       "1"
+      ]
+     }
+    }
+   },
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "7"
+    }
+   }
+  },
+  "input_DequantizeLinear_Output_vaip_1": {
+   "name": "input_DequantizeLinear_Output_vaip_1",
+   "opType": "transpose",
+   "originNode": "input_DequantizeLinear_Output",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_145_DequantizeLinear_Output_vaip_14": {
+   "name": "onnx::Conv_145_DequantizeLinear_Output_vaip_14",
+   "opType": "transpose",
+   "originNode": "onnx::Conv_145_DequantizeLinear_Output",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.3/shortcut/shortcut.0/Conv_output_0_vaip_39": {
+   "name": "/blks/blks.3/shortcut/shortcut.0/Conv_output_0_vaip_39",
+   "opType": "transpose",
+   "originNode": "/blks/blks.3/shortcut/shortcut.0/Conv_output_0",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_133_DequantizeLinear_Output_vaip_2": {
+   "name": "onnx::Conv_133_DequantizeLinear_Output_vaip_2",
+   "opType": "transpose",
+   "originNode": "onnx::Conv_133_DequantizeLinear_Output",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_157_DequantizeLinear_Output_vaip_26": {
+   "name": "onnx::Conv_157_DequantizeLinear_Output_vaip_26",
+   "opType": "transpose",
+   "originNode": "onnx::Conv_157_DequantizeLinear_Output",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.1/Add_output_0_vaip_57": {
+   "name": "/blks/blks.1/Add_output_0_vaip_57",
+   "opType": "transpose",
+   "originNode": "/blks/blks.1/Add_output_0",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_142_DequantizeLinear_Output_vaip_79": {
+   "name": "onnx::Conv_142_DequantizeLinear_Output_vaip_79",
+   "opType": "fix",
+   "next": {
+    "name": "onnx::Conv_142_DequantizeLinear_Output_vaip_11",
+    "opType": "transpose",
+    "originNode": "onnx::Conv_142_DequantizeLinear_Output",
+    "pass": "layoutransform",
+    "attribute": {
+     "transposeAttr": {
+      "order": [
+       "0",
+       "2",
+       "3",
+       "1"
+      ]
+     }
+    }
+   },
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "6"
+    }
+   }
+  },
+  "/blks/blks.0/conv2/Conv_output_0_vaip_9": {
+   "name": "/blks/blks.0/conv2/Conv_output_0_vaip_9",
+   "opType": "transpose",
+   "originNode": "/blks/blks.0/conv2/Conv_output_0",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.3/Relu_output_0_vaip_68": {
+   "name": "/blks/blks.3/Relu_output_0_vaip_68",
+   "opType": "transpose",
+   "originNode": "/blks/blks.3/Relu_output_0",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/Relu_output_0_DequantizeLinear_Output_vaip_47": {
+   "name": "/Relu_output_0_DequantizeLinear_Output_vaip_47",
+   "opType": "transpose",
+   "originNode": "/Relu_output_0_DequantizeLinear_Output",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.2/conv1/Conv_output_0_vaip_24": {
+   "name": "/blks/blks.2/conv1/Conv_output_0_vaip_24",
+   "opType": "transpose",
+   "originNode": "/blks/blks.2/conv1/Conv_output_0",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_136_DequantizeLinear_Output_vaip_81": {
+   "name": "onnx::Conv_136_DequantizeLinear_Output_vaip_81",
+   "opType": "fix",
+   "next": {
+    "name": "onnx::Conv_136_DequantizeLinear_Output_vaip_5",
+    "opType": "transpose",
+    "originNode": "onnx::Conv_136_DequantizeLinear_Output",
+    "pass": "layoutransform",
+    "attribute": {
+     "transposeAttr": {
+      "order": [
+       "0",
+       "2",
+       "3",
+       "1"
+      ]
+     }
+    }
+   },
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "7"
+    }
+   }
+  },
+  "/blks/blks.3/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output_vaip_72": {
+   "name": "/blks/blks.3/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output_vaip_72",
+   "opType": "transpose",
+   "originNode": "/blks/blks.3/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_137_DequantizeLinear_Output_vaip_82": {
+   "name": "onnx::Conv_137_DequantizeLinear_Output_vaip_82",
+   "opType": "fix",
+   "originNode": "onnx::Conv_137_DequantizeLinear_Output",
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "6"
+    }
+   }
+  },
+  "onnx::Conv_149_DequantizeLinear_Output_vaip_90": {
+   "name": "onnx::Conv_149_DequantizeLinear_Output_vaip_90",
+   "opType": "fix",
+   "originNode": "onnx::Conv_149_DequantizeLinear_Output",
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "5"
+    }
+   }
+  },
+  "/blks/blks.3/conv2/Conv_output_0_DequantizeLinear_Output_vaip_70": {
+   "name": "/blks/blks.3/conv2/Conv_output_0_DequantizeLinear_Output_vaip_70",
+   "opType": "transpose",
+   "originNode": "/blks/blks.3/conv2/Conv_output_0_DequantizeLinear_Output",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.1/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output_vaip_56": {
+   "name": "/blks/blks.1/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output_vaip_56",
+   "opType": "transpose",
+   "originNode": "/blks/blks.1/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/Relu_output_0_DequantizeLinear_Output/duplicated_vaip_43": {
+   "name": "/Relu_output_0_DequantizeLinear_Output/duplicated_vaip_43",
+   "opType": "transpose",
+   "originNode": "/Relu_output_0_DequantizeLinear_Output/duplicated",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.0/Relu_output_0_vaip_44": {
+   "name": "/blks/blks.0/Relu_output_0_vaip_44",
+   "opType": "transpose",
+   "originNode": "/blks/blks.0/Relu_output_0",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.1/Relu_1_output_0_vaip_58": {
+   "name": "/blks/blks.1/Relu_1_output_0_vaip_58",
+   "opType": "transpose",
+   "originNode": "/blks/blks.1/Relu_1_output_0",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_139_DequantizeLinear_Output_vaip_8": {
+   "name": "onnx::Conv_139_DequantizeLinear_Output_vaip_8",
+   "opType": "transpose",
+   "originNode": "onnx::Conv_139_DequantizeLinear_Output",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_163_DequantizeLinear_Output_vaip_99": {
+   "name": "onnx::Conv_163_DequantizeLinear_Output_vaip_99",
+   "opType": "fix",
+   "next": {
+    "name": "onnx::Conv_163_DequantizeLinear_Output_vaip_32",
+    "opType": "transpose",
+    "originNode": "onnx::Conv_163_DequantizeLinear_Output",
+    "pass": "layoutransform",
+    "attribute": {
+     "transposeAttr": {
+      "order": [
+       "0",
+       "2",
+       "3",
+       "1"
+      ]
+     }
+    }
+   },
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "9"
+    }
+   }
+  },
+  "/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output/duplicated_vaip_59": {
+   "name": "/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output/duplicated_vaip_59",
+   "opType": "transpose",
+   "originNode": "/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output/duplicated",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output/duplicated_vaip_67": {
+   "name": "/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output/duplicated_vaip_67",
+   "opType": "transpose",
+   "originNode": "/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output/duplicated",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_161_DequantizeLinear_Output_vaip_92": {
+   "name": "onnx::Conv_161_DequantizeLinear_Output_vaip_92",
+   "opType": "fix",
+   "originNode": "onnx::Conv_161_DequantizeLinear_Output",
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "7"
+    }
+   }
+  },
+  "/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output_vaip_37": {
+   "name": "/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output_vaip_37",
+   "opType": "transpose",
+   "originNode": "/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_146_DequantizeLinear_Output_vaip_88": {
+   "name": "onnx::Conv_146_DequantizeLinear_Output_vaip_88",
+   "opType": "fix",
+   "originNode": "onnx::Conv_146_DequantizeLinear_Output",
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "6"
+    }
+   }
+  },
+  "/blks/blks.2/Add_output_0_vaip_65": {
+   "name": "/blks/blks.2/Add_output_0_vaip_65",
+   "opType": "transpose",
+   "originNode": "/blks/blks.2/Add_output_0",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/Relu_output_0_vaip_42": {
+   "name": "/Relu_output_0_vaip_42",
+   "opType": "transpose",
+   "originNode": "/Relu_output_0",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_154_DequantizeLinear_Output_vaip_23": {
+   "name": "onnx::Conv_154_DequantizeLinear_Output_vaip_23",
+   "opType": "transpose",
+   "originNode": "onnx::Conv_154_DequantizeLinear_Output",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "linear.bias_DequantizeLinear_Output_vaip_103": {
+   "name": "linear.bias_DequantizeLinear_Output_vaip_103",
+   "opType": "fix",
+   "originNode": "linear.bias_DequantizeLinear_Output",
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "10"
+    }
+   }
+  },
+  "/blks/blks.2/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output_vaip_64": {
+   "name": "/blks/blks.2/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output_vaip_64",
+   "opType": "transpose",
+   "originNode": "/blks/blks.2/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.3/Relu_1_output_0_DequantizeLinear_Output_vaip_75": {
+   "name": "/blks/blks.3/Relu_1_output_0_DequantizeLinear_Output_vaip_75",
+   "opType": "transpose",
+   "originNode": "/blks/blks.3/Relu_1_output_0_DequantizeLinear_Output",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/conv1/Conv_output_0_vaip_3": {
+   "name": "/conv1/Conv_output_0_vaip_3",
+   "opType": "transpose",
+   "originNode": "/conv1/Conv_output_0",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.3/Relu_1_output_0_DequantizeLinear_Output_vaip_40": {
+   "name": "/blks/blks.3/Relu_1_output_0_DequantizeLinear_Output_vaip_40",
+   "opType": "transpose",
+   "originNode": "/blks/blks.3/Relu_1_output_0_DequantizeLinear_Output",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.0/Relu_1_output_0_vaip_50": {
+   "name": "/blks/blks.0/Relu_1_output_0_vaip_50",
+   "opType": "transpose",
+   "originNode": "/blks/blks.0/Relu_1_output_0",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_160_DequantizeLinear_Output_vaip_29": {
+   "name": "onnx::Conv_160_DequantizeLinear_Output_vaip_29",
+   "opType": "transpose",
+   "originNode": "onnx::Conv_160_DequantizeLinear_Output",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_152_DequantizeLinear_Output_vaip_86": {
+   "name": "onnx::Conv_152_DequantizeLinear_Output_vaip_86",
+   "opType": "fix",
+   "originNode": "onnx::Conv_152_DequantizeLinear_Output",
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "6"
+    }
+   }
+  },
+  "onnx::Conv_145_DequantizeLinear_Output_vaip_87": {
+   "name": "onnx::Conv_145_DequantizeLinear_Output_vaip_87",
+   "opType": "fix",
+   "next": {
+    "name": "onnx::Conv_145_DequantizeLinear_Output_vaip_14",
+    "opType": "transpose",
+    "originNode": "onnx::Conv_145_DequantizeLinear_Output",
+    "pass": "layoutransform",
+    "attribute": {
+     "transposeAttr": {
+      "order": [
+       "0",
+       "2",
+       "3",
+       "1"
+      ]
+     }
+    }
+   },
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "8"
+    }
+   }
+  },
+  "onnx::Conv_163_DequantizeLinear_Output_vaip_32": {
+   "name": "onnx::Conv_163_DequantizeLinear_Output_vaip_32",
+   "opType": "transpose",
+   "originNode": "onnx::Conv_163_DequantizeLinear_Output",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.3/Relu_output_0_DequantizeLinear_Output_vaip_34": {
+   "name": "/blks/blks.3/Relu_output_0_DequantizeLinear_Output_vaip_34",
+   "opType": "transpose",
+   "originNode": "/blks/blks.3/Relu_output_0_DequantizeLinear_Output",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output/duplicated_vaip_13": {
+   "name": "/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output/duplicated_vaip_13",
+   "opType": "transpose",
+   "originNode": "/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output/duplicated",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_169_DequantizeLinear_Output_vaip_97": {
+   "name": "onnx::Conv_169_DequantizeLinear_Output_vaip_97",
+   "opType": "fix",
+   "next": {
+    "name": "onnx::Conv_169_DequantizeLinear_Output_vaip_38",
+    "opType": "transpose",
+    "originNode": "onnx::Conv_169_DequantizeLinear_Output",
+    "pass": "layoutransform",
+    "attribute": {
+     "transposeAttr": {
+      "order": [
+       "0",
+       "2",
+       "3",
+       "1"
+      ]
+     }
+    }
+   },
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "7"
+    }
+   }
+  },
+  "onnx::Conv_148_DequantizeLinear_Output_vaip_89": {
+   "name": "onnx::Conv_148_DequantizeLinear_Output_vaip_89",
+   "opType": "fix",
+   "next": {
+    "name": "onnx::Conv_148_DequantizeLinear_Output_vaip_17",
+    "opType": "transpose",
+    "originNode": "onnx::Conv_148_DequantizeLinear_Output",
+    "pass": "layoutransform",
+    "attribute": {
+     "transposeAttr": {
+      "order": [
+       "0",
+       "2",
+       "3",
+       "1"
+      ]
+     }
+    }
+   },
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "8"
+    }
+   }
+  },
+  "/blks/blks.0/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output_vaip_48": {
+   "name": "/blks/blks.0/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output_vaip_48",
+   "opType": "transpose",
+   "originNode": "/blks/blks.0/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_166_DequantizeLinear_Output_vaip_101": {
+   "name": "onnx::Conv_166_DequantizeLinear_Output_vaip_101",
+   "opType": "fix",
+   "next": {
+    "name": "onnx::Conv_166_DequantizeLinear_Output_vaip_35",
+    "opType": "transpose",
+    "originNode": "onnx::Conv_166_DequantizeLinear_Output",
+    "pass": "layoutransform",
+    "attribute": {
+     "transposeAttr": {
+      "order": [
+       "0",
+       "2",
+       "3",
+       "1"
+      ]
+     }
+    }
+   },
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "6"
+    }
+   }
+  },
+  "onnx::Conv_134_DequantizeLinear_Output_vaip_78": {
+   "name": "onnx::Conv_134_DequantizeLinear_Output_vaip_78",
+   "opType": "fix",
+   "originNode": "onnx::Conv_134_DequantizeLinear_Output",
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "7"
+    }
+   }
+  },
+  "onnx::Conv_169_DequantizeLinear_Output_vaip_38": {
+   "name": "onnx::Conv_169_DequantizeLinear_Output_vaip_38",
+   "opType": "transpose",
+   "originNode": "onnx::Conv_169_DequantizeLinear_Output",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.0/Add_output_0_vaip_49": {
+   "name": "/blks/blks.0/Add_output_0_vaip_49",
+   "opType": "transpose",
+   "originNode": "/blks/blks.0/Add_output_0",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output/duplicated_vaip_22": {
+   "name": "/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output/duplicated_vaip_22",
+   "opType": "transpose",
+   "originNode": "/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output/duplicated",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_160_DequantizeLinear_Output_vaip_91": {
+   "name": "onnx::Conv_160_DequantizeLinear_Output_vaip_91",
+   "opType": "fix",
+   "next": {
+    "name": "onnx::Conv_160_DequantizeLinear_Output_vaip_29",
+    "opType": "transpose",
+    "originNode": "onnx::Conv_160_DequantizeLinear_Output",
+    "pass": "layoutransform",
+    "attribute": {
+     "transposeAttr": {
+      "order": [
+       "0",
+       "2",
+       "3",
+       "1"
+      ]
+     }
+    }
+   },
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "8"
+    }
+   }
+  },
+  "/blks/blks.1/conv2/Conv_output_0_vaip_18": {
+   "name": "/blks/blks.1/conv2/Conv_output_0_vaip_18",
+   "opType": "transpose",
+   "originNode": "/blks/blks.1/conv2/Conv_output_0",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.3/Relu_output_0_DequantizeLinear_Output_vaip_69": {
+   "name": "/blks/blks.3/Relu_output_0_DequantizeLinear_Output_vaip_69",
+   "opType": "transpose",
+   "originNode": "/blks/blks.3/Relu_output_0_DequantizeLinear_Output",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output_vaip_55": {
+   "name": "/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output_vaip_55",
+   "opType": "transpose",
+   "originNode": "/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "linear.weight_DequantizeLinear_Output_vaip_104": {
+   "name": "linear.weight_DequantizeLinear_Output_vaip_104",
+   "opType": "fix",
+   "originNode": "linear.weight_DequantizeLinear_Output",
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "10"
+    }
+   }
+  },
+  "/blks/blks.1/Relu_output_0_vaip_52": {
+   "name": "/blks/blks.1/Relu_output_0_vaip_52",
+   "opType": "transpose",
+   "originNode": "/blks/blks.1/Relu_output_0",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_140_DequantizeLinear_Output_vaip_84": {
+   "name": "onnx::Conv_140_DequantizeLinear_Output_vaip_84",
+   "opType": "fix",
+   "originNode": "onnx::Conv_140_DequantizeLinear_Output",
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "6"
+    }
+   }
+  },
+  "/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output_vaip_63": {
+   "name": "/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output_vaip_63",
+   "opType": "transpose",
+   "originNode": "/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.1/conv2/Conv_output_0_DequantizeLinear_Output_vaip_54": {
+   "name": "/blks/blks.1/conv2/Conv_output_0_DequantizeLinear_Output_vaip_54",
+   "opType": "transpose",
+   "originNode": "/blks/blks.1/conv2/Conv_output_0_DequantizeLinear_Output",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.1/Relu_output_0_DequantizeLinear_Output_vaip_16": {
+   "name": "/blks/blks.1/Relu_output_0_DequantizeLinear_Output_vaip_16",
+   "opType": "transpose",
+   "originNode": "/blks/blks.1/Relu_output_0_DequantizeLinear_Output",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/AveragePool_output_0_DequantizeLinear_Output_vaip_76": {
+   "name": "/AveragePool_output_0_DequantizeLinear_Output_vaip_76",
+   "opType": "transpose",
+   "originNode": "/AveragePool_output_0_DequantizeLinear_Output",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/Relu_output_0_DequantizeLinear_Output_vaip_10": {
+   "name": "/Relu_output_0_DequantizeLinear_Output_vaip_10",
+   "opType": "transpose",
+   "originNode": "/Relu_output_0_DequantizeLinear_Output",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_164_DequantizeLinear_Output_vaip_100": {
+   "name": "onnx::Conv_164_DequantizeLinear_Output_vaip_100",
+   "opType": "fix",
+   "originNode": "onnx::Conv_164_DequantizeLinear_Output",
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "6"
+    }
+   }
+  },
+  "onnx::Conv_143_DequantizeLinear_Output_vaip_80": {
+   "name": "onnx::Conv_143_DequantizeLinear_Output_vaip_80",
+   "opType": "fix",
+   "originNode": "onnx::Conv_143_DequantizeLinear_Output",
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "6"
+    }
+   }
+  },
+  "/blks/blks.0/conv2/Conv_output_0_DequantizeLinear_Output_vaip_46": {
+   "name": "/blks/blks.0/conv2/Conv_output_0_DequantizeLinear_Output_vaip_46",
+   "opType": "transpose",
+   "originNode": "/blks/blks.0/conv2/Conv_output_0_DequantizeLinear_Output",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.0/conv1/Conv_output_0_vaip_6": {
+   "name": "/blks/blks.0/conv1/Conv_output_0_vaip_6",
+   "opType": "transpose",
+   "originNode": "/blks/blks.0/conv1/Conv_output_0",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_139_DequantizeLinear_Output_vaip_83": {
+   "name": "onnx::Conv_139_DequantizeLinear_Output_vaip_83",
+   "opType": "fix",
+   "next": {
+    "name": "onnx::Conv_139_DequantizeLinear_Output_vaip_8",
+    "opType": "transpose",
+    "originNode": "onnx::Conv_139_DequantizeLinear_Output",
+    "pass": "layoutransform",
+    "attribute": {
+     "transposeAttr": {
+      "order": [
+       "0",
+       "2",
+       "3",
+       "1"
+      ]
+     }
+    }
+   },
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "8"
+    }
+   }
+  },
+  "/blks/blks.1/shortcut/shortcut.0/Conv_output_0_vaip_21": {
+   "name": "/blks/blks.1/shortcut/shortcut.0/Conv_output_0_vaip_21",
+   "opType": "transpose",
+   "originNode": "/blks/blks.1/shortcut/shortcut.0/Conv_output_0",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.3/conv1/Conv_output_0_vaip_33": {
+   "name": "/blks/blks.3/conv1/Conv_output_0_vaip_33",
+   "opType": "transpose",
+   "originNode": "/blks/blks.3/conv1/Conv_output_0",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_148_DequantizeLinear_Output_vaip_17": {
+   "name": "onnx::Conv_148_DequantizeLinear_Output_vaip_17",
+   "opType": "transpose",
+   "originNode": "onnx::Conv_148_DequantizeLinear_Output",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_151_DequantizeLinear_Output_vaip_20": {
+   "name": "onnx::Conv_151_DequantizeLinear_Output_vaip_20",
+   "opType": "transpose",
+   "originNode": "onnx::Conv_151_DequantizeLinear_Output",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output_vaip_71": {
+   "name": "/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output_vaip_71",
+   "opType": "transpose",
+   "originNode": "/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.2/conv2/Conv_output_0_vaip_27": {
+   "name": "/blks/blks.2/conv2/Conv_output_0_vaip_27",
+   "opType": "transpose",
+   "originNode": "/blks/blks.2/conv2/Conv_output_0",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.3/conv2/Conv_output_0_vaip_36": {
+   "name": "/blks/blks.3/conv2/Conv_output_0_vaip_36",
+   "opType": "transpose",
+   "originNode": "/blks/blks.3/conv2/Conv_output_0",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/Relu_output_0_DequantizeLinear_Output/duplicated_vaip_4": {
+   "name": "/Relu_output_0_DequantizeLinear_Output/duplicated_vaip_4",
+   "opType": "transpose",
+   "originNode": "/Relu_output_0_DequantizeLinear_Output/duplicated",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.3/Relu_1_output_0_vaip_74": {
+   "name": "/blks/blks.3/Relu_1_output_0_vaip_74",
+   "opType": "transpose",
+   "originNode": "/blks/blks.3/Relu_1_output_0",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_155_DequantizeLinear_Output_vaip_94": {
+   "name": "onnx::Conv_155_DequantizeLinear_Output_vaip_94",
+   "opType": "fix",
+   "originNode": "onnx::Conv_155_DequantizeLinear_Output",
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "5"
+    }
+   }
+  },
+  "/blks/blks.1/Relu_output_0_DequantizeLinear_Output_vaip_53": {
+   "name": "/blks/blks.1/Relu_output_0_DequantizeLinear_Output_vaip_53",
+   "opType": "transpose",
+   "originNode": "/blks/blks.1/Relu_output_0_DequantizeLinear_Output",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_142_DequantizeLinear_Output_vaip_11": {
+   "name": "onnx::Conv_142_DequantizeLinear_Output_vaip_11",
+   "opType": "transpose",
+   "originNode": "onnx::Conv_142_DequantizeLinear_Output",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "onnx::Conv_158_DequantizeLinear_Output_vaip_96": {
+   "name": "onnx::Conv_158_DequantizeLinear_Output_vaip_96",
+   "opType": "fix",
+   "originNode": "onnx::Conv_158_DequantizeLinear_Output",
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "5"
+    }
+   }
+  },
+  "input_DequantizeLinear_Output": {
+   "name": "input_DequantizeLinear_Output",
+   "opType": "identity",
+   "originNode": "input_DequantizeLinear_Output"
+  },
+  "/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output/duplicated_vaip_31": {
+   "name": "/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output/duplicated_vaip_31",
+   "opType": "transpose",
+   "originNode": "/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output/duplicated",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "/blks/blks.2/shortcut/shortcut.0/Conv_output_0_vaip_30": {
+   "name": "/blks/blks.2/shortcut/shortcut.0/Conv_output_0_vaip_30",
+   "opType": "transpose",
+   "originNode": "/blks/blks.2/shortcut/shortcut.0/Conv_output_0",
+   "pass": "layoutransform",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "input_QuantizeLinear_Output": {
+   "name": "input_QuantizeLinear_Output",
+   "opType": "identity",
+   "originNode": "input_QuantizeLinear_Output"
+  },
+  "onnx::Conv_151_DequantizeLinear_Output_vaip_85": {
+   "name": "onnx::Conv_151_DequantizeLinear_Output_vaip_85",
+   "opType": "fix",
+   "next": {
+    "name": "onnx::Conv_151_DequantizeLinear_Output_vaip_20",
+    "opType": "transpose",
+    "originNode": "onnx::Conv_151_DequantizeLinear_Output",
+    "pass": "layoutransform",
+    "attribute": {
+     "transposeAttr": {
+      "order": [
+       "0",
+       "2",
+       "3",
+       "1"
+      ]
+     }
+    }
+   },
+   "pass": "add_fix_after_const",
+   "attribute": {
+    "fixAttr": {
+     "fixPoint": "7"
+    }
+   }
+  },
+  "/blks/blks.2/conv2/Conv_output_0_DequantizeLinear_Output_vaip_62": {
+   "name": "/blks/blks.2/conv2/Conv_output_0_DequantizeLinear_Output_vaip_62",
+   "opType": "transpose",
+   "originNode": "/blks/blks.2/conv2/Conv_output_0_DequantizeLinear_Output",
+   "pass": "fuse_transpose",
+   "attribute": {
+    "transposeAttr": {
+     "order": [
+      "0",
+      "2",
+      "3",
+      "1"
+     ]
+    }
+   }
+  },
+  "output": {
+   "name": "output",
+   "opType": "identity",
+   "originNode": "output"
+  }
+ },
+ "constDataInfo": {
+  "onnx::Conv_137_DequantizeLinear_Output": {
+   "offset": "77802",
+   "size": "32",
+   "shape": [
+    "8"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_136_zero_point": {
+   "offset": "14522",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_151_zero_point": {
+   "offset": "51694",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_146_DequantizeLinear_Output": {
+   "offset": "81482",
+   "size": "64",
+   "shape": [
+    "16"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_161_quantized": {
+   "offset": "72607",
+   "size": "32",
+   "shape": [
+    "32"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_170_DequantizeLinear_Output_vaip_98": {
+   "offset": "375434",
+   "size": "256",
+   "shape": [
+    "64"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_160_DequantizeLinear_Output": {
+   "offset": "151690",
+   "size": "2048",
+   "shape": [
+    "32",
+    "16",
+    "1",
+    "1"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_140_DequantizeLinear_Output_vaip_84": {
+   "offset": "78986",
+   "size": "32",
+   "shape": [
+    "8"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_163_DequantizeLinear_Output": {
+   "offset": "153994",
+   "size": "73728",
+   "shape": [
+    "64",
+    "32",
+    "3",
+    "3"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_155_quantized": {
+   "offset": "77250",
+   "size": "32",
+   "shape": [
+    "32"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_166_DequantizeLinear_Output_vaip_35": {
+   "offset": "386482",
+   "size": "147456",
+   "shape": [
+    "64",
+    "3",
+    "3",
+    "64"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_148_quantized": {
+   "offset": "11508",
+   "size": "2304",
+   "shape": [
+    "16",
+    "16",
+    "3",
+    "3"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_157_DequantizeLinear_Output_vaip_26": {
+   "offset": "607666",
+   "size": "36864",
+   "shape": [
+    "32",
+    "3",
+    "3",
+    "32"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_158_zero_point": {
+   "offset": "14829",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_169_quantized": {
+   "offset": "1",
+   "size": "2048",
+   "shape": [
+    "64",
+    "32",
+    "1",
+    "1"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_167_zero_point": {
+   "offset": "2065",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_136_DequantizeLinear_Output": {
+   "offset": "77834",
+   "size": "1152",
+   "shape": [
+    "8",
+    "4",
+    "3",
+    "3"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_160_quantized": {
+   "offset": "72094",
+   "size": "512",
+   "shape": [
+    "32",
+    "16",
+    "1",
+    "1"
+   ],
+   "type": 3
+  },
+  "linear.bias_DequantizeLinear_Output_vaip_103": {
+   "offset": "386442",
+   "size": "40",
+   "shape": [
+    "10"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_158_quantized": {
+   "offset": "2066",
+   "size": "32",
+   "shape": [
+    "32"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_161_DequantizeLinear_Output": {
+   "offset": "151562",
+   "size": "128",
+   "shape": [
+    "32"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_151_DequantizeLinear_Output_vaip_85": {
+   "offset": "680802",
+   "size": "512",
+   "shape": [
+    "16",
+    "1",
+    "1",
+    "8"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_143_quantized": {
+   "offset": "14509",
+   "size": "8",
+   "shape": [
+    "8"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_164_quantized": {
+   "offset": "72028",
+   "size": "64",
+   "shape": [
+    "64"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_163_DequantizeLinear_Output_vaip_99": {
+   "offset": "533938",
+   "size": "73728",
+   "shape": [
+    "64",
+    "3",
+    "3",
+    "32"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_133_DequantizeLinear_Output": {
+   "offset": "77370",
+   "size": "432",
+   "shape": [
+    "4",
+    "3",
+    "3",
+    "3"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_155_DequantizeLinear_Output_vaip_94": {
+   "offset": "96010",
+   "size": "128",
+   "shape": [
+    "32"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_160_DequantizeLinear_Output_vaip_29": {
+   "offset": "681314",
+   "size": "2048",
+   "shape": [
+    "32",
+    "1",
+    "1",
+    "16"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_149_zero_point": {
+   "offset": "14523",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_149_DequantizeLinear_Output": {
+   "offset": "86154",
+   "size": "64",
+   "shape": [
+    "16"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_157_quantized": {
+   "offset": "2220",
+   "size": "9216",
+   "shape": [
+    "32",
+    "32",
+    "3",
+    "3"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_142_DequantizeLinear_Output_vaip_11": {
+   "offset": "680674",
+   "size": "128",
+   "shape": [
+    "8",
+    "1",
+    "1",
+    "4"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_148_zero_point": {
+   "offset": "72011",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_134_zero_point": {
+   "offset": "2098",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_161_DequantizeLinear_Output_vaip_92": {
+   "offset": "151562",
+   "size": "128",
+   "shape": [
+    "32"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_140_quantized": {
+   "offset": "14812",
+   "size": "8",
+   "shape": [
+    "8"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_137_DequantizeLinear_Output_vaip_82": {
+   "offset": "77802",
+   "size": "32",
+   "shape": [
+    "8"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_164_DequantizeLinear_Output_vaip_100": {
+   "offset": "153738",
+   "size": "256",
+   "shape": [
+    "64"
+   ],
+   "type": 1
+  },
+  "linear.weight_quantized": {
+   "offset": "13833",
+   "size": "640",
+   "shape": [
+    "10",
+    "64"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_145_DequantizeLinear_Output_vaip_14": {
+   "offset": "672178",
+   "size": "4608",
+   "shape": [
+    "16",
+    "3",
+    "3",
+    "8"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_142_DequantizeLinear_Output": {
+   "offset": "81354",
+   "size": "128",
+   "shape": [
+    "8",
+    "4",
+    "1",
+    "1"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_154_DequantizeLinear_Output": {
+   "offset": "96138",
+   "size": "18432",
+   "shape": [
+    "32",
+    "16",
+    "3",
+    "3"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_139_DequantizeLinear_Output_vaip_8": {
+   "offset": "676786",
+   "size": "2304",
+   "shape": [
+    "8",
+    "3",
+    "3",
+    "8"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_163_zero_point": {
+   "offset": "77248",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_154_zero_point": {
+   "offset": "72639",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_133_DequantizeLinear_Output_vaip_77": {
+   "offset": "680242",
+   "size": "432",
+   "shape": [
+    "4",
+    "3",
+    "3",
+    "3"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_169_DequantizeLinear_Output_vaip_97": {
+   "offset": "683362",
+   "size": "8192",
+   "shape": [
+    "64",
+    "1",
+    "1",
+    "32"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_133_zero_point": {
+   "offset": "2218",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_158_DequantizeLinear_Output": {
+   "offset": "114570",
+   "size": "128",
+   "shape": [
+    "32"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_143_zero_point": {
+   "offset": "14508",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_152_quantized": {
+   "offset": "52406",
+   "size": "16",
+   "shape": [
+    "16"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_148_DequantizeLinear_Output": {
+   "offset": "86218",
+   "size": "9216",
+   "shape": [
+    "16",
+    "16",
+    "3",
+    "3"
+   ],
+   "type": 1
+  },
+  "ortshared_1_0_1_5_token_69": {
+   "offset": "14518",
+   "size": "4",
+   "type": 1
+  },
+  "linear.weight_zero_point": {
+   "offset": "14507",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_140_DequantizeLinear_Output": {
+   "offset": "78986",
+   "size": "32",
+   "shape": [
+    "8"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_157_zero_point": {
+   "offset": "13812",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_137_zero_point": {
+   "offset": "14517",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_142_zero_point": {
+   "offset": "14473",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_146_quantized": {
+   "offset": "13817",
+   "size": "16",
+   "shape": [
+    "16"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_160_zero_point": {
+   "offset": "72093",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_167_DequantizeLinear_Output": {
+   "offset": "227722",
+   "size": "256",
+   "shape": [
+    "64"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_143_DequantizeLinear_Output_vaip_80": {
+   "offset": "81322",
+   "size": "32",
+   "shape": [
+    "8"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_161_zero_point": {
+   "offset": "72606",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_152_zero_point": {
+   "offset": "52405",
+   "size": "1",
+   "type": 3
+  },
+  "ortshared_7_1_2_0_token_70": {
+   "offset": "2049",
+   "size": "16",
+   "shape": [
+    "2"
+   ],
+   "type": 7
+  },
+  "onnx::Conv_139_quantized": {
+   "offset": "51699",
+   "size": "576",
+   "shape": [
+    "8",
+    "8",
+    "3",
+    "3"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_154_DequantizeLinear_Output_vaip_23": {
+   "offset": "644530",
+   "size": "18432",
+   "shape": [
+    "32",
+    "3",
+    "3",
+    "16"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_139_DequantizeLinear_Output": {
+   "offset": "79018",
+   "size": "2304",
+   "shape": [
+    "8",
+    "8",
+    "3",
+    "3"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_163_quantized": {
+   "offset": "52422",
+   "size": "18432",
+   "shape": [
+    "64",
+    "32",
+    "3",
+    "3"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_139_zero_point": {
+   "offset": "14820",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_167_quantized": {
+   "offset": "11440",
+   "size": "64",
+   "shape": [
+    "64"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_149_quantized": {
+   "offset": "72012",
+   "size": "16",
+   "shape": [
+    "16"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_143_DequantizeLinear_Output": {
+   "offset": "81322",
+   "size": "32",
+   "shape": [
+    "8"
+   ],
+   "type": 1
+  },
+  "ortshared_1_0_1_6_token_71": {
+   "offset": "51695",
+   "size": "4",
+   "type": 1
+  },
+  "onnx::Conv_166_DequantizeLinear_Output": {
+   "offset": "227978",
+   "size": "147456",
+   "shape": [
+    "64",
+    "64",
+    "3",
+    "3"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_155_DequantizeLinear_Output": {
+   "offset": "96010",
+   "size": "128",
+   "shape": [
+    "32"
+   ],
+   "type": 1
+  },
+  "ortshared_1_0_1_4_token_68": {
+   "offset": "13813",
+   "size": "4",
+   "type": 1
+  },
+  "linear.bias_zero_point": {
+   "size": "1",
+   "type": 3
+  },
+  "linear.bias_quantized": {
+   "offset": "2100",
+   "size": "10",
+   "shape": [
+    "10"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_145_quantized": {
+   "offset": "70855",
+   "size": "1152",
+   "shape": [
+    "16",
+    "8",
+    "3",
+    "3"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_160_DequantizeLinear_Output_vaip_91": {
+   "offset": "681314",
+   "size": "2048",
+   "shape": [
+    "32",
+    "1",
+    "1",
+    "16"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_145_DequantizeLinear_Output": {
+   "offset": "81546",
+   "size": "4608",
+   "shape": [
+    "16",
+    "8",
+    "3",
+    "3"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_149_DequantizeLinear_Output_vaip_90": {
+   "offset": "86154",
+   "size": "64",
+   "shape": [
+    "16"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_145_DequantizeLinear_Output_vaip_87": {
+   "offset": "672178",
+   "size": "4608",
+   "shape": [
+    "16",
+    "3",
+    "3",
+    "8"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_157_DequantizeLinear_Output": {
+   "offset": "114698",
+   "size": "36864",
+   "shape": [
+    "32",
+    "32",
+    "3",
+    "3"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_163_DequantizeLinear_Output_vaip_32": {
+   "offset": "533938",
+   "size": "73728",
+   "shape": [
+    "64",
+    "3",
+    "3",
+    "32"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_133_quantized": {
+   "offset": "2110",
+   "size": "108",
+   "shape": [
+    "4",
+    "3",
+    "3",
+    "3"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_151_DequantizeLinear_Output_vaip_20": {
+   "offset": "680802",
+   "size": "512",
+   "shape": [
+    "16",
+    "1",
+    "1",
+    "8"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_148_DequantizeLinear_Output_vaip_17": {
+   "offset": "662962",
+   "size": "9216",
+   "shape": [
+    "16",
+    "3",
+    "3",
+    "16"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_158_DequantizeLinear_Output_vaip_96": {
+   "offset": "114570",
+   "size": "128",
+   "shape": [
+    "32"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_170_zero_point": {
+   "offset": "2099",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_152_DequantizeLinear_Output": {
+   "offset": "95434",
+   "size": "64",
+   "shape": [
+    "16"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_170_DequantizeLinear_Output": {
+   "offset": "375434",
+   "size": "256",
+   "shape": [
+    "64"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_152_DequantizeLinear_Output_vaip_86": {
+   "offset": "95434",
+   "size": "64",
+   "shape": [
+    "16"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_164_zero_point": {
+   "offset": "72092",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_136_DequantizeLinear_Output_vaip_5": {
+   "offset": "679090",
+   "size": "1152",
+   "shape": [
+    "8",
+    "3",
+    "3",
+    "4"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_167_DequantizeLinear_Output_vaip_102": {
+   "offset": "227722",
+   "size": "256",
+   "shape": [
+    "64"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_170_quantized": {
+   "offset": "77290",
+   "size": "64",
+   "shape": [
+    "64"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_146_DequantizeLinear_Output_vaip_88": {
+   "offset": "81482",
+   "size": "64",
+   "shape": [
+    "16"
+   ],
+   "type": 1
+  },
+  "ortshared_1_0_1_3_token_67": {
+   "offset": "77286",
+   "size": "4",
+   "type": 1
+  },
+  "onnx::Conv_154_quantized": {
+   "offset": "72640",
+   "size": "4608",
+   "shape": [
+    "32",
+    "16",
+    "3",
+    "3"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_164_DequantizeLinear_Output": {
+   "offset": "153738",
+   "size": "256",
+   "shape": [
+    "64"
+   ],
+   "type": 1
+  },
+  "linear.weight_DequantizeLinear_Output": {
+   "offset": "383882",
+   "size": "2560",
+   "shape": [
+    "10",
+    "64"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_169_zero_point": {
+   "offset": "52404",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_139_DequantizeLinear_Output_vaip_83": {
+   "offset": "676786",
+   "size": "2304",
+   "shape": [
+    "8",
+    "3",
+    "3",
+    "8"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_142_DequantizeLinear_Output_vaip_79": {
+   "offset": "680674",
+   "size": "128",
+   "shape": [
+    "8",
+    "1",
+    "1",
+    "4"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_134_DequantizeLinear_Output_vaip_78": {
+   "offset": "77354",
+   "size": "16",
+   "shape": [
+    "4"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_142_quantized": {
+   "offset": "14474",
+   "size": "32",
+   "shape": [
+    "8",
+    "4",
+    "1",
+    "1"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_166_zero_point": {
+   "offset": "52275",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_169_DequantizeLinear_Output": {
+   "offset": "375690",
+   "size": "8192",
+   "shape": [
+    "64",
+    "32",
+    "1",
+    "1"
+   ],
+   "type": 1
+  },
+  "linear.weight_DequantizeLinear_Output_vaip_104": {
+   "offset": "383882",
+   "size": "2560",
+   "shape": [
+    "10",
+    "64"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_137_quantized": {
+   "offset": "14821",
+   "size": "8",
+   "shape": [
+    "8"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_155_zero_point": {
+   "offset": "77249",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_151_quantized": {
+   "offset": "52276",
+   "size": "128",
+   "shape": [
+    "16",
+    "8",
+    "1",
+    "1"
+   ],
+   "type": 3
+  },
+  "ortshared_1_0_1_1_token_65": {
+   "offset": "77282",
+   "size": "4",
+   "type": 1
+  },
+  "onnx::Conv_157_DequantizeLinear_Output_vaip_95": {
+   "offset": "607666",
+   "size": "36864",
+   "shape": [
+    "32",
+    "3",
+    "3",
+    "32"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_145_zero_point": {
+   "offset": "70854",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_133_DequantizeLinear_Output_vaip_2": {
+   "offset": "680242",
+   "size": "432",
+   "shape": [
+    "4",
+    "3",
+    "3",
+    "3"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_148_DequantizeLinear_Output_vaip_89": {
+   "offset": "662962",
+   "size": "9216",
+   "shape": [
+    "16",
+    "3",
+    "3",
+    "16"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_140_zero_point": {
+   "offset": "2219",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_169_DequantizeLinear_Output_vaip_38": {
+   "offset": "683362",
+   "size": "8192",
+   "shape": [
+    "64",
+    "1",
+    "1",
+    "32"
+   ],
+   "type": 1
+  },
+  "ortshared_1_0_1_0_token_64": {
+   "offset": "72007",
+   "size": "4",
+   "type": 1
+  },
+  "onnx::Conv_134_quantized": {
+   "offset": "11504",
+   "size": "4",
+   "shape": [
+    "4"
+   ],
+   "type": 3
+  },
+  "linear.bias_DequantizeLinear_Output": {
+   "offset": "386442",
+   "size": "40",
+   "shape": [
+    "10"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_151_DequantizeLinear_Output": {
+   "offset": "95498",
+   "size": "512",
+   "shape": [
+    "16",
+    "8",
+    "1",
+    "1"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_166_quantized": {
+   "offset": "14830",
+   "size": "36864",
+   "shape": [
+    "64",
+    "64",
+    "3",
+    "3"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_136_quantized": {
+   "offset": "14524",
+   "size": "288",
+   "shape": [
+    "8",
+    "4",
+    "3",
+    "3"
+   ],
+   "type": 3
+  },
+  "onnx::Conv_166_DequantizeLinear_Output_vaip_101": {
+   "offset": "386482",
+   "size": "147456",
+   "shape": [
+    "64",
+    "3",
+    "3",
+    "64"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_146_zero_point": {
+   "offset": "14506",
+   "size": "1",
+   "type": 3
+  },
+  "onnx::Conv_134_DequantizeLinear_Output": {
+   "offset": "77354",
+   "size": "16",
+   "shape": [
+    "4"
+   ],
+   "type": 1
+  },
+  "ortshared_1_0_1_2_token_66": {
+   "offset": "11436",
+   "size": "4",
+   "type": 1
+  },
+  "onnx::Conv_154_DequantizeLinear_Output_vaip_93": {
+   "offset": "644530",
+   "size": "18432",
+   "shape": [
+    "32",
+    "3",
+    "3",
+    "16"
+   ],
+   "type": 1
+  },
+  "onnx::Conv_136_DequantizeLinear_Output_vaip_81": {
+   "offset": "679090",
+   "size": "1152",
+   "shape": [
+    "8",
+    "3",
+    "3",
+    "4"
+   ],
+   "type": 1
+  }
+ },
+ "fixInfo": {
+  "onnx::Conv_134_DequantizeLinear_Output": 7,
+  "onnx::Conv_160_DequantizeLinear_Output": 8,
+  "onnx::Conv_170_DequantizeLinear_Output": 5,
+  "onnx::Conv_167_DequantizeLinear_Output": 5,
+  "onnx::Conv_155_DequantizeLinear_Output": 5,
+  "onnx::Conv_142_DequantizeLinear_Output": 6,
+  "onnx::Conv_143_DequantizeLinear_Output": 6,
+  "onnx::Conv_163_DequantizeLinear_Output_vaip_32": 9,
+  "onnx::Conv_140_DequantizeLinear_Output": 6,
+  "onnx::Conv_142_DequantizeLinear_Output_vaip_11": 6,
+  "onnx::Conv_151_DequantizeLinear_Output_vaip_20": 7,
+  "onnx::Conv_149_DequantizeLinear_Output": 5,
+  "onnx::Conv_136_DequantizeLinear_Output": 7,
+  "onnx::Conv_160_DequantizeLinear_Output_vaip_29": 8,
+  "onnx::Conv_158_DequantizeLinear_Output": 5,
+  "onnx::Conv_154_DequantizeLinear_Output": 8,
+  "onnx::Conv_166_DequantizeLinear_Output_vaip_35": 6,
+  "onnx::Conv_151_DequantizeLinear_Output": 7,
+  "onnx::Conv_157_DequantizeLinear_Output_vaip_26": 8,
+  "onnx::Conv_154_DequantizeLinear_Output_vaip_23": 8,
+  "onnx::Conv_161_DequantizeLinear_Output": 7,
+  "onnx::Conv_133_DequantizeLinear_Output": 7,
+  "onnx::Conv_163_DequantizeLinear_Output": 9,
+  "onnx::Conv_152_DequantizeLinear_Output": 6,
+  "onnx::Conv_164_DequantizeLinear_Output": 6,
+  "onnx::Conv_139_DequantizeLinear_Output_vaip_8": 8,
+  "linear.weight_DequantizeLinear_Output": 10,
+  "onnx::Conv_148_DequantizeLinear_Output": 8,
+  "onnx::Conv_133_DequantizeLinear_Output_vaip_2": 7,
+  "onnx::Conv_166_DequantizeLinear_Output": 6,
+  "onnx::Conv_145_DequantizeLinear_Output_vaip_14": 8,
+  "onnx::Conv_148_DequantizeLinear_Output_vaip_17": 8,
+  "onnx::Conv_136_DequantizeLinear_Output_vaip_5": 7,
+  "onnx::Conv_145_DequantizeLinear_Output": 8,
+  "onnx::Conv_169_DequantizeLinear_Output": 7,
+  "onnx::Conv_157_DequantizeLinear_Output": 8,
+  "onnx::Conv_137_DequantizeLinear_Output": 6,
+  "onnx::Conv_139_DequantizeLinear_Output": 8,
+  "onnx::Conv_169_DequantizeLinear_Output_vaip_38": 7,
+  "linear.bias_DequantizeLinear_Output": 10,
+  "onnx::Conv_146_DequantizeLinear_Output": 6
+ }
+}
