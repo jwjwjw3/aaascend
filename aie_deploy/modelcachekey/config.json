@@ -252,32 +252,32 @@
      }
     ],
     "xcompilerAttrs": {
-     "prefetch": {
+     "disable_std_quant": {
       "boolValue": false
-     },
-     "dpu_subgraph_num": {
-      "intValue": 32
      },
      "opt_level": {
       "intValue": 0
      },
-     "profile": {
-      "intValue": 0
-     },
-     "preassign": {
-      "boolValue": false
-     },
-     "dump_subgraph_ops": {
-      "boolValue": false
-     },
      "concat_skip_code_gen": {
-      "boolValue": false
-     },
-     "disable_std_quant": {
       "boolValue": false
      },
      "debug_mode": {
       "stringValue": "performance"
+     },
+     "dump_subgraph_ops": {
+      "boolValue": false
+     },
+     "prefetch": {
+      "boolValue": false
+     },
+     "profile": {
+      "intValue": 0
+     },
+     "dpu_subgraph_num": {
+      "intValue": 32
+     },
+     "preassign": {
+      "boolValue": false
      }
     },
     "minimumNumOfConv": 2
@@ -332,8 +332,8 @@
  },
  "onnxPath": "N/A",
  "sessionOptions": {
+  "cacheKey": "modelcachekey",
   "config_file": "vaip_config.json",
-  "cacheDir": "./",
-  "cacheKey": "modelcachekey"
+  "cacheDir": "./"
  }
 }

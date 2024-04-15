@@ -2,7 +2,7 @@
  "deviceStat": [
   {
    "name": "all",
-   "nodeNum": 103,
+   "nodeNum": 173,
    "supportedOpType": [
     "::Add",
     "::AveragePool",
@@ -16,17 +16,19 @@
   },
   {
    "name": "CPU",
-   "nodeNum": 2,
+   "nodeNum": 157,
    "supportedOpType": [
+    "::Add",
+    "::Conv",
     "::DequantizeLinear",
-    "::QuantizeLinear"
+    "::QuantizeLinear",
+    "::Relu"
    ]
   },
   {
    "name": "DPU",
-   "nodeNum": 101,
+   "nodeNum": 16,
    "supportedOpType": [
-    "::Add",
     "::AveragePool",
     "::Conv",
     "::DequantizeLinear",
@@ -44,11 +46,11 @@
    ],
    "input": [
     "input",
-    "ortshared_1_0_1_2_token_66",
+    "ortshared_1_0_1_7_token_96",
     "input_zero_point"
    ],
    "opType": "QuantizeLinear",
-   "comment": "@0 [input_QuantizeLinear_Output:(ty=2,shape=[-1,3,32,32])] QuantizeLinear [input:(ty=1,shape=[-1,3,32,32]),ortshared_1_0_1_2_token_66:(ty=1,shape=[]),input_zero_point:(ty=2,shape=[])]",
+   "comment": "@0 [input_QuantizeLinear_Output:(ty=2,shape=[-1,3,32,32])] QuantizeLinear [input:(ty=1,shape=[-1,3,32,32]),ortshared_1_0_1_7_token_96:(ty=1,shape=[]),input_zero_point:(ty=2,shape=[])]",
    "device": "CPU"
   },
   {
@@ -57,38 +59,38 @@
    ],
    "input": [
     "input_QuantizeLinear_Output",
-    "ortshared_1_0_1_2_token_66",
+    "ortshared_1_0_1_7_token_96",
     "input_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@29 [input_DequantizeLinear_Output:(ty=1,shape=[-1,3,32,32])] DequantizeLinear [input_QuantizeLinear_Output:(ty=2,shape=[-1,3,32,32]),ortshared_1_0_1_2_token_66:(ty=1,shape=[]),input_zero_point:(ty=2,shape=[])]",
+   "comment": "@45 [input_DequantizeLinear_Output:(ty=1,shape=[-1,3,32,32])] DequantizeLinear [input_QuantizeLinear_Output:(ty=2,shape=[-1,3,32,32]),ortshared_1_0_1_7_token_96:(ty=1,shape=[]),input_zero_point:(ty=2,shape=[])]",
    "device": "DPU"
   },
   {
    "output": [
-    "onnx::Conv_134_DequantizeLinear_Output"
+    "onnx::Conv_234_DequantizeLinear_Output"
    ],
    "input": [
-    "onnx::Conv_134_quantized",
-    "ortshared_1_0_1_2_token_66",
-    "onnx::Conv_134_zero_point"
+    "onnx::Conv_234_quantized",
+    "ortshared_1_0_1_0_token_88",
+    "onnx::Conv_234_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@4 [onnx::Conv_134_DequantizeLinear_Output:(ty=1,shape=[4])] DequantizeLinear [onnx::Conv_134_quantized:(ty=3,shape=[4]),ortshared_1_0_1_2_token_66:(ty=1,shape=[]),onnx::Conv_134_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
+   "comment": "@4 [onnx::Conv_234_DequantizeLinear_Output:(ty=1,shape=[16])] DequantizeLinear [onnx::Conv_234_quantized:(ty=3,shape=[16]),ortshared_1_0_1_0_token_88:(ty=1,shape=[]),onnx::Conv_234_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "onnx::Conv_133_DequantizeLinear_Output"
+    "onnx::Conv_233_DequantizeLinear_Output"
    ],
    "input": [
-    "onnx::Conv_133_quantized",
-    "ortshared_1_0_1_2_token_66",
-    "onnx::Conv_133_zero_point"
+    "onnx::Conv_233_quantized",
+    "ortshared_1_0_1_3_token_92",
+    "onnx::Conv_233_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@3 [onnx::Conv_133_DequantizeLinear_Output:(ty=1,shape=[4,3,3,3])] DequantizeLinear [onnx::Conv_133_quantized:(ty=3,shape=[4,3,3,3]),ortshared_1_0_1_2_token_66:(ty=1,shape=[]),onnx::Conv_133_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
+   "comment": "@3 [onnx::Conv_233_DequantizeLinear_Output:(ty=1,shape=[16,3,3,3])] DequantizeLinear [onnx::Conv_233_quantized:(ty=3,shape=[16,3,3,3]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),onnx::Conv_233_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
@@ -96,11 +98,11 @@
    ],
    "input": [
     "input_DequantizeLinear_Output",
-    "onnx::Conv_133_DequantizeLinear_Output",
-    "onnx::Conv_134_DequantizeLinear_Output"
+    "onnx::Conv_233_DequantizeLinear_Output",
+    "onnx::Conv_234_DequantizeLinear_Output"
    ],
    "opType": "Conv",
-   "comment": "@30 [/conv1/Conv_output_0:(ty=1,shape=[-1,4,32,32])] Conv [input_DequantizeLinear_Output:(ty=1,shape=[-1,3,32,32]),onnx::Conv_133_DequantizeLinear_Output:(ty=1,shape=[4,3,3,3]),onnx::Conv_134_DequantizeLinear_Output:(ty=1,shape=[4])]",
+   "comment": "@46 [/conv1/Conv_output_0:(ty=1,shape=[-1,16,32,32])] Conv [input_DequantizeLinear_Output:(ty=1,shape=[-1,3,32,32]),onnx::Conv_233_DequantizeLinear_Output:(ty=1,shape=[16,3,3,3]),onnx::Conv_234_DequantizeLinear_Output:(ty=1,shape=[16])]",
    "device": "DPU"
   },
   {
@@ -111,7 +113,7 @@
     "/conv1/Conv_output_0"
    ],
    "opType": "Relu",
-   "comment": "@31 [/Relu_output_0:(ty=1,shape=[-1,4,32,32])] Relu [/conv1/Conv_output_0:(ty=1,shape=[-1,4,32,32])]",
+   "comment": "@47 [/Relu_output_0:(ty=1,shape=[-1,16,32,32])] Relu [/conv1/Conv_output_0:(ty=1,shape=[-1,16,32,32])]",
    "device": "DPU"
   },
   {
@@ -120,11 +122,11 @@
    ],
    "input": [
     "/Relu_output_0",
-    "ortshared_1_0_1_4_token_68",
+    "ortshared_1_0_1_3_token_92",
     "/Relu_output_0_zero_point"
    ],
    "opType": "QuantizeLinear",
-   "comment": "@32 [/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,4,32,32])] QuantizeLinear [/Relu_output_0:(ty=1,shape=[-1,4,32,32]),ortshared_1_0_1_4_token_68:(ty=1,shape=[]),/Relu_output_0_zero_point:(ty=2,shape=[])]",
+   "comment": "@48 [/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32])] QuantizeLinear [/Relu_output_0:(ty=1,shape=[-1,16,32,32]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/Relu_output_0_zero_point:(ty=2,shape=[])]",
    "device": "DPU"
   },
   {
@@ -133,152 +135,11 @@
    ],
    "input": [
     "/Relu_output_0_QuantizeLinear_Output",
-    "ortshared_1_0_1_4_token_68",
+    "ortshared_1_0_1_3_token_92",
     "/Relu_output_0_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@100 [/Relu_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,4,32,32])] DequantizeLinear [/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,4,32,32]),ortshared_1_0_1_4_token_68:(ty=1,shape=[]),/Relu_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
-  },
-  {
-   "output": [
-    "onnx::Conv_137_DequantizeLinear_Output"
-   ],
-   "input": [
-    "onnx::Conv_137_quantized",
-    "ortshared_1_0_1_4_token_68",
-    "onnx::Conv_137_zero_point"
-   ],
-   "opType": "DequantizeLinear",
-   "comment": "@6 [onnx::Conv_137_DequantizeLinear_Output:(ty=1,shape=[8])] DequantizeLinear [onnx::Conv_137_quantized:(ty=3,shape=[8]),ortshared_1_0_1_4_token_68:(ty=1,shape=[]),onnx::Conv_137_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
-  },
-  {
-   "output": [
-    "onnx::Conv_136_DequantizeLinear_Output"
-   ],
-   "input": [
-    "onnx::Conv_136_quantized",
-    "ortshared_1_0_1_2_token_66",
-    "onnx::Conv_136_zero_point"
-   ],
-   "opType": "DequantizeLinear",
-   "comment": "@5 [onnx::Conv_136_DequantizeLinear_Output:(ty=1,shape=[8,4,3,3])] DequantizeLinear [onnx::Conv_136_quantized:(ty=3,shape=[8,4,3,3]),ortshared_1_0_1_2_token_66:(ty=1,shape=[]),onnx::Conv_136_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
-  },
-  {
-   "output": [
-    "/blks/blks.0/conv1/Conv_output_0"
-   ],
-   "input": [
-    "/Relu_output_0_DequantizeLinear_Output/duplicated",
-    "onnx::Conv_136_DequantizeLinear_Output",
-    "onnx::Conv_137_DequantizeLinear_Output"
-   ],
-   "opType": "Conv",
-   "comment": "@35 [/blks/blks.0/conv1/Conv_output_0:(ty=1,shape=[-1,8,32,32])] Conv [/Relu_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,4,32,32]),onnx::Conv_136_DequantizeLinear_Output:(ty=1,shape=[8,4,3,3]),onnx::Conv_137_DequantizeLinear_Output:(ty=1,shape=[8])]",
-   "device": "DPU"
-  },
-  {
-   "output": [
-    "/blks/blks.0/Relu_output_0"
-   ],
-   "input": [
-    "/blks/blks.0/conv1/Conv_output_0"
-   ],
-   "opType": "Relu",
-   "comment": "@37 [/blks/blks.0/Relu_output_0:(ty=1,shape=[-1,8,32,32])] Relu [/blks/blks.0/conv1/Conv_output_0:(ty=1,shape=[-1,8,32,32])]",
-   "device": "DPU"
-  },
-  {
-   "output": [
-    "/blks/blks.0/Relu_output_0_QuantizeLinear_Output"
-   ],
-   "input": [
-    "/blks/blks.0/Relu_output_0",
-    "ortshared_1_0_1_3_token_67",
-    "/blks/blks.0/Relu_output_0_zero_point"
-   ],
-   "opType": "QuantizeLinear",
-   "comment": "@39 [/blks/blks.0/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,8,32,32])] QuantizeLinear [/blks/blks.0/Relu_output_0:(ty=1,shape=[-1,8,32,32]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),/blks/blks.0/Relu_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
-  },
-  {
-   "output": [
-    "/blks/blks.0/Relu_output_0_DequantizeLinear_Output"
-   ],
-   "input": [
-    "/blks/blks.0/Relu_output_0_QuantizeLinear_Output",
-    "ortshared_1_0_1_3_token_67",
-    "/blks/blks.0/Relu_output_0_zero_point"
-   ],
-   "opType": "DequantizeLinear",
-   "comment": "@40 [/blks/blks.0/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,8,32,32])] DequantizeLinear [/blks/blks.0/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,8,32,32]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),/blks/blks.0/Relu_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
-  },
-  {
-   "output": [
-    "onnx::Conv_140_DequantizeLinear_Output"
-   ],
-   "input": [
-    "onnx::Conv_140_quantized",
-    "ortshared_1_0_1_4_token_68",
-    "onnx::Conv_140_zero_point"
-   ],
-   "opType": "DequantizeLinear",
-   "comment": "@8 [onnx::Conv_140_DequantizeLinear_Output:(ty=1,shape=[8])] DequantizeLinear [onnx::Conv_140_quantized:(ty=3,shape=[8]),ortshared_1_0_1_4_token_68:(ty=1,shape=[]),onnx::Conv_140_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
-  },
-  {
-   "output": [
-    "onnx::Conv_139_DequantizeLinear_Output"
-   ],
-   "input": [
-    "onnx::Conv_139_quantized",
-    "ortshared_1_0_1_0_token_64",
-    "onnx::Conv_139_zero_point"
-   ],
-   "opType": "DequantizeLinear",
-   "comment": "@7 [onnx::Conv_139_DequantizeLinear_Output:(ty=1,shape=[8,8,3,3])] DequantizeLinear [onnx::Conv_139_quantized:(ty=3,shape=[8,8,3,3]),ortshared_1_0_1_0_token_64:(ty=1,shape=[]),onnx::Conv_139_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
-  },
-  {
-   "output": [
-    "/blks/blks.0/conv2/Conv_output_0"
-   ],
-   "input": [
-    "/blks/blks.0/Relu_output_0_DequantizeLinear_Output",
-    "onnx::Conv_139_DequantizeLinear_Output",
-    "onnx::Conv_140_DequantizeLinear_Output"
-   ],
-   "opType": "Conv",
-   "comment": "@41 [/blks/blks.0/conv2/Conv_output_0:(ty=1,shape=[-1,8,32,32])] Conv [/blks/blks.0/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,8,32,32]),onnx::Conv_139_DequantizeLinear_Output:(ty=1,shape=[8,8,3,3]),onnx::Conv_140_DequantizeLinear_Output:(ty=1,shape=[8])]",
-   "device": "DPU"
-  },
-  {
-   "output": [
-    "/blks/blks.0/conv2/Conv_output_0_QuantizeLinear_Output"
-   ],
-   "input": [
-    "/blks/blks.0/conv2/Conv_output_0",
-    "ortshared_1_0_1_3_token_67",
-    "/blks/blks.0/conv2/Conv_output_0_zero_point"
-   ],
-   "opType": "QuantizeLinear",
-   "comment": "@42 [/blks/blks.0/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,8,32,32])] QuantizeLinear [/blks/blks.0/conv2/Conv_output_0:(ty=1,shape=[-1,8,32,32]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),/blks/blks.0/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
-  },
-  {
-   "output": [
-    "/blks/blks.0/conv2/Conv_output_0_DequantizeLinear_Output"
-   ],
-   "input": [
-    "/blks/blks.0/conv2/Conv_output_0_QuantizeLinear_Output",
-    "ortshared_1_0_1_3_token_67",
-    "/blks/blks.0/conv2/Conv_output_0_zero_point"
-   ],
-   "opType": "DequantizeLinear",
-   "comment": "@43 [/blks/blks.0/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,8,32,32])] DequantizeLinear [/blks/blks.0/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,8,32,32]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),/blks/blks.0/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
+   "comment": "@165 [/Relu_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,16,32,32])] DequantizeLinear [/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/Relu_output_0_zero_point:(ty=2,shape=[])]",
    "device": "DPU"
   },
   {
@@ -287,940 +148,1966 @@
    ],
    "input": [
     "/Relu_output_0_QuantizeLinear_Output",
-    "ortshared_1_0_1_4_token_68",
+    "ortshared_1_0_1_3_token_92",
     "/Relu_output_0_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@33 [/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,4,32,32])] DequantizeLinear [/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,4,32,32]),ortshared_1_0_1_4_token_68:(ty=1,shape=[]),/Relu_output_0_zero_point:(ty=2,shape=[])]",
+   "comment": "@49 [/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,32,32])] DequantizeLinear [/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/Relu_output_0_zero_point:(ty=2,shape=[])]",
    "device": "DPU"
   },
   {
    "output": [
-    "onnx::Conv_143_DequantizeLinear_Output"
+    "onnx::Conv_237_DequantizeLinear_Output"
    ],
    "input": [
-    "onnx::Conv_143_quantized",
-    "ortshared_1_0_1_4_token_68",
-    "onnx::Conv_143_zero_point"
+    "onnx::Conv_237_quantized",
+    "ortshared_1_0_1_0_token_88",
+    "onnx::Conv_237_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@10 [onnx::Conv_143_DequantizeLinear_Output:(ty=1,shape=[8])] DequantizeLinear [onnx::Conv_143_quantized:(ty=3,shape=[8]),ortshared_1_0_1_4_token_68:(ty=1,shape=[]),onnx::Conv_143_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
+   "comment": "@6 [onnx::Conv_237_DequantizeLinear_Output:(ty=1,shape=[16])] DequantizeLinear [onnx::Conv_237_quantized:(ty=3,shape=[16]),ortshared_1_0_1_0_token_88:(ty=1,shape=[]),onnx::Conv_237_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "onnx::Conv_142_DequantizeLinear_Output"
+    "onnx::Conv_236_DequantizeLinear_Output"
    ],
    "input": [
-    "onnx::Conv_142_quantized",
-    "ortshared_1_0_1_4_token_68",
-    "onnx::Conv_142_zero_point"
+    "onnx::Conv_236_quantized",
+    "ortshared_1_0_1_6_token_95",
+    "onnx::Conv_236_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@9 [onnx::Conv_142_DequantizeLinear_Output:(ty=1,shape=[8,4,1,1])] DequantizeLinear [onnx::Conv_142_quantized:(ty=3,shape=[8,4,1,1]),ortshared_1_0_1_4_token_68:(ty=1,shape=[]),onnx::Conv_142_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
+   "comment": "@5 [onnx::Conv_236_DequantizeLinear_Output:(ty=1,shape=[16,16,3,3])] DequantizeLinear [onnx::Conv_236_quantized:(ty=3,shape=[16,16,3,3]),ortshared_1_0_1_6_token_95:(ty=1,shape=[]),onnx::Conv_236_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.0/shortcut/shortcut.0/Conv_output_0"
+    "/layer1/layer1.0/conv1/Conv_output_0"
    ],
    "input": [
     "/Relu_output_0_DequantizeLinear_Output",
-    "onnx::Conv_142_DequantizeLinear_Output",
-    "onnx::Conv_143_DequantizeLinear_Output"
+    "onnx::Conv_236_DequantizeLinear_Output",
+    "onnx::Conv_237_DequantizeLinear_Output"
    ],
    "opType": "Conv",
-   "comment": "@34 [/blks/blks.0/shortcut/shortcut.0/Conv_output_0:(ty=1,shape=[-1,8,32,32])] Conv [/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,4,32,32]),onnx::Conv_142_DequantizeLinear_Output:(ty=1,shape=[8,4,1,1]),onnx::Conv_143_DequantizeLinear_Output:(ty=1,shape=[8])]",
-   "device": "DPU"
+   "comment": "@50 [/layer1/layer1.0/conv1/Conv_output_0:(ty=1,shape=[-1,16,32,32])] Conv [/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,32,32]),onnx::Conv_236_DequantizeLinear_Output:(ty=1,shape=[16,16,3,3]),onnx::Conv_237_DequantizeLinear_Output:(ty=1,shape=[16])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.0/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output"
+    "/layer1/layer1.0/Relu_output_0"
    ],
    "input": [
-    "/blks/blks.0/shortcut/shortcut.0/Conv_output_0",
-    "ortshared_1_0_1_4_token_68",
-    "/blks/blks.0/shortcut/shortcut.0/Conv_output_0_zero_point"
+    "/layer1/layer1.0/conv1/Conv_output_0"
+   ],
+   "opType": "Relu",
+   "comment": "@51 [/layer1/layer1.0/Relu_output_0:(ty=1,shape=[-1,16,32,32])] Relu [/layer1/layer1.0/conv1/Conv_output_0:(ty=1,shape=[-1,16,32,32])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer1/layer1.0/Relu_output_0_QuantizeLinear_Output"
+   ],
+   "input": [
+    "/layer1/layer1.0/Relu_output_0",
+    "ortshared_1_0_1_3_token_92",
+    "/layer1/layer1.0/Relu_output_0_zero_point"
    ],
    "opType": "QuantizeLinear",
-   "comment": "@36 [/blks/blks.0/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,8,32,32])] QuantizeLinear [/blks/blks.0/shortcut/shortcut.0/Conv_output_0:(ty=1,shape=[-1,8,32,32]),ortshared_1_0_1_4_token_68:(ty=1,shape=[]),/blks/blks.0/shortcut/shortcut.0/Conv_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@52 [/layer1/layer1.0/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32])] QuantizeLinear [/layer1/layer1.0/Relu_output_0:(ty=1,shape=[-1,16,32,32]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer1/layer1.0/Relu_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.0/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output"
+    "/layer1/layer1.0/Relu_output_0_DequantizeLinear_Output"
    ],
    "input": [
-    "/blks/blks.0/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output",
-    "ortshared_1_0_1_4_token_68",
-    "/blks/blks.0/shortcut/shortcut.0/Conv_output_0_zero_point"
+    "/layer1/layer1.0/Relu_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_3_token_92",
+    "/layer1/layer1.0/Relu_output_0_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@38 [/blks/blks.0/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,8,32,32])] DequantizeLinear [/blks/blks.0/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,8,32,32]),ortshared_1_0_1_4_token_68:(ty=1,shape=[]),/blks/blks.0/shortcut/shortcut.0/Conv_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@53 [/layer1/layer1.0/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,32,32])] DequantizeLinear [/layer1/layer1.0/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer1/layer1.0/Relu_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.0/Add_output_0"
+    "onnx::Conv_240_DequantizeLinear_Output"
    ],
    "input": [
-    "/blks/blks.0/conv2/Conv_output_0_DequantizeLinear_Output",
-    "/blks/blks.0/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output"
+    "onnx::Conv_240_quantized",
+    "ortshared_1_0_1_0_token_88",
+    "onnx::Conv_240_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@8 [onnx::Conv_240_DequantizeLinear_Output:(ty=1,shape=[16])] DequantizeLinear [onnx::Conv_240_quantized:(ty=3,shape=[16]),ortshared_1_0_1_0_token_88:(ty=1,shape=[]),onnx::Conv_240_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "onnx::Conv_239_DequantizeLinear_Output"
+   ],
+   "input": [
+    "onnx::Conv_239_quantized",
+    "ortshared_1_0_1_6_token_95",
+    "onnx::Conv_239_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@7 [onnx::Conv_239_DequantizeLinear_Output:(ty=1,shape=[16,16,3,3])] DequantizeLinear [onnx::Conv_239_quantized:(ty=3,shape=[16,16,3,3]),ortshared_1_0_1_6_token_95:(ty=1,shape=[]),onnx::Conv_239_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer1/layer1.0/conv2/Conv_output_0"
+   ],
+   "input": [
+    "/layer1/layer1.0/Relu_output_0_DequantizeLinear_Output",
+    "onnx::Conv_239_DequantizeLinear_Output",
+    "onnx::Conv_240_DequantizeLinear_Output"
+   ],
+   "opType": "Conv",
+   "comment": "@54 [/layer1/layer1.0/conv2/Conv_output_0:(ty=1,shape=[-1,16,32,32])] Conv [/layer1/layer1.0/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,32,32]),onnx::Conv_239_DequantizeLinear_Output:(ty=1,shape=[16,16,3,3]),onnx::Conv_240_DequantizeLinear_Output:(ty=1,shape=[16])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer1/layer1.0/conv2/Conv_output_0_QuantizeLinear_Output"
+   ],
+   "input": [
+    "/layer1/layer1.0/conv2/Conv_output_0",
+    "ortshared_1_0_1_3_token_92",
+    "/layer1/layer1.0/conv2/Conv_output_0_zero_point"
+   ],
+   "opType": "QuantizeLinear",
+   "comment": "@55 [/layer1/layer1.0/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32])] QuantizeLinear [/layer1/layer1.0/conv2/Conv_output_0:(ty=1,shape=[-1,16,32,32]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer1/layer1.0/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer1/layer1.0/conv2/Conv_output_0_DequantizeLinear_Output"
+   ],
+   "input": [
+    "/layer1/layer1.0/conv2/Conv_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_3_token_92",
+    "/layer1/layer1.0/conv2/Conv_output_0_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@56 [/layer1/layer1.0/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,32,32])] DequantizeLinear [/layer1/layer1.0/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer1/layer1.0/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer1/layer1.0/Add_output_0"
+   ],
+   "input": [
+    "/layer1/layer1.0/conv2/Conv_output_0_DequantizeLinear_Output",
+    "/Relu_output_0_DequantizeLinear_Output/duplicated"
    ],
    "opType": "Add",
-   "comment": "@44 [/blks/blks.0/Add_output_0:(ty=1,shape=[-1,8,32,32])] Add [/blks/blks.0/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,8,32,32]),/blks/blks.0/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,8,32,32])]",
-   "device": "DPU"
+   "comment": "@57 [/layer1/layer1.0/Add_output_0:(ty=1,shape=[-1,16,32,32])] Add [/layer1/layer1.0/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,32,32]),/Relu_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,16,32,32])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.0/Relu_1_output_0"
+    "/layer1/layer1.0/Relu_1_output_0"
    ],
    "input": [
-    "/blks/blks.0/Add_output_0"
+    "/layer1/layer1.0/Add_output_0"
    ],
    "opType": "Relu",
-   "comment": "@45 [/blks/blks.0/Relu_1_output_0:(ty=1,shape=[-1,8,32,32])] Relu [/blks/blks.0/Add_output_0:(ty=1,shape=[-1,8,32,32])]",
-   "device": "DPU"
+   "comment": "@58 [/layer1/layer1.0/Relu_1_output_0:(ty=1,shape=[-1,16,32,32])] Relu [/layer1/layer1.0/Add_output_0:(ty=1,shape=[-1,16,32,32])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.0/Relu_1_output_0_QuantizeLinear_Output"
+    "/layer1/layer1.0/Relu_1_output_0_QuantizeLinear_Output"
    ],
    "input": [
-    "/blks/blks.0/Relu_1_output_0",
-    "ortshared_1_0_1_3_token_67",
-    "/blks/blks.0/Relu_1_output_0_zero_point"
+    "/layer1/layer1.0/Relu_1_output_0",
+    "ortshared_1_0_1_3_token_92",
+    "/layer1/layer1.0/Relu_1_output_0_zero_point"
    ],
    "opType": "QuantizeLinear",
-   "comment": "@46 [/blks/blks.0/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,8,32,32])] QuantizeLinear [/blks/blks.0/Relu_1_output_0:(ty=1,shape=[-1,8,32,32]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),/blks/blks.0/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@59 [/layer1/layer1.0/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32])] QuantizeLinear [/layer1/layer1.0/Relu_1_output_0:(ty=1,shape=[-1,16,32,32]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer1/layer1.0/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output/duplicated"
+    "/layer1/layer1.0/Relu_1_output_0_DequantizeLinear_Output/duplicated"
    ],
    "input": [
-    "/blks/blks.0/Relu_1_output_0_QuantizeLinear_Output",
-    "ortshared_1_0_1_3_token_67",
-    "/blks/blks.0/Relu_1_output_0_zero_point"
+    "/layer1/layer1.0/Relu_1_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_3_token_92",
+    "/layer1/layer1.0/Relu_1_output_0_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@101 [/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,8,32,32])] DequantizeLinear [/blks/blks.0/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,8,32,32]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),/blks/blks.0/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@166 [/layer1/layer1.0/Relu_1_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,16,32,32])] DequantizeLinear [/layer1/layer1.0/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer1/layer1.0/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "onnx::Conv_146_DequantizeLinear_Output"
+    "/layer1/layer1.0/Relu_1_output_0_DequantizeLinear_Output"
    ],
    "input": [
-    "onnx::Conv_146_quantized",
-    "ortshared_1_0_1_4_token_68",
-    "onnx::Conv_146_zero_point"
+    "/layer1/layer1.0/Relu_1_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_3_token_92",
+    "/layer1/layer1.0/Relu_1_output_0_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@12 [onnx::Conv_146_DequantizeLinear_Output:(ty=1,shape=[16])] DequantizeLinear [onnx::Conv_146_quantized:(ty=3,shape=[16]),ortshared_1_0_1_4_token_68:(ty=1,shape=[]),onnx::Conv_146_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
+   "comment": "@60 [/layer1/layer1.0/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,32,32])] DequantizeLinear [/layer1/layer1.0/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer1/layer1.0/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "onnx::Conv_145_DequantizeLinear_Output"
+    "onnx::Conv_243_DequantizeLinear_Output"
    ],
    "input": [
-    "onnx::Conv_145_quantized",
-    "ortshared_1_0_1_0_token_64",
-    "onnx::Conv_145_zero_point"
+    "onnx::Conv_243_quantized",
+    "ortshared_1_0_1_0_token_88",
+    "onnx::Conv_243_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@11 [onnx::Conv_145_DequantizeLinear_Output:(ty=1,shape=[16,8,3,3])] DequantizeLinear [onnx::Conv_145_quantized:(ty=3,shape=[16,8,3,3]),ortshared_1_0_1_0_token_64:(ty=1,shape=[]),onnx::Conv_145_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
+   "comment": "@10 [onnx::Conv_243_DequantizeLinear_Output:(ty=1,shape=[16])] DequantizeLinear [onnx::Conv_243_quantized:(ty=3,shape=[16]),ortshared_1_0_1_0_token_88:(ty=1,shape=[]),onnx::Conv_243_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.1/conv1/Conv_output_0"
+    "onnx::Conv_242_DequantizeLinear_Output"
    ],
    "input": [
-    "/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output/duplicated",
-    "onnx::Conv_145_DequantizeLinear_Output",
-    "onnx::Conv_146_DequantizeLinear_Output"
+    "onnx::Conv_242_quantized",
+    "ortshared_1_0_1_5_token_94",
+    "onnx::Conv_242_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@9 [onnx::Conv_242_DequantizeLinear_Output:(ty=1,shape=[16,16,3,3])] DequantizeLinear [onnx::Conv_242_quantized:(ty=3,shape=[16,16,3,3]),ortshared_1_0_1_5_token_94:(ty=1,shape=[]),onnx::Conv_242_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer1/layer1.1/conv1/Conv_output_0"
+   ],
+   "input": [
+    "/layer1/layer1.0/Relu_1_output_0_DequantizeLinear_Output",
+    "onnx::Conv_242_DequantizeLinear_Output",
+    "onnx::Conv_243_DequantizeLinear_Output"
    ],
    "opType": "Conv",
-   "comment": "@49 [/blks/blks.1/conv1/Conv_output_0:(ty=1,shape=[-1,16,16,16])] Conv [/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,8,32,32]),onnx::Conv_145_DequantizeLinear_Output:(ty=1,shape=[16,8,3,3]),onnx::Conv_146_DequantizeLinear_Output:(ty=1,shape=[16])]",
-   "device": "DPU"
+   "comment": "@61 [/layer1/layer1.1/conv1/Conv_output_0:(ty=1,shape=[-1,16,32,32])] Conv [/layer1/layer1.0/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,32,32]),onnx::Conv_242_DequantizeLinear_Output:(ty=1,shape=[16,16,3,3]),onnx::Conv_243_DequantizeLinear_Output:(ty=1,shape=[16])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.1/Relu_output_0"
+    "/layer1/layer1.1/Relu_output_0"
    ],
    "input": [
-    "/blks/blks.1/conv1/Conv_output_0"
+    "/layer1/layer1.1/conv1/Conv_output_0"
    ],
    "opType": "Relu",
-   "comment": "@51 [/blks/blks.1/Relu_output_0:(ty=1,shape=[-1,16,16,16])] Relu [/blks/blks.1/conv1/Conv_output_0:(ty=1,shape=[-1,16,16,16])]",
-   "device": "DPU"
+   "comment": "@62 [/layer1/layer1.1/Relu_output_0:(ty=1,shape=[-1,16,32,32])] Relu [/layer1/layer1.1/conv1/Conv_output_0:(ty=1,shape=[-1,16,32,32])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.1/Relu_output_0_QuantizeLinear_Output"
+    "/layer1/layer1.1/Relu_output_0_QuantizeLinear_Output"
    ],
    "input": [
-    "/blks/blks.1/Relu_output_0",
-    "ortshared_1_0_1_3_token_67",
-    "/blks/blks.1/Relu_output_0_zero_point"
+    "/layer1/layer1.1/Relu_output_0",
+    "ortshared_1_0_1_3_token_92",
+    "/layer1/layer1.1/Relu_output_0_zero_point"
    ],
    "opType": "QuantizeLinear",
-   "comment": "@53 [/blks/blks.1/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,16,16])] QuantizeLinear [/blks/blks.1/Relu_output_0:(ty=1,shape=[-1,16,16,16]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),/blks/blks.1/Relu_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@63 [/layer1/layer1.1/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32])] QuantizeLinear [/layer1/layer1.1/Relu_output_0:(ty=1,shape=[-1,16,32,32]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer1/layer1.1/Relu_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.1/Relu_output_0_DequantizeLinear_Output"
+    "/layer1/layer1.1/Relu_output_0_DequantizeLinear_Output"
    ],
    "input": [
-    "/blks/blks.1/Relu_output_0_QuantizeLinear_Output",
-    "ortshared_1_0_1_3_token_67",
-    "/blks/blks.1/Relu_output_0_zero_point"
+    "/layer1/layer1.1/Relu_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_3_token_92",
+    "/layer1/layer1.1/Relu_output_0_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@54 [/blks/blks.1/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,16,16])] DequantizeLinear [/blks/blks.1/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,16,16]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),/blks/blks.1/Relu_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@64 [/layer1/layer1.1/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,32,32])] DequantizeLinear [/layer1/layer1.1/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer1/layer1.1/Relu_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "onnx::Conv_149_DequantizeLinear_Output"
+    "onnx::Conv_246_DequantizeLinear_Output"
    ],
    "input": [
-    "onnx::Conv_149_quantized",
-    "ortshared_1_0_1_3_token_67",
-    "onnx::Conv_149_zero_point"
+    "onnx::Conv_246_quantized",
+    "ortshared_1_0_1_0_token_88",
+    "onnx::Conv_246_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@14 [onnx::Conv_149_DequantizeLinear_Output:(ty=1,shape=[16])] DequantizeLinear [onnx::Conv_149_quantized:(ty=3,shape=[16]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),onnx::Conv_149_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
+   "comment": "@12 [onnx::Conv_246_DequantizeLinear_Output:(ty=1,shape=[16])] DequantizeLinear [onnx::Conv_246_quantized:(ty=3,shape=[16]),ortshared_1_0_1_0_token_88:(ty=1,shape=[]),onnx::Conv_246_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "onnx::Conv_148_DequantizeLinear_Output"
+    "onnx::Conv_245_DequantizeLinear_Output"
    ],
    "input": [
-    "onnx::Conv_148_quantized",
-    "ortshared_1_0_1_0_token_64",
-    "onnx::Conv_148_zero_point"
+    "onnx::Conv_245_quantized",
+    "ortshared_1_0_1_6_token_95",
+    "onnx::Conv_245_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@13 [onnx::Conv_148_DequantizeLinear_Output:(ty=1,shape=[16,16,3,3])] DequantizeLinear [onnx::Conv_148_quantized:(ty=3,shape=[16,16,3,3]),ortshared_1_0_1_0_token_64:(ty=1,shape=[]),onnx::Conv_148_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
+   "comment": "@11 [onnx::Conv_245_DequantizeLinear_Output:(ty=1,shape=[16,16,3,3])] DequantizeLinear [onnx::Conv_245_quantized:(ty=3,shape=[16,16,3,3]),ortshared_1_0_1_6_token_95:(ty=1,shape=[]),onnx::Conv_245_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.1/conv2/Conv_output_0"
+    "/layer1/layer1.1/conv2/Conv_output_0"
    ],
    "input": [
-    "/blks/blks.1/Relu_output_0_DequantizeLinear_Output",
-    "onnx::Conv_148_DequantizeLinear_Output",
-    "onnx::Conv_149_DequantizeLinear_Output"
+    "/layer1/layer1.1/Relu_output_0_DequantizeLinear_Output",
+    "onnx::Conv_245_DequantizeLinear_Output",
+    "onnx::Conv_246_DequantizeLinear_Output"
    ],
    "opType": "Conv",
-   "comment": "@55 [/blks/blks.1/conv2/Conv_output_0:(ty=1,shape=[-1,16,16,16])] Conv [/blks/blks.1/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,16,16]),onnx::Conv_148_DequantizeLinear_Output:(ty=1,shape=[16,16,3,3]),onnx::Conv_149_DequantizeLinear_Output:(ty=1,shape=[16])]",
-   "device": "DPU"
+   "comment": "@65 [/layer1/layer1.1/conv2/Conv_output_0:(ty=1,shape=[-1,16,32,32])] Conv [/layer1/layer1.1/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,32,32]),onnx::Conv_245_DequantizeLinear_Output:(ty=1,shape=[16,16,3,3]),onnx::Conv_246_DequantizeLinear_Output:(ty=1,shape=[16])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.1/conv2/Conv_output_0_QuantizeLinear_Output"
+    "/layer1/layer1.1/conv2/Conv_output_0_QuantizeLinear_Output"
    ],
    "input": [
-    "/blks/blks.1/conv2/Conv_output_0",
-    "ortshared_1_0_1_3_token_67",
-    "/blks/blks.1/conv2/Conv_output_0_zero_point"
+    "/layer1/layer1.1/conv2/Conv_output_0",
+    "ortshared_1_0_1_3_token_92",
+    "/layer1/layer1.1/conv2/Conv_output_0_zero_point"
    ],
    "opType": "QuantizeLinear",
-   "comment": "@56 [/blks/blks.1/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,16,16])] QuantizeLinear [/blks/blks.1/conv2/Conv_output_0:(ty=1,shape=[-1,16,16,16]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),/blks/blks.1/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@66 [/layer1/layer1.1/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32])] QuantizeLinear [/layer1/layer1.1/conv2/Conv_output_0:(ty=1,shape=[-1,16,32,32]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer1/layer1.1/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.1/conv2/Conv_output_0_DequantizeLinear_Output"
+    "/layer1/layer1.1/conv2/Conv_output_0_DequantizeLinear_Output"
    ],
    "input": [
-    "/blks/blks.1/conv2/Conv_output_0_QuantizeLinear_Output",
-    "ortshared_1_0_1_3_token_67",
-    "/blks/blks.1/conv2/Conv_output_0_zero_point"
+    "/layer1/layer1.1/conv2/Conv_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_3_token_92",
+    "/layer1/layer1.1/conv2/Conv_output_0_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@57 [/blks/blks.1/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,16,16])] DequantizeLinear [/blks/blks.1/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,16,16]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),/blks/blks.1/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@67 [/layer1/layer1.1/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,32,32])] DequantizeLinear [/layer1/layer1.1/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer1/layer1.1/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output"
+    "/layer1/layer1.1/Add_output_0"
    ],
    "input": [
-    "/blks/blks.0/Relu_1_output_0_QuantizeLinear_Output",
-    "ortshared_1_0_1_3_token_67",
-    "/blks/blks.0/Relu_1_output_0_zero_point"
-   ],
-   "opType": "DequantizeLinear",
-   "comment": "@47 [/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,8,32,32])] DequantizeLinear [/blks/blks.0/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,8,32,32]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),/blks/blks.0/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
-  },
-  {
-   "output": [
-    "onnx::Conv_152_DequantizeLinear_Output"
-   ],
-   "input": [
-    "onnx::Conv_152_quantized",
-    "ortshared_1_0_1_4_token_68",
-    "onnx::Conv_152_zero_point"
-   ],
-   "opType": "DequantizeLinear",
-   "comment": "@16 [onnx::Conv_152_DequantizeLinear_Output:(ty=1,shape=[16])] DequantizeLinear [onnx::Conv_152_quantized:(ty=3,shape=[16]),ortshared_1_0_1_4_token_68:(ty=1,shape=[]),onnx::Conv_152_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
-  },
-  {
-   "output": [
-    "onnx::Conv_151_DequantizeLinear_Output"
-   ],
-   "input": [
-    "onnx::Conv_151_quantized",
-    "ortshared_1_0_1_2_token_66",
-    "onnx::Conv_151_zero_point"
-   ],
-   "opType": "DequantizeLinear",
-   "comment": "@15 [onnx::Conv_151_DequantizeLinear_Output:(ty=1,shape=[16,8,1,1])] DequantizeLinear [onnx::Conv_151_quantized:(ty=3,shape=[16,8,1,1]),ortshared_1_0_1_2_token_66:(ty=1,shape=[]),onnx::Conv_151_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
-  },
-  {
-   "output": [
-    "/blks/blks.1/shortcut/shortcut.0/Conv_output_0"
-   ],
-   "input": [
-    "/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output",
-    "onnx::Conv_151_DequantizeLinear_Output",
-    "onnx::Conv_152_DequantizeLinear_Output"
-   ],
-   "opType": "Conv",
-   "comment": "@48 [/blks/blks.1/shortcut/shortcut.0/Conv_output_0:(ty=1,shape=[-1,16,16,16])] Conv [/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,8,32,32]),onnx::Conv_151_DequantizeLinear_Output:(ty=1,shape=[16,8,1,1]),onnx::Conv_152_DequantizeLinear_Output:(ty=1,shape=[16])]",
-   "device": "DPU"
-  },
-  {
-   "output": [
-    "/blks/blks.1/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output"
-   ],
-   "input": [
-    "/blks/blks.1/shortcut/shortcut.0/Conv_output_0",
-    "ortshared_1_0_1_4_token_68",
-    "/blks/blks.1/shortcut/shortcut.0/Conv_output_0_zero_point"
-   ],
-   "opType": "QuantizeLinear",
-   "comment": "@50 [/blks/blks.1/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,16,16])] QuantizeLinear [/blks/blks.1/shortcut/shortcut.0/Conv_output_0:(ty=1,shape=[-1,16,16,16]),ortshared_1_0_1_4_token_68:(ty=1,shape=[]),/blks/blks.1/shortcut/shortcut.0/Conv_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
-  },
-  {
-   "output": [
-    "/blks/blks.1/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output"
-   ],
-   "input": [
-    "/blks/blks.1/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output",
-    "ortshared_1_0_1_4_token_68",
-    "/blks/blks.1/shortcut/shortcut.0/Conv_output_0_zero_point"
-   ],
-   "opType": "DequantizeLinear",
-   "comment": "@52 [/blks/blks.1/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,16,16])] DequantizeLinear [/blks/blks.1/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,16,16]),ortshared_1_0_1_4_token_68:(ty=1,shape=[]),/blks/blks.1/shortcut/shortcut.0/Conv_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
-  },
-  {
-   "output": [
-    "/blks/blks.1/Add_output_0"
-   ],
-   "input": [
-    "/blks/blks.1/conv2/Conv_output_0_DequantizeLinear_Output",
-    "/blks/blks.1/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output"
+    "/layer1/layer1.1/conv2/Conv_output_0_DequantizeLinear_Output",
+    "/layer1/layer1.0/Relu_1_output_0_DequantizeLinear_Output/duplicated"
    ],
    "opType": "Add",
-   "comment": "@58 [/blks/blks.1/Add_output_0:(ty=1,shape=[-1,16,16,16])] Add [/blks/blks.1/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,16,16]),/blks/blks.1/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,16,16])]",
-   "device": "DPU"
+   "comment": "@68 [/layer1/layer1.1/Add_output_0:(ty=1,shape=[-1,16,32,32])] Add [/layer1/layer1.1/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,32,32]),/layer1/layer1.0/Relu_1_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,16,32,32])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.1/Relu_1_output_0"
+    "/layer1/layer1.1/Relu_1_output_0"
    ],
    "input": [
-    "/blks/blks.1/Add_output_0"
+    "/layer1/layer1.1/Add_output_0"
    ],
    "opType": "Relu",
-   "comment": "@59 [/blks/blks.1/Relu_1_output_0:(ty=1,shape=[-1,16,16,16])] Relu [/blks/blks.1/Add_output_0:(ty=1,shape=[-1,16,16,16])]",
-   "device": "DPU"
+   "comment": "@69 [/layer1/layer1.1/Relu_1_output_0:(ty=1,shape=[-1,16,32,32])] Relu [/layer1/layer1.1/Add_output_0:(ty=1,shape=[-1,16,32,32])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.1/Relu_1_output_0_QuantizeLinear_Output"
+    "/layer1/layer1.1/Relu_1_output_0_QuantizeLinear_Output"
    ],
    "input": [
-    "/blks/blks.1/Relu_1_output_0",
-    "ortshared_1_0_1_6_token_71",
-    "/blks/blks.1/Relu_1_output_0_zero_point"
+    "/layer1/layer1.1/Relu_1_output_0",
+    "ortshared_1_0_1_2_token_91",
+    "/layer1/layer1.1/Relu_1_output_0_zero_point"
    ],
    "opType": "QuantizeLinear",
-   "comment": "@60 [/blks/blks.1/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,16,16])] QuantizeLinear [/blks/blks.1/Relu_1_output_0:(ty=1,shape=[-1,16,16,16]),ortshared_1_0_1_6_token_71:(ty=1,shape=[]),/blks/blks.1/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@70 [/layer1/layer1.1/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32])] QuantizeLinear [/layer1/layer1.1/Relu_1_output_0:(ty=1,shape=[-1,16,32,32]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),/layer1/layer1.1/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output/duplicated"
+    "/layer1/layer1.1/Relu_1_output_0_DequantizeLinear_Output/duplicated"
    ],
    "input": [
-    "/blks/blks.1/Relu_1_output_0_QuantizeLinear_Output",
-    "ortshared_1_0_1_6_token_71",
-    "/blks/blks.1/Relu_1_output_0_zero_point"
+    "/layer1/layer1.1/Relu_1_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_2_token_91",
+    "/layer1/layer1.1/Relu_1_output_0_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@102 [/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,16,16,16])] DequantizeLinear [/blks/blks.1/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,16,16]),ortshared_1_0_1_6_token_71:(ty=1,shape=[]),/blks/blks.1/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@167 [/layer1/layer1.1/Relu_1_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,16,32,32])] DequantizeLinear [/layer1/layer1.1/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),/layer1/layer1.1/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "onnx::Conv_155_DequantizeLinear_Output"
+    "/layer1/layer1.1/Relu_1_output_0_DequantizeLinear_Output"
    ],
    "input": [
-    "onnx::Conv_155_quantized",
-    "ortshared_1_0_1_3_token_67",
-    "onnx::Conv_155_zero_point"
+    "/layer1/layer1.1/Relu_1_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_2_token_91",
+    "/layer1/layer1.1/Relu_1_output_0_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@18 [onnx::Conv_155_DequantizeLinear_Output:(ty=1,shape=[32])] DequantizeLinear [onnx::Conv_155_quantized:(ty=3,shape=[32]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),onnx::Conv_155_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
+   "comment": "@71 [/layer1/layer1.1/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,32,32])] DequantizeLinear [/layer1/layer1.1/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),/layer1/layer1.1/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "onnx::Conv_154_DequantizeLinear_Output"
+    "onnx::Conv_249_DequantizeLinear_Output"
    ],
    "input": [
-    "onnx::Conv_154_quantized",
-    "ortshared_1_0_1_0_token_64",
-    "onnx::Conv_154_zero_point"
+    "onnx::Conv_249_quantized",
+    "ortshared_1_0_1_0_token_88",
+    "onnx::Conv_249_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@17 [onnx::Conv_154_DequantizeLinear_Output:(ty=1,shape=[32,16,3,3])] DequantizeLinear [onnx::Conv_154_quantized:(ty=3,shape=[32,16,3,3]),ortshared_1_0_1_0_token_64:(ty=1,shape=[]),onnx::Conv_154_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
+   "comment": "@14 [onnx::Conv_249_DequantizeLinear_Output:(ty=1,shape=[16])] DequantizeLinear [onnx::Conv_249_quantized:(ty=3,shape=[16]),ortshared_1_0_1_0_token_88:(ty=1,shape=[]),onnx::Conv_249_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.2/conv1/Conv_output_0"
+    "onnx::Conv_248_DequantizeLinear_Output"
    ],
    "input": [
-    "/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output/duplicated",
-    "onnx::Conv_154_DequantizeLinear_Output",
-    "onnx::Conv_155_DequantizeLinear_Output"
+    "onnx::Conv_248_quantized",
+    "ortshared_1_0_1_5_token_94",
+    "onnx::Conv_248_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@13 [onnx::Conv_248_DequantizeLinear_Output:(ty=1,shape=[16,16,3,3])] DequantizeLinear [onnx::Conv_248_quantized:(ty=3,shape=[16,16,3,3]),ortshared_1_0_1_5_token_94:(ty=1,shape=[]),onnx::Conv_248_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer1/layer1.2/conv1/Conv_output_0"
+   ],
+   "input": [
+    "/layer1/layer1.1/Relu_1_output_0_DequantizeLinear_Output",
+    "onnx::Conv_248_DequantizeLinear_Output",
+    "onnx::Conv_249_DequantizeLinear_Output"
    ],
    "opType": "Conv",
-   "comment": "@63 [/blks/blks.2/conv1/Conv_output_0:(ty=1,shape=[-1,32,8,8])] Conv [/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,16,16,16]),onnx::Conv_154_DequantizeLinear_Output:(ty=1,shape=[32,16,3,3]),onnx::Conv_155_DequantizeLinear_Output:(ty=1,shape=[32])]",
-   "device": "DPU"
+   "comment": "@72 [/layer1/layer1.2/conv1/Conv_output_0:(ty=1,shape=[-1,16,32,32])] Conv [/layer1/layer1.1/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,32,32]),onnx::Conv_248_DequantizeLinear_Output:(ty=1,shape=[16,16,3,3]),onnx::Conv_249_DequantizeLinear_Output:(ty=1,shape=[16])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.2/Relu_output_0"
+    "/layer1/layer1.2/Relu_output_0"
    ],
    "input": [
-    "/blks/blks.2/conv1/Conv_output_0"
+    "/layer1/layer1.2/conv1/Conv_output_0"
    ],
    "opType": "Relu",
-   "comment": "@65 [/blks/blks.2/Relu_output_0:(ty=1,shape=[-1,32,8,8])] Relu [/blks/blks.2/conv1/Conv_output_0:(ty=1,shape=[-1,32,8,8])]",
-   "device": "DPU"
+   "comment": "@73 [/layer1/layer1.2/Relu_output_0:(ty=1,shape=[-1,16,32,32])] Relu [/layer1/layer1.2/conv1/Conv_output_0:(ty=1,shape=[-1,16,32,32])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.2/Relu_output_0_QuantizeLinear_Output"
+    "/layer1/layer1.2/Relu_output_0_QuantizeLinear_Output"
    ],
    "input": [
-    "/blks/blks.2/Relu_output_0",
-    "ortshared_1_0_1_3_token_67",
-    "/blks/blks.2/Relu_output_0_zero_point"
+    "/layer1/layer1.2/Relu_output_0",
+    "ortshared_1_0_1_3_token_92",
+    "/layer1/layer1.2/Relu_output_0_zero_point"
    ],
    "opType": "QuantizeLinear",
-   "comment": "@67 [/blks/blks.2/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,8,8])] QuantizeLinear [/blks/blks.2/Relu_output_0:(ty=1,shape=[-1,32,8,8]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),/blks/blks.2/Relu_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@74 [/layer1/layer1.2/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32])] QuantizeLinear [/layer1/layer1.2/Relu_output_0:(ty=1,shape=[-1,16,32,32]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer1/layer1.2/Relu_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.2/Relu_output_0_DequantizeLinear_Output"
+    "/layer1/layer1.2/Relu_output_0_DequantizeLinear_Output"
    ],
    "input": [
-    "/blks/blks.2/Relu_output_0_QuantizeLinear_Output",
-    "ortshared_1_0_1_3_token_67",
-    "/blks/blks.2/Relu_output_0_zero_point"
+    "/layer1/layer1.2/Relu_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_3_token_92",
+    "/layer1/layer1.2/Relu_output_0_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@68 [/blks/blks.2/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,8,8])] DequantizeLinear [/blks/blks.2/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,8,8]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),/blks/blks.2/Relu_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@75 [/layer1/layer1.2/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,32,32])] DequantizeLinear [/layer1/layer1.2/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer1/layer1.2/Relu_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "onnx::Conv_158_DequantizeLinear_Output"
+    "onnx::Conv_252_DequantizeLinear_Output"
    ],
    "input": [
-    "onnx::Conv_158_quantized",
-    "ortshared_1_0_1_3_token_67",
-    "onnx::Conv_158_zero_point"
+    "onnx::Conv_252_quantized",
+    "ortshared_1_0_1_0_token_88",
+    "onnx::Conv_252_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@20 [onnx::Conv_158_DequantizeLinear_Output:(ty=1,shape=[32])] DequantizeLinear [onnx::Conv_158_quantized:(ty=3,shape=[32]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),onnx::Conv_158_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
+   "comment": "@16 [onnx::Conv_252_DequantizeLinear_Output:(ty=1,shape=[16])] DequantizeLinear [onnx::Conv_252_quantized:(ty=3,shape=[16]),ortshared_1_0_1_0_token_88:(ty=1,shape=[]),onnx::Conv_252_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "onnx::Conv_157_DequantizeLinear_Output"
+    "onnx::Conv_251_DequantizeLinear_Output"
    ],
    "input": [
-    "onnx::Conv_157_quantized",
-    "ortshared_1_0_1_0_token_64",
-    "onnx::Conv_157_zero_point"
+    "onnx::Conv_251_quantized",
+    "ortshared_1_0_1_6_token_95",
+    "onnx::Conv_251_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@19 [onnx::Conv_157_DequantizeLinear_Output:(ty=1,shape=[32,32,3,3])] DequantizeLinear [onnx::Conv_157_quantized:(ty=3,shape=[32,32,3,3]),ortshared_1_0_1_0_token_64:(ty=1,shape=[]),onnx::Conv_157_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
+   "comment": "@15 [onnx::Conv_251_DequantizeLinear_Output:(ty=1,shape=[16,16,3,3])] DequantizeLinear [onnx::Conv_251_quantized:(ty=3,shape=[16,16,3,3]),ortshared_1_0_1_6_token_95:(ty=1,shape=[]),onnx::Conv_251_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.2/conv2/Conv_output_0"
+    "/layer1/layer1.2/conv2/Conv_output_0"
    ],
    "input": [
-    "/blks/blks.2/Relu_output_0_DequantizeLinear_Output",
-    "onnx::Conv_157_DequantizeLinear_Output",
-    "onnx::Conv_158_DequantizeLinear_Output"
+    "/layer1/layer1.2/Relu_output_0_DequantizeLinear_Output",
+    "onnx::Conv_251_DequantizeLinear_Output",
+    "onnx::Conv_252_DequantizeLinear_Output"
    ],
    "opType": "Conv",
-   "comment": "@69 [/blks/blks.2/conv2/Conv_output_0:(ty=1,shape=[-1,32,8,8])] Conv [/blks/blks.2/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,8,8]),onnx::Conv_157_DequantizeLinear_Output:(ty=1,shape=[32,32,3,3]),onnx::Conv_158_DequantizeLinear_Output:(ty=1,shape=[32])]",
-   "device": "DPU"
+   "comment": "@76 [/layer1/layer1.2/conv2/Conv_output_0:(ty=1,shape=[-1,16,32,32])] Conv [/layer1/layer1.2/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,32,32]),onnx::Conv_251_DequantizeLinear_Output:(ty=1,shape=[16,16,3,3]),onnx::Conv_252_DequantizeLinear_Output:(ty=1,shape=[16])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.2/conv2/Conv_output_0_QuantizeLinear_Output"
+    "/layer1/layer1.2/conv2/Conv_output_0_QuantizeLinear_Output"
    ],
    "input": [
-    "/blks/blks.2/conv2/Conv_output_0",
-    "ortshared_1_0_1_3_token_67",
-    "/blks/blks.2/conv2/Conv_output_0_zero_point"
+    "/layer1/layer1.2/conv2/Conv_output_0",
+    "ortshared_1_0_1_3_token_92",
+    "/layer1/layer1.2/conv2/Conv_output_0_zero_point"
    ],
    "opType": "QuantizeLinear",
-   "comment": "@70 [/blks/blks.2/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,8,8])] QuantizeLinear [/blks/blks.2/conv2/Conv_output_0:(ty=1,shape=[-1,32,8,8]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),/blks/blks.2/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@77 [/layer1/layer1.2/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32])] QuantizeLinear [/layer1/layer1.2/conv2/Conv_output_0:(ty=1,shape=[-1,16,32,32]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer1/layer1.2/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.2/conv2/Conv_output_0_DequantizeLinear_Output"
+    "/layer1/layer1.2/conv2/Conv_output_0_DequantizeLinear_Output"
    ],
    "input": [
-    "/blks/blks.2/conv2/Conv_output_0_QuantizeLinear_Output",
-    "ortshared_1_0_1_3_token_67",
-    "/blks/blks.2/conv2/Conv_output_0_zero_point"
+    "/layer1/layer1.2/conv2/Conv_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_3_token_92",
+    "/layer1/layer1.2/conv2/Conv_output_0_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@71 [/blks/blks.2/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,8,8])] DequantizeLinear [/blks/blks.2/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,8,8]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),/blks/blks.2/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@78 [/layer1/layer1.2/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,32,32])] DequantizeLinear [/layer1/layer1.2/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer1/layer1.2/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output"
+    "/layer1/layer1.2/Add_output_0"
    ],
    "input": [
-    "/blks/blks.1/Relu_1_output_0_QuantizeLinear_Output",
-    "ortshared_1_0_1_6_token_71",
-    "/blks/blks.1/Relu_1_output_0_zero_point"
-   ],
-   "opType": "DequantizeLinear",
-   "comment": "@61 [/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,16,16])] DequantizeLinear [/blks/blks.1/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,16,16]),ortshared_1_0_1_6_token_71:(ty=1,shape=[]),/blks/blks.1/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
-  },
-  {
-   "output": [
-    "onnx::Conv_161_DequantizeLinear_Output"
-   ],
-   "input": [
-    "onnx::Conv_161_quantized",
-    "ortshared_1_0_1_2_token_66",
-    "onnx::Conv_161_zero_point"
-   ],
-   "opType": "DequantizeLinear",
-   "comment": "@22 [onnx::Conv_161_DequantizeLinear_Output:(ty=1,shape=[32])] DequantizeLinear [onnx::Conv_161_quantized:(ty=3,shape=[32]),ortshared_1_0_1_2_token_66:(ty=1,shape=[]),onnx::Conv_161_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
-  },
-  {
-   "output": [
-    "onnx::Conv_160_DequantizeLinear_Output"
-   ],
-   "input": [
-    "onnx::Conv_160_quantized",
-    "ortshared_1_0_1_0_token_64",
-    "onnx::Conv_160_zero_point"
-   ],
-   "opType": "DequantizeLinear",
-   "comment": "@21 [onnx::Conv_160_DequantizeLinear_Output:(ty=1,shape=[32,16,1,1])] DequantizeLinear [onnx::Conv_160_quantized:(ty=3,shape=[32,16,1,1]),ortshared_1_0_1_0_token_64:(ty=1,shape=[]),onnx::Conv_160_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
-  },
-  {
-   "output": [
-    "/blks/blks.2/shortcut/shortcut.0/Conv_output_0"
-   ],
-   "input": [
-    "/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output",
-    "onnx::Conv_160_DequantizeLinear_Output",
-    "onnx::Conv_161_DequantizeLinear_Output"
-   ],
-   "opType": "Conv",
-   "comment": "@62 [/blks/blks.2/shortcut/shortcut.0/Conv_output_0:(ty=1,shape=[-1,32,8,8])] Conv [/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,16,16]),onnx::Conv_160_DequantizeLinear_Output:(ty=1,shape=[32,16,1,1]),onnx::Conv_161_DequantizeLinear_Output:(ty=1,shape=[32])]",
-   "device": "DPU"
-  },
-  {
-   "output": [
-    "/blks/blks.2/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output"
-   ],
-   "input": [
-    "/blks/blks.2/shortcut/shortcut.0/Conv_output_0",
-    "ortshared_1_0_1_4_token_68",
-    "/blks/blks.2/shortcut/shortcut.0/Conv_output_0_zero_point"
-   ],
-   "opType": "QuantizeLinear",
-   "comment": "@64 [/blks/blks.2/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,8,8])] QuantizeLinear [/blks/blks.2/shortcut/shortcut.0/Conv_output_0:(ty=1,shape=[-1,32,8,8]),ortshared_1_0_1_4_token_68:(ty=1,shape=[]),/blks/blks.2/shortcut/shortcut.0/Conv_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
-  },
-  {
-   "output": [
-    "/blks/blks.2/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output"
-   ],
-   "input": [
-    "/blks/blks.2/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output",
-    "ortshared_1_0_1_4_token_68",
-    "/blks/blks.2/shortcut/shortcut.0/Conv_output_0_zero_point"
-   ],
-   "opType": "DequantizeLinear",
-   "comment": "@66 [/blks/blks.2/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,8,8])] DequantizeLinear [/blks/blks.2/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,8,8]),ortshared_1_0_1_4_token_68:(ty=1,shape=[]),/blks/blks.2/shortcut/shortcut.0/Conv_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
-  },
-  {
-   "output": [
-    "/blks/blks.2/Add_output_0"
-   ],
-   "input": [
-    "/blks/blks.2/conv2/Conv_output_0_DequantizeLinear_Output",
-    "/blks/blks.2/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output"
+    "/layer1/layer1.2/conv2/Conv_output_0_DequantizeLinear_Output",
+    "/layer1/layer1.1/Relu_1_output_0_DequantizeLinear_Output/duplicated"
    ],
    "opType": "Add",
-   "comment": "@72 [/blks/blks.2/Add_output_0:(ty=1,shape=[-1,32,8,8])] Add [/blks/blks.2/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,8,8]),/blks/blks.2/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,8,8])]",
-   "device": "DPU"
+   "comment": "@79 [/layer1/layer1.2/Add_output_0:(ty=1,shape=[-1,16,32,32])] Add [/layer1/layer1.2/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,32,32]),/layer1/layer1.1/Relu_1_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,16,32,32])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.2/Relu_1_output_0"
+    "/layer1/layer1.2/Relu_1_output_0"
    ],
    "input": [
-    "/blks/blks.2/Add_output_0"
+    "/layer1/layer1.2/Add_output_0"
    ],
    "opType": "Relu",
-   "comment": "@73 [/blks/blks.2/Relu_1_output_0:(ty=1,shape=[-1,32,8,8])] Relu [/blks/blks.2/Add_output_0:(ty=1,shape=[-1,32,8,8])]",
-   "device": "DPU"
+   "comment": "@80 [/layer1/layer1.2/Relu_1_output_0:(ty=1,shape=[-1,16,32,32])] Relu [/layer1/layer1.2/Add_output_0:(ty=1,shape=[-1,16,32,32])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.2/Relu_1_output_0_QuantizeLinear_Output"
+    "/layer1/layer1.2/Relu_1_output_0_QuantizeLinear_Output"
    ],
    "input": [
-    "/blks/blks.2/Relu_1_output_0",
-    "ortshared_1_0_1_3_token_67",
-    "/blks/blks.2/Relu_1_output_0_zero_point"
+    "/layer1/layer1.2/Relu_1_output_0",
+    "ortshared_1_0_1_2_token_91",
+    "/layer1/layer1.2/Relu_1_output_0_zero_point"
    ],
    "opType": "QuantizeLinear",
-   "comment": "@74 [/blks/blks.2/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,8,8])] QuantizeLinear [/blks/blks.2/Relu_1_output_0:(ty=1,shape=[-1,32,8,8]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),/blks/blks.2/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@81 [/layer1/layer1.2/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32])] QuantizeLinear [/layer1/layer1.2/Relu_1_output_0:(ty=1,shape=[-1,16,32,32]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),/layer1/layer1.2/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output/duplicated"
+    "/layer1/layer1.2/Relu_1_output_0_DequantizeLinear_Output/duplicated"
    ],
    "input": [
-    "/blks/blks.2/Relu_1_output_0_QuantizeLinear_Output",
-    "ortshared_1_0_1_3_token_67",
-    "/blks/blks.2/Relu_1_output_0_zero_point"
+    "/layer1/layer1.2/Relu_1_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_2_token_91",
+    "/layer1/layer1.2/Relu_1_output_0_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@103 [/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,32,8,8])] DequantizeLinear [/blks/blks.2/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,8,8]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),/blks/blks.2/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@168 [/layer1/layer1.2/Relu_1_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,16,32,32])] DequantizeLinear [/layer1/layer1.2/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),/layer1/layer1.2/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "onnx::Conv_164_DequantizeLinear_Output"
+    "onnx::Conv_255_DequantizeLinear_Output"
    ],
    "input": [
-    "onnx::Conv_164_quantized",
-    "ortshared_1_0_1_4_token_68",
-    "onnx::Conv_164_zero_point"
+    "onnx::Conv_255_quantized",
+    "ortshared_1_0_1_4_token_93",
+    "onnx::Conv_255_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@24 [onnx::Conv_164_DequantizeLinear_Output:(ty=1,shape=[64])] DequantizeLinear [onnx::Conv_164_quantized:(ty=3,shape=[64]),ortshared_1_0_1_4_token_68:(ty=1,shape=[]),onnx::Conv_164_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
+   "comment": "@18 [onnx::Conv_255_DequantizeLinear_Output:(ty=1,shape=[32])] DequantizeLinear [onnx::Conv_255_quantized:(ty=3,shape=[32]),ortshared_1_0_1_4_token_93:(ty=1,shape=[]),onnx::Conv_255_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "onnx::Conv_163_DequantizeLinear_Output"
+    "onnx::Conv_254_DequantizeLinear_Output"
    ],
    "input": [
-    "onnx::Conv_163_quantized",
-    "ortshared_1_0_1_1_token_65",
-    "onnx::Conv_163_zero_point"
+    "onnx::Conv_254_quantized",
+    "ortshared_1_0_1_5_token_94",
+    "onnx::Conv_254_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@23 [onnx::Conv_163_DequantizeLinear_Output:(ty=1,shape=[64,32,3,3])] DequantizeLinear [onnx::Conv_163_quantized:(ty=3,shape=[64,32,3,3]),ortshared_1_0_1_1_token_65:(ty=1,shape=[]),onnx::Conv_163_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
+   "comment": "@17 [onnx::Conv_254_DequantizeLinear_Output:(ty=1,shape=[32,16,3,3])] DequantizeLinear [onnx::Conv_254_quantized:(ty=3,shape=[32,16,3,3]),ortshared_1_0_1_5_token_94:(ty=1,shape=[]),onnx::Conv_254_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.3/conv1/Conv_output_0"
+    "/layer2/layer2.0/conv1/Conv_output_0"
    ],
    "input": [
-    "/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output/duplicated",
-    "onnx::Conv_163_DequantizeLinear_Output",
-    "onnx::Conv_164_DequantizeLinear_Output"
+    "/layer1/layer1.2/Relu_1_output_0_DequantizeLinear_Output/duplicated",
+    "onnx::Conv_254_DequantizeLinear_Output",
+    "onnx::Conv_255_DequantizeLinear_Output"
    ],
    "opType": "Conv",
-   "comment": "@77 [/blks/blks.3/conv1/Conv_output_0:(ty=1,shape=[-1,64,4,4])] Conv [/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,32,8,8]),onnx::Conv_163_DequantizeLinear_Output:(ty=1,shape=[64,32,3,3]),onnx::Conv_164_DequantizeLinear_Output:(ty=1,shape=[64])]",
-   "device": "DPU"
+   "comment": "@84 [/layer2/layer2.0/conv1/Conv_output_0:(ty=1,shape=[-1,32,16,16])] Conv [/layer1/layer1.2/Relu_1_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,16,32,32]),onnx::Conv_254_DequantizeLinear_Output:(ty=1,shape=[32,16,3,3]),onnx::Conv_255_DequantizeLinear_Output:(ty=1,shape=[32])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.3/Relu_output_0"
+    "/layer2/layer2.0/Relu_output_0"
    ],
    "input": [
-    "/blks/blks.3/conv1/Conv_output_0"
+    "/layer2/layer2.0/conv1/Conv_output_0"
    ],
    "opType": "Relu",
-   "comment": "@79 [/blks/blks.3/Relu_output_0:(ty=1,shape=[-1,64,4,4])] Relu [/blks/blks.3/conv1/Conv_output_0:(ty=1,shape=[-1,64,4,4])]",
-   "device": "DPU"
+   "comment": "@86 [/layer2/layer2.0/Relu_output_0:(ty=1,shape=[-1,32,16,16])] Relu [/layer2/layer2.0/conv1/Conv_output_0:(ty=1,shape=[-1,32,16,16])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.3/Relu_output_0_QuantizeLinear_Output"
+    "/layer2/layer2.0/Relu_output_0_QuantizeLinear_Output"
    ],
    "input": [
-    "/blks/blks.3/Relu_output_0",
-    "ortshared_1_0_1_3_token_67",
-    "/blks/blks.3/Relu_output_0_zero_point"
+    "/layer2/layer2.0/Relu_output_0",
+    "ortshared_1_0_1_3_token_92",
+    "/layer2/layer2.0/Relu_output_0_zero_point"
    ],
    "opType": "QuantizeLinear",
-   "comment": "@81 [/blks/blks.3/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,4,4])] QuantizeLinear [/blks/blks.3/Relu_output_0:(ty=1,shape=[-1,64,4,4]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),/blks/blks.3/Relu_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@88 [/layer2/layer2.0/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,16,16])] QuantizeLinear [/layer2/layer2.0/Relu_output_0:(ty=1,shape=[-1,32,16,16]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer2/layer2.0/Relu_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.3/Relu_output_0_DequantizeLinear_Output"
+    "/layer2/layer2.0/Relu_output_0_DequantizeLinear_Output"
    ],
    "input": [
-    "/blks/blks.3/Relu_output_0_QuantizeLinear_Output",
-    "ortshared_1_0_1_3_token_67",
-    "/blks/blks.3/Relu_output_0_zero_point"
+    "/layer2/layer2.0/Relu_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_3_token_92",
+    "/layer2/layer2.0/Relu_output_0_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@82 [/blks/blks.3/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,4,4])] DequantizeLinear [/blks/blks.3/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,4,4]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),/blks/blks.3/Relu_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@89 [/layer2/layer2.0/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,16,16])] DequantizeLinear [/layer2/layer2.0/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,16,16]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer2/layer2.0/Relu_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "onnx::Conv_167_DequantizeLinear_Output"
+    "onnx::Conv_258_DequantizeLinear_Output"
    ],
    "input": [
-    "onnx::Conv_167_quantized",
-    "ortshared_1_0_1_3_token_67",
-    "onnx::Conv_167_zero_point"
+    "onnx::Conv_258_quantized",
+    "ortshared_1_0_1_0_token_88",
+    "onnx::Conv_258_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@26 [onnx::Conv_167_DequantizeLinear_Output:(ty=1,shape=[64])] DequantizeLinear [onnx::Conv_167_quantized:(ty=3,shape=[64]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),onnx::Conv_167_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
+   "comment": "@20 [onnx::Conv_258_DequantizeLinear_Output:(ty=1,shape=[32])] DequantizeLinear [onnx::Conv_258_quantized:(ty=3,shape=[32]),ortshared_1_0_1_0_token_88:(ty=1,shape=[]),onnx::Conv_258_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "onnx::Conv_166_DequantizeLinear_Output"
+    "onnx::Conv_257_DequantizeLinear_Output"
    ],
    "input": [
-    "onnx::Conv_166_quantized",
-    "ortshared_1_0_1_4_token_68",
-    "onnx::Conv_166_zero_point"
+    "onnx::Conv_257_quantized",
+    "ortshared_1_0_1_5_token_94",
+    "onnx::Conv_257_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@25 [onnx::Conv_166_DequantizeLinear_Output:(ty=1,shape=[64,64,3,3])] DequantizeLinear [onnx::Conv_166_quantized:(ty=3,shape=[64,64,3,3]),ortshared_1_0_1_4_token_68:(ty=1,shape=[]),onnx::Conv_166_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
+   "comment": "@19 [onnx::Conv_257_DequantizeLinear_Output:(ty=1,shape=[32,32,3,3])] DequantizeLinear [onnx::Conv_257_quantized:(ty=3,shape=[32,32,3,3]),ortshared_1_0_1_5_token_94:(ty=1,shape=[]),onnx::Conv_257_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.3/conv2/Conv_output_0"
+    "/layer2/layer2.0/conv2/Conv_output_0"
    ],
    "input": [
-    "/blks/blks.3/Relu_output_0_DequantizeLinear_Output",
-    "onnx::Conv_166_DequantizeLinear_Output",
-    "onnx::Conv_167_DequantizeLinear_Output"
+    "/layer2/layer2.0/Relu_output_0_DequantizeLinear_Output",
+    "onnx::Conv_257_DequantizeLinear_Output",
+    "onnx::Conv_258_DequantizeLinear_Output"
    ],
    "opType": "Conv",
-   "comment": "@83 [/blks/blks.3/conv2/Conv_output_0:(ty=1,shape=[-1,64,4,4])] Conv [/blks/blks.3/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,4,4]),onnx::Conv_166_DequantizeLinear_Output:(ty=1,shape=[64,64,3,3]),onnx::Conv_167_DequantizeLinear_Output:(ty=1,shape=[64])]",
-   "device": "DPU"
+   "comment": "@90 [/layer2/layer2.0/conv2/Conv_output_0:(ty=1,shape=[-1,32,16,16])] Conv [/layer2/layer2.0/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,16,16]),onnx::Conv_257_DequantizeLinear_Output:(ty=1,shape=[32,32,3,3]),onnx::Conv_258_DequantizeLinear_Output:(ty=1,shape=[32])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.3/conv2/Conv_output_0_QuantizeLinear_Output"
+    "/layer2/layer2.0/conv2/Conv_output_0_QuantizeLinear_Output"
    ],
    "input": [
-    "/blks/blks.3/conv2/Conv_output_0",
-    "ortshared_1_0_1_6_token_71",
-    "/blks/blks.3/conv2/Conv_output_0_zero_point"
+    "/layer2/layer2.0/conv2/Conv_output_0",
+    "ortshared_1_0_1_3_token_92",
+    "/layer2/layer2.0/conv2/Conv_output_0_zero_point"
    ],
    "opType": "QuantizeLinear",
-   "comment": "@84 [/blks/blks.3/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,4,4])] QuantizeLinear [/blks/blks.3/conv2/Conv_output_0:(ty=1,shape=[-1,64,4,4]),ortshared_1_0_1_6_token_71:(ty=1,shape=[]),/blks/blks.3/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@91 [/layer2/layer2.0/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,16,16])] QuantizeLinear [/layer2/layer2.0/conv2/Conv_output_0:(ty=1,shape=[-1,32,16,16]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer2/layer2.0/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.3/conv2/Conv_output_0_DequantizeLinear_Output"
+    "/layer2/layer2.0/conv2/Conv_output_0_DequantizeLinear_Output"
    ],
    "input": [
-    "/blks/blks.3/conv2/Conv_output_0_QuantizeLinear_Output",
-    "ortshared_1_0_1_6_token_71",
-    "/blks/blks.3/conv2/Conv_output_0_zero_point"
+    "/layer2/layer2.0/conv2/Conv_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_3_token_92",
+    "/layer2/layer2.0/conv2/Conv_output_0_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@85 [/blks/blks.3/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,4,4])] DequantizeLinear [/blks/blks.3/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,4,4]),ortshared_1_0_1_6_token_71:(ty=1,shape=[]),/blks/blks.3/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@92 [/layer2/layer2.0/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,16,16])] DequantizeLinear [/layer2/layer2.0/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,16,16]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer2/layer2.0/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output"
+    "/layer1/layer1.2/Relu_1_output_0_DequantizeLinear_Output"
    ],
    "input": [
-    "/blks/blks.2/Relu_1_output_0_QuantizeLinear_Output",
-    "ortshared_1_0_1_3_token_67",
-    "/blks/blks.2/Relu_1_output_0_zero_point"
+    "/layer1/layer1.2/Relu_1_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_2_token_91",
+    "/layer1/layer1.2/Relu_1_output_0_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@75 [/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,8,8])] DequantizeLinear [/blks/blks.2/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,8,8]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),/blks/blks.2/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@82 [/layer1/layer1.2/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,32,32])] DequantizeLinear [/layer1/layer1.2/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,16,32,32]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),/layer1/layer1.2/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "onnx::Conv_170_DequantizeLinear_Output"
+    "onnx::Conv_261_DequantizeLinear_Output"
    ],
    "input": [
-    "onnx::Conv_170_quantized",
-    "ortshared_1_0_1_3_token_67",
-    "onnx::Conv_170_zero_point"
+    "onnx::Conv_261_quantized",
+    "ortshared_1_0_1_0_token_88",
+    "onnx::Conv_261_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@28 [onnx::Conv_170_DequantizeLinear_Output:(ty=1,shape=[64])] DequantizeLinear [onnx::Conv_170_quantized:(ty=3,shape=[64]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),onnx::Conv_170_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
+   "comment": "@22 [onnx::Conv_261_DequantizeLinear_Output:(ty=1,shape=[32])] DequantizeLinear [onnx::Conv_261_quantized:(ty=3,shape=[32]),ortshared_1_0_1_0_token_88:(ty=1,shape=[]),onnx::Conv_261_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "onnx::Conv_169_DequantizeLinear_Output"
+    "onnx::Conv_260_DequantizeLinear_Output"
    ],
    "input": [
-    "onnx::Conv_169_quantized",
-    "ortshared_1_0_1_2_token_66",
-    "onnx::Conv_169_zero_point"
+    "onnx::Conv_260_quantized",
+    "ortshared_1_0_1_6_token_95",
+    "onnx::Conv_260_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@27 [onnx::Conv_169_DequantizeLinear_Output:(ty=1,shape=[64,32,1,1])] DequantizeLinear [onnx::Conv_169_quantized:(ty=3,shape=[64,32,1,1]),ortshared_1_0_1_2_token_66:(ty=1,shape=[]),onnx::Conv_169_zero_point:(ty=3,shape=[])]",
-   "device": "DPU"
+   "comment": "@21 [onnx::Conv_260_DequantizeLinear_Output:(ty=1,shape=[32,16,1,1])] DequantizeLinear [onnx::Conv_260_quantized:(ty=3,shape=[32,16,1,1]),ortshared_1_0_1_6_token_95:(ty=1,shape=[]),onnx::Conv_260_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.3/shortcut/shortcut.0/Conv_output_0"
+    "/layer2/layer2.0/identity/identity.0/Conv_output_0"
    ],
    "input": [
-    "/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output",
-    "onnx::Conv_169_DequantizeLinear_Output",
-    "onnx::Conv_170_DequantizeLinear_Output"
+    "/layer1/layer1.2/Relu_1_output_0_DequantizeLinear_Output",
+    "onnx::Conv_260_DequantizeLinear_Output",
+    "onnx::Conv_261_DequantizeLinear_Output"
    ],
    "opType": "Conv",
-   "comment": "@76 [/blks/blks.3/shortcut/shortcut.0/Conv_output_0:(ty=1,shape=[-1,64,4,4])] Conv [/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,8,8]),onnx::Conv_169_DequantizeLinear_Output:(ty=1,shape=[64,32,1,1]),onnx::Conv_170_DequantizeLinear_Output:(ty=1,shape=[64])]",
-   "device": "DPU"
+   "comment": "@83 [/layer2/layer2.0/identity/identity.0/Conv_output_0:(ty=1,shape=[-1,32,16,16])] Conv [/layer1/layer1.2/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,16,32,32]),onnx::Conv_260_DequantizeLinear_Output:(ty=1,shape=[32,16,1,1]),onnx::Conv_261_DequantizeLinear_Output:(ty=1,shape=[32])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.3/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output"
+    "/layer2/layer2.0/identity/identity.0/Conv_output_0_QuantizeLinear_Output"
    ],
    "input": [
-    "/blks/blks.3/shortcut/shortcut.0/Conv_output_0",
-    "ortshared_1_0_1_3_token_67",
-    "/blks/blks.3/shortcut/shortcut.0/Conv_output_0_zero_point"
+    "/layer2/layer2.0/identity/identity.0/Conv_output_0",
+    "ortshared_1_0_1_3_token_92",
+    "/layer2/layer2.0/identity/identity.0/Conv_output_0_zero_point"
    ],
    "opType": "QuantizeLinear",
-   "comment": "@78 [/blks/blks.3/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,4,4])] QuantizeLinear [/blks/blks.3/shortcut/shortcut.0/Conv_output_0:(ty=1,shape=[-1,64,4,4]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),/blks/blks.3/shortcut/shortcut.0/Conv_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@85 [/layer2/layer2.0/identity/identity.0/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,16,16])] QuantizeLinear [/layer2/layer2.0/identity/identity.0/Conv_output_0:(ty=1,shape=[-1,32,16,16]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer2/layer2.0/identity/identity.0/Conv_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.3/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output"
+    "/layer2/layer2.0/identity/identity.0/Conv_output_0_DequantizeLinear_Output"
    ],
    "input": [
-    "/blks/blks.3/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output",
-    "ortshared_1_0_1_3_token_67",
-    "/blks/blks.3/shortcut/shortcut.0/Conv_output_0_zero_point"
+    "/layer2/layer2.0/identity/identity.0/Conv_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_3_token_92",
+    "/layer2/layer2.0/identity/identity.0/Conv_output_0_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@80 [/blks/blks.3/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,4,4])] DequantizeLinear [/blks/blks.3/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,4,4]),ortshared_1_0_1_3_token_67:(ty=1,shape=[]),/blks/blks.3/shortcut/shortcut.0/Conv_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@87 [/layer2/layer2.0/identity/identity.0/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,16,16])] DequantizeLinear [/layer2/layer2.0/identity/identity.0/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,16,16]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer2/layer2.0/identity/identity.0/Conv_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.3/Add_output_0"
+    "/layer2/layer2.0/Add_output_0"
    ],
    "input": [
-    "/blks/blks.3/conv2/Conv_output_0_DequantizeLinear_Output",
-    "/blks/blks.3/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output"
+    "/layer2/layer2.0/conv2/Conv_output_0_DequantizeLinear_Output",
+    "/layer2/layer2.0/identity/identity.0/Conv_output_0_DequantizeLinear_Output"
    ],
    "opType": "Add",
-   "comment": "@86 [/blks/blks.3/Add_output_0:(ty=1,shape=[-1,64,4,4])] Add [/blks/blks.3/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,4,4]),/blks/blks.3/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,4,4])]",
-   "device": "DPU"
+   "comment": "@93 [/layer2/layer2.0/Add_output_0:(ty=1,shape=[-1,32,16,16])] Add [/layer2/layer2.0/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,16,16]),/layer2/layer2.0/identity/identity.0/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,16,16])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.3/Relu_1_output_0"
+    "/layer2/layer2.0/Relu_1_output_0"
    ],
    "input": [
-    "/blks/blks.3/Add_output_0"
+    "/layer2/layer2.0/Add_output_0"
    ],
    "opType": "Relu",
-   "comment": "@87 [/blks/blks.3/Relu_1_output_0:(ty=1,shape=[-1,64,4,4])] Relu [/blks/blks.3/Add_output_0:(ty=1,shape=[-1,64,4,4])]",
-   "device": "DPU"
+   "comment": "@94 [/layer2/layer2.0/Relu_1_output_0:(ty=1,shape=[-1,32,16,16])] Relu [/layer2/layer2.0/Add_output_0:(ty=1,shape=[-1,32,16,16])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.3/Relu_1_output_0_QuantizeLinear_Output"
+    "/layer2/layer2.0/Relu_1_output_0_QuantizeLinear_Output"
    ],
    "input": [
-    "/blks/blks.3/Relu_1_output_0",
-    "ortshared_1_0_1_6_token_71",
-    "/blks/blks.3/Relu_1_output_0_zero_point"
+    "/layer2/layer2.0/Relu_1_output_0",
+    "ortshared_1_0_1_3_token_92",
+    "/layer2/layer2.0/Relu_1_output_0_zero_point"
    ],
    "opType": "QuantizeLinear",
-   "comment": "@88 [/blks/blks.3/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,4,4])] QuantizeLinear [/blks/blks.3/Relu_1_output_0:(ty=1,shape=[-1,64,4,4]),ortshared_1_0_1_6_token_71:(ty=1,shape=[]),/blks/blks.3/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@95 [/layer2/layer2.0/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,16,16])] QuantizeLinear [/layer2/layer2.0/Relu_1_output_0:(ty=1,shape=[-1,32,16,16]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer2/layer2.0/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
-    "/blks/blks.3/Relu_1_output_0_DequantizeLinear_Output"
+    "/layer2/layer2.0/Relu_1_output_0_DequantizeLinear_Output/duplicated"
    ],
    "input": [
-    "/blks/blks.3/Relu_1_output_0_QuantizeLinear_Output",
-    "ortshared_1_0_1_6_token_71",
-    "/blks/blks.3/Relu_1_output_0_zero_point"
+    "/layer2/layer2.0/Relu_1_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_3_token_92",
+    "/layer2/layer2.0/Relu_1_output_0_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@89 [/blks/blks.3/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,4,4])] DequantizeLinear [/blks/blks.3/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,4,4]),ortshared_1_0_1_6_token_71:(ty=1,shape=[]),/blks/blks.3/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
-   "device": "DPU"
+   "comment": "@169 [/layer2/layer2.0/Relu_1_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,32,16,16])] DequantizeLinear [/layer2/layer2.0/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,16,16]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer2/layer2.0/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.0/Relu_1_output_0_DequantizeLinear_Output"
+   ],
+   "input": [
+    "/layer2/layer2.0/Relu_1_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_3_token_92",
+    "/layer2/layer2.0/Relu_1_output_0_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@96 [/layer2/layer2.0/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,16,16])] DequantizeLinear [/layer2/layer2.0/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,16,16]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer2/layer2.0/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "onnx::Conv_264_DequantizeLinear_Output"
+   ],
+   "input": [
+    "onnx::Conv_264_quantized",
+    "ortshared_1_0_1_4_token_93",
+    "onnx::Conv_264_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@24 [onnx::Conv_264_DequantizeLinear_Output:(ty=1,shape=[32])] DequantizeLinear [onnx::Conv_264_quantized:(ty=3,shape=[32]),ortshared_1_0_1_4_token_93:(ty=1,shape=[]),onnx::Conv_264_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "onnx::Conv_263_DequantizeLinear_Output"
+   ],
+   "input": [
+    "onnx::Conv_263_quantized",
+    "ortshared_1_0_1_1_token_89",
+    "onnx::Conv_263_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@23 [onnx::Conv_263_DequantizeLinear_Output:(ty=1,shape=[32,32,3,3])] DequantizeLinear [onnx::Conv_263_quantized:(ty=3,shape=[32,32,3,3]),ortshared_1_0_1_1_token_89:(ty=1,shape=[]),onnx::Conv_263_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.1/conv1/Conv_output_0"
+   ],
+   "input": [
+    "/layer2/layer2.0/Relu_1_output_0_DequantizeLinear_Output",
+    "onnx::Conv_263_DequantizeLinear_Output",
+    "onnx::Conv_264_DequantizeLinear_Output"
+   ],
+   "opType": "Conv",
+   "comment": "@97 [/layer2/layer2.1/conv1/Conv_output_0:(ty=1,shape=[-1,32,16,16])] Conv [/layer2/layer2.0/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,16,16]),onnx::Conv_263_DequantizeLinear_Output:(ty=1,shape=[32,32,3,3]),onnx::Conv_264_DequantizeLinear_Output:(ty=1,shape=[32])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.1/Relu_output_0"
+   ],
+   "input": [
+    "/layer2/layer2.1/conv1/Conv_output_0"
+   ],
+   "opType": "Relu",
+   "comment": "@98 [/layer2/layer2.1/Relu_output_0:(ty=1,shape=[-1,32,16,16])] Relu [/layer2/layer2.1/conv1/Conv_output_0:(ty=1,shape=[-1,32,16,16])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.1/Relu_output_0_QuantizeLinear_Output"
+   ],
+   "input": [
+    "/layer2/layer2.1/Relu_output_0",
+    "ortshared_1_0_1_3_token_92",
+    "/layer2/layer2.1/Relu_output_0_zero_point"
+   ],
+   "opType": "QuantizeLinear",
+   "comment": "@99 [/layer2/layer2.1/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,16,16])] QuantizeLinear [/layer2/layer2.1/Relu_output_0:(ty=1,shape=[-1,32,16,16]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer2/layer2.1/Relu_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.1/Relu_output_0_DequantizeLinear_Output"
+   ],
+   "input": [
+    "/layer2/layer2.1/Relu_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_3_token_92",
+    "/layer2/layer2.1/Relu_output_0_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@100 [/layer2/layer2.1/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,16,16])] DequantizeLinear [/layer2/layer2.1/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,16,16]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer2/layer2.1/Relu_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "onnx::Conv_267_DequantizeLinear_Output"
+   ],
+   "input": [
+    "onnx::Conv_267_quantized",
+    "ortshared_1_0_1_0_token_88",
+    "onnx::Conv_267_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@26 [onnx::Conv_267_DequantizeLinear_Output:(ty=1,shape=[32])] DequantizeLinear [onnx::Conv_267_quantized:(ty=3,shape=[32]),ortshared_1_0_1_0_token_88:(ty=1,shape=[]),onnx::Conv_267_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "onnx::Conv_266_DequantizeLinear_Output"
+   ],
+   "input": [
+    "onnx::Conv_266_quantized",
+    "ortshared_1_0_1_5_token_94",
+    "onnx::Conv_266_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@25 [onnx::Conv_266_DequantizeLinear_Output:(ty=1,shape=[32,32,3,3])] DequantizeLinear [onnx::Conv_266_quantized:(ty=3,shape=[32,32,3,3]),ortshared_1_0_1_5_token_94:(ty=1,shape=[]),onnx::Conv_266_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.1/conv2/Conv_output_0"
+   ],
+   "input": [
+    "/layer2/layer2.1/Relu_output_0_DequantizeLinear_Output",
+    "onnx::Conv_266_DequantizeLinear_Output",
+    "onnx::Conv_267_DequantizeLinear_Output"
+   ],
+   "opType": "Conv",
+   "comment": "@101 [/layer2/layer2.1/conv2/Conv_output_0:(ty=1,shape=[-1,32,16,16])] Conv [/layer2/layer2.1/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,16,16]),onnx::Conv_266_DequantizeLinear_Output:(ty=1,shape=[32,32,3,3]),onnx::Conv_267_DequantizeLinear_Output:(ty=1,shape=[32])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.1/conv2/Conv_output_0_QuantizeLinear_Output"
+   ],
+   "input": [
+    "/layer2/layer2.1/conv2/Conv_output_0",
+    "ortshared_1_0_1_3_token_92",
+    "/layer2/layer2.1/conv2/Conv_output_0_zero_point"
+   ],
+   "opType": "QuantizeLinear",
+   "comment": "@102 [/layer2/layer2.1/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,16,16])] QuantizeLinear [/layer2/layer2.1/conv2/Conv_output_0:(ty=1,shape=[-1,32,16,16]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer2/layer2.1/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.1/conv2/Conv_output_0_DequantizeLinear_Output"
+   ],
+   "input": [
+    "/layer2/layer2.1/conv2/Conv_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_3_token_92",
+    "/layer2/layer2.1/conv2/Conv_output_0_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@103 [/layer2/layer2.1/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,16,16])] DequantizeLinear [/layer2/layer2.1/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,16,16]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer2/layer2.1/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.1/Add_output_0"
+   ],
+   "input": [
+    "/layer2/layer2.1/conv2/Conv_output_0_DequantizeLinear_Output",
+    "/layer2/layer2.0/Relu_1_output_0_DequantizeLinear_Output/duplicated"
+   ],
+   "opType": "Add",
+   "comment": "@104 [/layer2/layer2.1/Add_output_0:(ty=1,shape=[-1,32,16,16])] Add [/layer2/layer2.1/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,16,16]),/layer2/layer2.0/Relu_1_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,32,16,16])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.1/Relu_1_output_0"
+   ],
+   "input": [
+    "/layer2/layer2.1/Add_output_0"
+   ],
+   "opType": "Relu",
+   "comment": "@105 [/layer2/layer2.1/Relu_1_output_0:(ty=1,shape=[-1,32,16,16])] Relu [/layer2/layer2.1/Add_output_0:(ty=1,shape=[-1,32,16,16])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.1/Relu_1_output_0_QuantizeLinear_Output"
+   ],
+   "input": [
+    "/layer2/layer2.1/Relu_1_output_0",
+    "ortshared_1_0_1_2_token_91",
+    "/layer2/layer2.1/Relu_1_output_0_zero_point"
+   ],
+   "opType": "QuantizeLinear",
+   "comment": "@106 [/layer2/layer2.1/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,16,16])] QuantizeLinear [/layer2/layer2.1/Relu_1_output_0:(ty=1,shape=[-1,32,16,16]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),/layer2/layer2.1/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.1/Relu_1_output_0_DequantizeLinear_Output/duplicated"
+   ],
+   "input": [
+    "/layer2/layer2.1/Relu_1_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_2_token_91",
+    "/layer2/layer2.1/Relu_1_output_0_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@170 [/layer2/layer2.1/Relu_1_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,32,16,16])] DequantizeLinear [/layer2/layer2.1/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,16,16]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),/layer2/layer2.1/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.1/Relu_1_output_0_DequantizeLinear_Output"
+   ],
+   "input": [
+    "/layer2/layer2.1/Relu_1_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_2_token_91",
+    "/layer2/layer2.1/Relu_1_output_0_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@107 [/layer2/layer2.1/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,16,16])] DequantizeLinear [/layer2/layer2.1/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,16,16]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),/layer2/layer2.1/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "onnx::Conv_270_DequantizeLinear_Output"
+   ],
+   "input": [
+    "onnx::Conv_270_quantized",
+    "ortshared_1_0_1_4_token_93",
+    "onnx::Conv_270_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@28 [onnx::Conv_270_DequantizeLinear_Output:(ty=1,shape=[32])] DequantizeLinear [onnx::Conv_270_quantized:(ty=3,shape=[32]),ortshared_1_0_1_4_token_93:(ty=1,shape=[]),onnx::Conv_270_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "onnx::Conv_269_DequantizeLinear_Output"
+   ],
+   "input": [
+    "onnx::Conv_269_quantized",
+    "ortshared_1_0_1_1_token_89",
+    "onnx::Conv_269_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@27 [onnx::Conv_269_DequantizeLinear_Output:(ty=1,shape=[32,32,3,3])] DequantizeLinear [onnx::Conv_269_quantized:(ty=3,shape=[32,32,3,3]),ortshared_1_0_1_1_token_89:(ty=1,shape=[]),onnx::Conv_269_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.2/conv1/Conv_output_0"
+   ],
+   "input": [
+    "/layer2/layer2.1/Relu_1_output_0_DequantizeLinear_Output",
+    "onnx::Conv_269_DequantizeLinear_Output",
+    "onnx::Conv_270_DequantizeLinear_Output"
+   ],
+   "opType": "Conv",
+   "comment": "@108 [/layer2/layer2.2/conv1/Conv_output_0:(ty=1,shape=[-1,32,16,16])] Conv [/layer2/layer2.1/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,16,16]),onnx::Conv_269_DequantizeLinear_Output:(ty=1,shape=[32,32,3,3]),onnx::Conv_270_DequantizeLinear_Output:(ty=1,shape=[32])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.2/Relu_output_0"
+   ],
+   "input": [
+    "/layer2/layer2.2/conv1/Conv_output_0"
+   ],
+   "opType": "Relu",
+   "comment": "@109 [/layer2/layer2.2/Relu_output_0:(ty=1,shape=[-1,32,16,16])] Relu [/layer2/layer2.2/conv1/Conv_output_0:(ty=1,shape=[-1,32,16,16])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.2/Relu_output_0_QuantizeLinear_Output"
+   ],
+   "input": [
+    "/layer2/layer2.2/Relu_output_0",
+    "ortshared_1_0_1_3_token_92",
+    "/layer2/layer2.2/Relu_output_0_zero_point"
+   ],
+   "opType": "QuantizeLinear",
+   "comment": "@110 [/layer2/layer2.2/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,16,16])] QuantizeLinear [/layer2/layer2.2/Relu_output_0:(ty=1,shape=[-1,32,16,16]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer2/layer2.2/Relu_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.2/Relu_output_0_DequantizeLinear_Output"
+   ],
+   "input": [
+    "/layer2/layer2.2/Relu_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_3_token_92",
+    "/layer2/layer2.2/Relu_output_0_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@111 [/layer2/layer2.2/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,16,16])] DequantizeLinear [/layer2/layer2.2/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,16,16]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer2/layer2.2/Relu_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "onnx::Conv_273_DequantizeLinear_Output"
+   ],
+   "input": [
+    "onnx::Conv_273_quantized",
+    "ortshared_1_0_1_0_token_88",
+    "onnx::Conv_273_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@30 [onnx::Conv_273_DequantizeLinear_Output:(ty=1,shape=[32])] DequantizeLinear [onnx::Conv_273_quantized:(ty=3,shape=[32]),ortshared_1_0_1_0_token_88:(ty=1,shape=[]),onnx::Conv_273_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "onnx::Conv_272_DequantizeLinear_Output"
+   ],
+   "input": [
+    "onnx::Conv_272_quantized",
+    "ortshared_1_0_1_5_token_94",
+    "onnx::Conv_272_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@29 [onnx::Conv_272_DequantizeLinear_Output:(ty=1,shape=[32,32,3,3])] DequantizeLinear [onnx::Conv_272_quantized:(ty=3,shape=[32,32,3,3]),ortshared_1_0_1_5_token_94:(ty=1,shape=[]),onnx::Conv_272_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.2/conv2/Conv_output_0"
+   ],
+   "input": [
+    "/layer2/layer2.2/Relu_output_0_DequantizeLinear_Output",
+    "onnx::Conv_272_DequantizeLinear_Output",
+    "onnx::Conv_273_DequantizeLinear_Output"
+   ],
+   "opType": "Conv",
+   "comment": "@112 [/layer2/layer2.2/conv2/Conv_output_0:(ty=1,shape=[-1,32,16,16])] Conv [/layer2/layer2.2/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,16,16]),onnx::Conv_272_DequantizeLinear_Output:(ty=1,shape=[32,32,3,3]),onnx::Conv_273_DequantizeLinear_Output:(ty=1,shape=[32])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.2/conv2/Conv_output_0_QuantizeLinear_Output"
+   ],
+   "input": [
+    "/layer2/layer2.2/conv2/Conv_output_0",
+    "ortshared_1_0_1_3_token_92",
+    "/layer2/layer2.2/conv2/Conv_output_0_zero_point"
+   ],
+   "opType": "QuantizeLinear",
+   "comment": "@113 [/layer2/layer2.2/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,16,16])] QuantizeLinear [/layer2/layer2.2/conv2/Conv_output_0:(ty=1,shape=[-1,32,16,16]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer2/layer2.2/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.2/conv2/Conv_output_0_DequantizeLinear_Output"
+   ],
+   "input": [
+    "/layer2/layer2.2/conv2/Conv_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_3_token_92",
+    "/layer2/layer2.2/conv2/Conv_output_0_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@114 [/layer2/layer2.2/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,16,16])] DequantizeLinear [/layer2/layer2.2/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,16,16]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer2/layer2.2/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.2/Add_output_0"
+   ],
+   "input": [
+    "/layer2/layer2.2/conv2/Conv_output_0_DequantizeLinear_Output",
+    "/layer2/layer2.1/Relu_1_output_0_DequantizeLinear_Output/duplicated"
+   ],
+   "opType": "Add",
+   "comment": "@115 [/layer2/layer2.2/Add_output_0:(ty=1,shape=[-1,32,16,16])] Add [/layer2/layer2.2/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,16,16]),/layer2/layer2.1/Relu_1_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,32,16,16])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.2/Relu_1_output_0"
+   ],
+   "input": [
+    "/layer2/layer2.2/Add_output_0"
+   ],
+   "opType": "Relu",
+   "comment": "@116 [/layer2/layer2.2/Relu_1_output_0:(ty=1,shape=[-1,32,16,16])] Relu [/layer2/layer2.2/Add_output_0:(ty=1,shape=[-1,32,16,16])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.2/Relu_1_output_0_QuantizeLinear_Output"
+   ],
+   "input": [
+    "/layer2/layer2.2/Relu_1_output_0",
+    "ortshared_1_0_1_2_token_91",
+    "/layer2/layer2.2/Relu_1_output_0_zero_point"
+   ],
+   "opType": "QuantizeLinear",
+   "comment": "@117 [/layer2/layer2.2/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,16,16])] QuantizeLinear [/layer2/layer2.2/Relu_1_output_0:(ty=1,shape=[-1,32,16,16]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),/layer2/layer2.2/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.2/Relu_1_output_0_DequantizeLinear_Output/duplicated"
+   ],
+   "input": [
+    "/layer2/layer2.2/Relu_1_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_2_token_91",
+    "/layer2/layer2.2/Relu_1_output_0_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@171 [/layer2/layer2.2/Relu_1_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,32,16,16])] DequantizeLinear [/layer2/layer2.2/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,16,16]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),/layer2/layer2.2/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "onnx::Conv_276_DequantizeLinear_Output"
+   ],
+   "input": [
+    "onnx::Conv_276_quantized",
+    "ortshared_1_0_1_0_token_88",
+    "onnx::Conv_276_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@32 [onnx::Conv_276_DequantizeLinear_Output:(ty=1,shape=[64])] DequantizeLinear [onnx::Conv_276_quantized:(ty=3,shape=[64]),ortshared_1_0_1_0_token_88:(ty=1,shape=[]),onnx::Conv_276_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "onnx::Conv_275_DequantizeLinear_Output"
+   ],
+   "input": [
+    "onnx::Conv_275_quantized",
+    "ortshared_1_0_1_1_token_89",
+    "onnx::Conv_275_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@31 [onnx::Conv_275_DequantizeLinear_Output:(ty=1,shape=[64,32,3,3])] DequantizeLinear [onnx::Conv_275_quantized:(ty=3,shape=[64,32,3,3]),ortshared_1_0_1_1_token_89:(ty=1,shape=[]),onnx::Conv_275_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.0/conv1/Conv_output_0"
+   ],
+   "input": [
+    "/layer2/layer2.2/Relu_1_output_0_DequantizeLinear_Output/duplicated",
+    "onnx::Conv_275_DequantizeLinear_Output",
+    "onnx::Conv_276_DequantizeLinear_Output"
+   ],
+   "opType": "Conv",
+   "comment": "@120 [/layer3/layer3.0/conv1/Conv_output_0:(ty=1,shape=[-1,64,8,8])] Conv [/layer2/layer2.2/Relu_1_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,32,16,16]),onnx::Conv_275_DequantizeLinear_Output:(ty=1,shape=[64,32,3,3]),onnx::Conv_276_DequantizeLinear_Output:(ty=1,shape=[64])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.0/Relu_output_0"
+   ],
+   "input": [
+    "/layer3/layer3.0/conv1/Conv_output_0"
+   ],
+   "opType": "Relu",
+   "comment": "@122 [/layer3/layer3.0/Relu_output_0:(ty=1,shape=[-1,64,8,8])] Relu [/layer3/layer3.0/conv1/Conv_output_0:(ty=1,shape=[-1,64,8,8])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.0/Relu_output_0_QuantizeLinear_Output"
+   ],
+   "input": [
+    "/layer3/layer3.0/Relu_output_0",
+    "ortshared_1_0_1_3_token_92",
+    "/layer3/layer3.0/Relu_output_0_zero_point"
+   ],
+   "opType": "QuantizeLinear",
+   "comment": "@124 [/layer3/layer3.0/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,8,8])] QuantizeLinear [/layer3/layer3.0/Relu_output_0:(ty=1,shape=[-1,64,8,8]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer3/layer3.0/Relu_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.0/Relu_output_0_DequantizeLinear_Output"
+   ],
+   "input": [
+    "/layer3/layer3.0/Relu_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_3_token_92",
+    "/layer3/layer3.0/Relu_output_0_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@125 [/layer3/layer3.0/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,8,8])] DequantizeLinear [/layer3/layer3.0/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,8,8]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer3/layer3.0/Relu_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "onnx::Conv_279_DequantizeLinear_Output"
+   ],
+   "input": [
+    "onnx::Conv_279_quantized",
+    "ortshared_1_0_1_0_token_88",
+    "onnx::Conv_279_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@34 [onnx::Conv_279_DequantizeLinear_Output:(ty=1,shape=[64])] DequantizeLinear [onnx::Conv_279_quantized:(ty=3,shape=[64]),ortshared_1_0_1_0_token_88:(ty=1,shape=[]),onnx::Conv_279_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "onnx::Conv_278_DequantizeLinear_Output"
+   ],
+   "input": [
+    "onnx::Conv_278_quantized",
+    "ortshared_1_0_1_1_token_89",
+    "onnx::Conv_278_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@33 [onnx::Conv_278_DequantizeLinear_Output:(ty=1,shape=[64,64,3,3])] DequantizeLinear [onnx::Conv_278_quantized:(ty=3,shape=[64,64,3,3]),ortshared_1_0_1_1_token_89:(ty=1,shape=[]),onnx::Conv_278_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.0/conv2/Conv_output_0"
+   ],
+   "input": [
+    "/layer3/layer3.0/Relu_output_0_DequantizeLinear_Output",
+    "onnx::Conv_278_DequantizeLinear_Output",
+    "onnx::Conv_279_DequantizeLinear_Output"
+   ],
+   "opType": "Conv",
+   "comment": "@126 [/layer3/layer3.0/conv2/Conv_output_0:(ty=1,shape=[-1,64,8,8])] Conv [/layer3/layer3.0/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,8,8]),onnx::Conv_278_DequantizeLinear_Output:(ty=1,shape=[64,64,3,3]),onnx::Conv_279_DequantizeLinear_Output:(ty=1,shape=[64])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.0/conv2/Conv_output_0_QuantizeLinear_Output"
+   ],
+   "input": [
+    "/layer3/layer3.0/conv2/Conv_output_0",
+    "ortshared_1_0_1_3_token_92",
+    "/layer3/layer3.0/conv2/Conv_output_0_zero_point"
+   ],
+   "opType": "QuantizeLinear",
+   "comment": "@127 [/layer3/layer3.0/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,8,8])] QuantizeLinear [/layer3/layer3.0/conv2/Conv_output_0:(ty=1,shape=[-1,64,8,8]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer3/layer3.0/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.0/conv2/Conv_output_0_DequantizeLinear_Output"
+   ],
+   "input": [
+    "/layer3/layer3.0/conv2/Conv_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_3_token_92",
+    "/layer3/layer3.0/conv2/Conv_output_0_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@128 [/layer3/layer3.0/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,8,8])] DequantizeLinear [/layer3/layer3.0/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,8,8]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer3/layer3.0/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer2/layer2.2/Relu_1_output_0_DequantizeLinear_Output"
+   ],
+   "input": [
+    "/layer2/layer2.2/Relu_1_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_2_token_91",
+    "/layer2/layer2.2/Relu_1_output_0_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@118 [/layer2/layer2.2/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,16,16])] DequantizeLinear [/layer2/layer2.2/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,32,16,16]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),/layer2/layer2.2/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "onnx::Conv_282_DequantizeLinear_Output"
+   ],
+   "input": [
+    "onnx::Conv_282_quantized",
+    "ortshared_1_0_1_0_token_88",
+    "onnx::Conv_282_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@36 [onnx::Conv_282_DequantizeLinear_Output:(ty=1,shape=[64])] DequantizeLinear [onnx::Conv_282_quantized:(ty=3,shape=[64]),ortshared_1_0_1_0_token_88:(ty=1,shape=[]),onnx::Conv_282_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "onnx::Conv_281_DequantizeLinear_Output"
+   ],
+   "input": [
+    "onnx::Conv_281_quantized",
+    "ortshared_1_0_1_6_token_95",
+    "onnx::Conv_281_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@35 [onnx::Conv_281_DequantizeLinear_Output:(ty=1,shape=[64,32,1,1])] DequantizeLinear [onnx::Conv_281_quantized:(ty=3,shape=[64,32,1,1]),ortshared_1_0_1_6_token_95:(ty=1,shape=[]),onnx::Conv_281_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.0/identity/identity.0/Conv_output_0"
+   ],
+   "input": [
+    "/layer2/layer2.2/Relu_1_output_0_DequantizeLinear_Output",
+    "onnx::Conv_281_DequantizeLinear_Output",
+    "onnx::Conv_282_DequantizeLinear_Output"
+   ],
+   "opType": "Conv",
+   "comment": "@119 [/layer3/layer3.0/identity/identity.0/Conv_output_0:(ty=1,shape=[-1,64,8,8])] Conv [/layer2/layer2.2/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,32,16,16]),onnx::Conv_281_DequantizeLinear_Output:(ty=1,shape=[64,32,1,1]),onnx::Conv_282_DequantizeLinear_Output:(ty=1,shape=[64])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.0/identity/identity.0/Conv_output_0_QuantizeLinear_Output"
+   ],
+   "input": [
+    "/layer3/layer3.0/identity/identity.0/Conv_output_0",
+    "ortshared_1_0_1_3_token_92",
+    "/layer3/layer3.0/identity/identity.0/Conv_output_0_zero_point"
+   ],
+   "opType": "QuantizeLinear",
+   "comment": "@121 [/layer3/layer3.0/identity/identity.0/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,8,8])] QuantizeLinear [/layer3/layer3.0/identity/identity.0/Conv_output_0:(ty=1,shape=[-1,64,8,8]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer3/layer3.0/identity/identity.0/Conv_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.0/identity/identity.0/Conv_output_0_DequantizeLinear_Output"
+   ],
+   "input": [
+    "/layer3/layer3.0/identity/identity.0/Conv_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_3_token_92",
+    "/layer3/layer3.0/identity/identity.0/Conv_output_0_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@123 [/layer3/layer3.0/identity/identity.0/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,8,8])] DequantizeLinear [/layer3/layer3.0/identity/identity.0/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,8,8]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer3/layer3.0/identity/identity.0/Conv_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.0/Add_output_0"
+   ],
+   "input": [
+    "/layer3/layer3.0/conv2/Conv_output_0_DequantizeLinear_Output",
+    "/layer3/layer3.0/identity/identity.0/Conv_output_0_DequantizeLinear_Output"
+   ],
+   "opType": "Add",
+   "comment": "@129 [/layer3/layer3.0/Add_output_0:(ty=1,shape=[-1,64,8,8])] Add [/layer3/layer3.0/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,8,8]),/layer3/layer3.0/identity/identity.0/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,8,8])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.0/Relu_1_output_0"
+   ],
+   "input": [
+    "/layer3/layer3.0/Add_output_0"
+   ],
+   "opType": "Relu",
+   "comment": "@130 [/layer3/layer3.0/Relu_1_output_0:(ty=1,shape=[-1,64,8,8])] Relu [/layer3/layer3.0/Add_output_0:(ty=1,shape=[-1,64,8,8])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.0/Relu_1_output_0_QuantizeLinear_Output"
+   ],
+   "input": [
+    "/layer3/layer3.0/Relu_1_output_0",
+    "ortshared_1_0_1_2_token_91",
+    "/layer3/layer3.0/Relu_1_output_0_zero_point"
+   ],
+   "opType": "QuantizeLinear",
+   "comment": "@131 [/layer3/layer3.0/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,8,8])] QuantizeLinear [/layer3/layer3.0/Relu_1_output_0:(ty=1,shape=[-1,64,8,8]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),/layer3/layer3.0/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.0/Relu_1_output_0_DequantizeLinear_Output/duplicated"
+   ],
+   "input": [
+    "/layer3/layer3.0/Relu_1_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_2_token_91",
+    "/layer3/layer3.0/Relu_1_output_0_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@172 [/layer3/layer3.0/Relu_1_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,64,8,8])] DequantizeLinear [/layer3/layer3.0/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,8,8]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),/layer3/layer3.0/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.0/Relu_1_output_0_DequantizeLinear_Output"
+   ],
+   "input": [
+    "/layer3/layer3.0/Relu_1_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_2_token_91",
+    "/layer3/layer3.0/Relu_1_output_0_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@132 [/layer3/layer3.0/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,8,8])] DequantizeLinear [/layer3/layer3.0/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,8,8]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),/layer3/layer3.0/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "onnx::Conv_285_DequantizeLinear_Output"
+   ],
+   "input": [
+    "onnx::Conv_285_quantized",
+    "ortshared_1_0_1_0_token_88",
+    "onnx::Conv_285_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@38 [onnx::Conv_285_DequantizeLinear_Output:(ty=1,shape=[64])] DequantizeLinear [onnx::Conv_285_quantized:(ty=3,shape=[64]),ortshared_1_0_1_0_token_88:(ty=1,shape=[]),onnx::Conv_285_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "onnx::Conv_284_DequantizeLinear_Output"
+   ],
+   "input": [
+    "onnx::Conv_284_quantized",
+    "ortshared_1_0_1_8_token_97",
+    "onnx::Conv_284_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@37 [onnx::Conv_284_DequantizeLinear_Output:(ty=1,shape=[64,64,3,3])] DequantizeLinear [onnx::Conv_284_quantized:(ty=3,shape=[64,64,3,3]),ortshared_1_0_1_8_token_97:(ty=1,shape=[]),onnx::Conv_284_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.1/conv1/Conv_output_0"
+   ],
+   "input": [
+    "/layer3/layer3.0/Relu_1_output_0_DequantizeLinear_Output",
+    "onnx::Conv_284_DequantizeLinear_Output",
+    "onnx::Conv_285_DequantizeLinear_Output"
+   ],
+   "opType": "Conv",
+   "comment": "@133 [/layer3/layer3.1/conv1/Conv_output_0:(ty=1,shape=[-1,64,8,8])] Conv [/layer3/layer3.0/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,8,8]),onnx::Conv_284_DequantizeLinear_Output:(ty=1,shape=[64,64,3,3]),onnx::Conv_285_DequantizeLinear_Output:(ty=1,shape=[64])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.1/Relu_output_0"
+   ],
+   "input": [
+    "/layer3/layer3.1/conv1/Conv_output_0"
+   ],
+   "opType": "Relu",
+   "comment": "@134 [/layer3/layer3.1/Relu_output_0:(ty=1,shape=[-1,64,8,8])] Relu [/layer3/layer3.1/conv1/Conv_output_0:(ty=1,shape=[-1,64,8,8])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.1/Relu_output_0_QuantizeLinear_Output"
+   ],
+   "input": [
+    "/layer3/layer3.1/Relu_output_0",
+    "ortshared_1_0_1_3_token_92",
+    "/layer3/layer3.1/Relu_output_0_zero_point"
+   ],
+   "opType": "QuantizeLinear",
+   "comment": "@135 [/layer3/layer3.1/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,8,8])] QuantizeLinear [/layer3/layer3.1/Relu_output_0:(ty=1,shape=[-1,64,8,8]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer3/layer3.1/Relu_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.1/Relu_output_0_DequantizeLinear_Output"
+   ],
+   "input": [
+    "/layer3/layer3.1/Relu_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_3_token_92",
+    "/layer3/layer3.1/Relu_output_0_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@136 [/layer3/layer3.1/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,8,8])] DequantizeLinear [/layer3/layer3.1/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,8,8]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer3/layer3.1/Relu_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "onnx::Conv_288_DequantizeLinear_Output"
+   ],
+   "input": [
+    "onnx::Conv_288_quantized",
+    "ortshared_1_0_1_0_token_88",
+    "onnx::Conv_288_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@40 [onnx::Conv_288_DequantizeLinear_Output:(ty=1,shape=[64])] DequantizeLinear [onnx::Conv_288_quantized:(ty=3,shape=[64]),ortshared_1_0_1_0_token_88:(ty=1,shape=[]),onnx::Conv_288_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "onnx::Conv_287_DequantizeLinear_Output"
+   ],
+   "input": [
+    "onnx::Conv_287_quantized",
+    "ortshared_1_0_1_1_token_89",
+    "onnx::Conv_287_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@39 [onnx::Conv_287_DequantizeLinear_Output:(ty=1,shape=[64,64,3,3])] DequantizeLinear [onnx::Conv_287_quantized:(ty=3,shape=[64,64,3,3]),ortshared_1_0_1_1_token_89:(ty=1,shape=[]),onnx::Conv_287_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.1/conv2/Conv_output_0"
+   ],
+   "input": [
+    "/layer3/layer3.1/Relu_output_0_DequantizeLinear_Output",
+    "onnx::Conv_287_DequantizeLinear_Output",
+    "onnx::Conv_288_DequantizeLinear_Output"
+   ],
+   "opType": "Conv",
+   "comment": "@137 [/layer3/layer3.1/conv2/Conv_output_0:(ty=1,shape=[-1,64,8,8])] Conv [/layer3/layer3.1/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,8,8]),onnx::Conv_287_DequantizeLinear_Output:(ty=1,shape=[64,64,3,3]),onnx::Conv_288_DequantizeLinear_Output:(ty=1,shape=[64])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.1/conv2/Conv_output_0_QuantizeLinear_Output"
+   ],
+   "input": [
+    "/layer3/layer3.1/conv2/Conv_output_0",
+    "ortshared_1_0_1_2_token_91",
+    "/layer3/layer3.1/conv2/Conv_output_0_zero_point"
+   ],
+   "opType": "QuantizeLinear",
+   "comment": "@138 [/layer3/layer3.1/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,8,8])] QuantizeLinear [/layer3/layer3.1/conv2/Conv_output_0:(ty=1,shape=[-1,64,8,8]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),/layer3/layer3.1/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.1/conv2/Conv_output_0_DequantizeLinear_Output"
+   ],
+   "input": [
+    "/layer3/layer3.1/conv2/Conv_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_2_token_91",
+    "/layer3/layer3.1/conv2/Conv_output_0_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@139 [/layer3/layer3.1/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,8,8])] DequantizeLinear [/layer3/layer3.1/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,8,8]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),/layer3/layer3.1/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.1/Add_output_0"
+   ],
+   "input": [
+    "/layer3/layer3.1/conv2/Conv_output_0_DequantizeLinear_Output",
+    "/layer3/layer3.0/Relu_1_output_0_DequantizeLinear_Output/duplicated"
+   ],
+   "opType": "Add",
+   "comment": "@140 [/layer3/layer3.1/Add_output_0:(ty=1,shape=[-1,64,8,8])] Add [/layer3/layer3.1/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,8,8]),/layer3/layer3.0/Relu_1_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,64,8,8])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.1/Relu_1_output_0"
+   ],
+   "input": [
+    "/layer3/layer3.1/Add_output_0"
+   ],
+   "opType": "Relu",
+   "comment": "@141 [/layer3/layer3.1/Relu_1_output_0:(ty=1,shape=[-1,64,8,8])] Relu [/layer3/layer3.1/Add_output_0:(ty=1,shape=[-1,64,8,8])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.1/Relu_1_output_0_QuantizeLinear_Output"
+   ],
+   "input": [
+    "/layer3/layer3.1/Relu_1_output_0",
+    "ortshared_1_0_1_2_token_91",
+    "/layer3/layer3.1/Relu_1_output_0_zero_point"
+   ],
+   "opType": "QuantizeLinear",
+   "comment": "@142 [/layer3/layer3.1/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,8,8])] QuantizeLinear [/layer3/layer3.1/Relu_1_output_0:(ty=1,shape=[-1,64,8,8]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),/layer3/layer3.1/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.1/Relu_1_output_0_DequantizeLinear_Output/duplicated"
+   ],
+   "input": [
+    "/layer3/layer3.1/Relu_1_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_2_token_91",
+    "/layer3/layer3.1/Relu_1_output_0_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@173 [/layer3/layer3.1/Relu_1_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,64,8,8])] DequantizeLinear [/layer3/layer3.1/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,8,8]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),/layer3/layer3.1/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.1/Relu_1_output_0_DequantizeLinear_Output"
+   ],
+   "input": [
+    "/layer3/layer3.1/Relu_1_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_2_token_91",
+    "/layer3/layer3.1/Relu_1_output_0_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@143 [/layer3/layer3.1/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,8,8])] DequantizeLinear [/layer3/layer3.1/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,8,8]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),/layer3/layer3.1/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "onnx::Conv_291_DequantizeLinear_Output"
+   ],
+   "input": [
+    "onnx::Conv_291_quantized",
+    "ortshared_1_0_1_0_token_88",
+    "onnx::Conv_291_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@42 [onnx::Conv_291_DequantizeLinear_Output:(ty=1,shape=[64])] DequantizeLinear [onnx::Conv_291_quantized:(ty=3,shape=[64]),ortshared_1_0_1_0_token_88:(ty=1,shape=[]),onnx::Conv_291_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "onnx::Conv_290_DequantizeLinear_Output"
+   ],
+   "input": [
+    "onnx::Conv_290_quantized",
+    "ortshared_1_0_1_8_token_97",
+    "onnx::Conv_290_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@41 [onnx::Conv_290_DequantizeLinear_Output:(ty=1,shape=[64,64,3,3])] DequantizeLinear [onnx::Conv_290_quantized:(ty=3,shape=[64,64,3,3]),ortshared_1_0_1_8_token_97:(ty=1,shape=[]),onnx::Conv_290_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.2/conv1/Conv_output_0"
+   ],
+   "input": [
+    "/layer3/layer3.1/Relu_1_output_0_DequantizeLinear_Output",
+    "onnx::Conv_290_DequantizeLinear_Output",
+    "onnx::Conv_291_DequantizeLinear_Output"
+   ],
+   "opType": "Conv",
+   "comment": "@144 [/layer3/layer3.2/conv1/Conv_output_0:(ty=1,shape=[-1,64,8,8])] Conv [/layer3/layer3.1/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,8,8]),onnx::Conv_290_DequantizeLinear_Output:(ty=1,shape=[64,64,3,3]),onnx::Conv_291_DequantizeLinear_Output:(ty=1,shape=[64])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.2/Relu_output_0"
+   ],
+   "input": [
+    "/layer3/layer3.2/conv1/Conv_output_0"
+   ],
+   "opType": "Relu",
+   "comment": "@145 [/layer3/layer3.2/Relu_output_0:(ty=1,shape=[-1,64,8,8])] Relu [/layer3/layer3.2/conv1/Conv_output_0:(ty=1,shape=[-1,64,8,8])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.2/Relu_output_0_QuantizeLinear_Output"
+   ],
+   "input": [
+    "/layer3/layer3.2/Relu_output_0",
+    "ortshared_1_0_1_3_token_92",
+    "/layer3/layer3.2/Relu_output_0_zero_point"
+   ],
+   "opType": "QuantizeLinear",
+   "comment": "@146 [/layer3/layer3.2/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,8,8])] QuantizeLinear [/layer3/layer3.2/Relu_output_0:(ty=1,shape=[-1,64,8,8]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer3/layer3.2/Relu_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.2/Relu_output_0_DequantizeLinear_Output"
+   ],
+   "input": [
+    "/layer3/layer3.2/Relu_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_3_token_92",
+    "/layer3/layer3.2/Relu_output_0_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@147 [/layer3/layer3.2/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,8,8])] DequantizeLinear [/layer3/layer3.2/Relu_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,8,8]),ortshared_1_0_1_3_token_92:(ty=1,shape=[]),/layer3/layer3.2/Relu_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "onnx::Conv_294_DequantizeLinear_Output"
+   ],
+   "input": [
+    "onnx::Conv_294_quantized",
+    "ortshared_1_0_1_0_token_88",
+    "onnx::Conv_294_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@44 [onnx::Conv_294_DequantizeLinear_Output:(ty=1,shape=[64])] DequantizeLinear [onnx::Conv_294_quantized:(ty=3,shape=[64]),ortshared_1_0_1_0_token_88:(ty=1,shape=[]),onnx::Conv_294_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "onnx::Conv_293_DequantizeLinear_Output"
+   ],
+   "input": [
+    "onnx::Conv_293_quantized",
+    "ortshared_1_0_1_1_token_89",
+    "onnx::Conv_293_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@43 [onnx::Conv_293_DequantizeLinear_Output:(ty=1,shape=[64,64,3,3])] DequantizeLinear [onnx::Conv_293_quantized:(ty=3,shape=[64,64,3,3]),ortshared_1_0_1_1_token_89:(ty=1,shape=[]),onnx::Conv_293_zero_point:(ty=3,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.2/conv2/Conv_output_0"
+   ],
+   "input": [
+    "/layer3/layer3.2/Relu_output_0_DequantizeLinear_Output",
+    "onnx::Conv_293_DequantizeLinear_Output",
+    "onnx::Conv_294_DequantizeLinear_Output"
+   ],
+   "opType": "Conv",
+   "comment": "@148 [/layer3/layer3.2/conv2/Conv_output_0:(ty=1,shape=[-1,64,8,8])] Conv [/layer3/layer3.2/Relu_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,8,8]),onnx::Conv_293_DequantizeLinear_Output:(ty=1,shape=[64,64,3,3]),onnx::Conv_294_DequantizeLinear_Output:(ty=1,shape=[64])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.2/conv2/Conv_output_0_QuantizeLinear_Output"
+   ],
+   "input": [
+    "/layer3/layer3.2/conv2/Conv_output_0",
+    "ortshared_1_0_1_2_token_91",
+    "/layer3/layer3.2/conv2/Conv_output_0_zero_point"
+   ],
+   "opType": "QuantizeLinear",
+   "comment": "@149 [/layer3/layer3.2/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,8,8])] QuantizeLinear [/layer3/layer3.2/conv2/Conv_output_0:(ty=1,shape=[-1,64,8,8]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),/layer3/layer3.2/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.2/conv2/Conv_output_0_DequantizeLinear_Output"
+   ],
+   "input": [
+    "/layer3/layer3.2/conv2/Conv_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_2_token_91",
+    "/layer3/layer3.2/conv2/Conv_output_0_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@150 [/layer3/layer3.2/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,8,8])] DequantizeLinear [/layer3/layer3.2/conv2/Conv_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,8,8]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),/layer3/layer3.2/conv2/Conv_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.2/Add_output_0"
+   ],
+   "input": [
+    "/layer3/layer3.2/conv2/Conv_output_0_DequantizeLinear_Output",
+    "/layer3/layer3.1/Relu_1_output_0_DequantizeLinear_Output/duplicated"
+   ],
+   "opType": "Add",
+   "comment": "@151 [/layer3/layer3.2/Add_output_0:(ty=1,shape=[-1,64,8,8])] Add [/layer3/layer3.2/conv2/Conv_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,8,8]),/layer3/layer3.1/Relu_1_output_0_DequantizeLinear_Output/duplicated:(ty=1,shape=[-1,64,8,8])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.2/Relu_1_output_0"
+   ],
+   "input": [
+    "/layer3/layer3.2/Add_output_0"
+   ],
+   "opType": "Relu",
+   "comment": "@152 [/layer3/layer3.2/Relu_1_output_0:(ty=1,shape=[-1,64,8,8])] Relu [/layer3/layer3.2/Add_output_0:(ty=1,shape=[-1,64,8,8])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.2/Relu_1_output_0_QuantizeLinear_Output"
+   ],
+   "input": [
+    "/layer3/layer3.2/Relu_1_output_0",
+    "ortshared_1_0_1_9_token_98",
+    "/layer3/layer3.2/Relu_1_output_0_zero_point"
+   ],
+   "opType": "QuantizeLinear",
+   "comment": "@153 [/layer3/layer3.2/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,8,8])] QuantizeLinear [/layer3/layer3.2/Relu_1_output_0:(ty=1,shape=[-1,64,8,8]),ortshared_1_0_1_9_token_98:(ty=1,shape=[]),/layer3/layer3.2/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
+  },
+  {
+   "output": [
+    "/layer3/layer3.2/Relu_1_output_0_DequantizeLinear_Output"
+   ],
+   "input": [
+    "/layer3/layer3.2/Relu_1_output_0_QuantizeLinear_Output",
+    "ortshared_1_0_1_9_token_98",
+    "/layer3/layer3.2/Relu_1_output_0_zero_point"
+   ],
+   "opType": "DequantizeLinear",
+   "comment": "@154 [/layer3/layer3.2/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,8,8])] DequantizeLinear [/layer3/layer3.2/Relu_1_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,8,8]),ortshared_1_0_1_9_token_98:(ty=1,shape=[]),/layer3/layer3.2/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "device": "CPU"
   },
   {
    "output": [
     "/AveragePool_output_0_Mul"
    ],
    "input": [
-    "/blks/blks.3/Relu_1_output_0_DequantizeLinear_Output"
+    "/layer3/layer3.2/Relu_1_output_0_DequantizeLinear_Output"
    ],
    "opType": "AveragePool",
-   "comment": "@90 [/AveragePool_output_0_Mul:(ty=1,shape=[-1,64,1,1])] AveragePool [/blks/blks.3/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,4,4])]",
+   "comment": "@155 [/AveragePool_output_0_Mul:(ty=1,shape=[-1,64,1,1])] AveragePool [/layer3/layer3.2/Relu_1_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,8,8])]",
    "device": "DPU"
   },
   {
@@ -1229,11 +2116,11 @@
    ],
    "input": [
     "/AveragePool_output_0_Mul",
-    "ortshared_1_0_1_6_token_71",
-    "/blks/blks.3/Relu_1_output_0_zero_point"
+    "ortshared_1_0_1_9_token_98",
+    "/layer3/layer3.2/Relu_1_output_0_zero_point"
    ],
    "opType": "QuantizeLinear",
-   "comment": "@92 [/AveragePool_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,1,1])] QuantizeLinear [/AveragePool_output_0_Mul:(ty=1,shape=[-1,64,1,1]),ortshared_1_0_1_6_token_71:(ty=1,shape=[]),/blks/blks.3/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "comment": "@157 [/AveragePool_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,1,1])] QuantizeLinear [/AveragePool_output_0_Mul:(ty=1,shape=[-1,64,1,1]),ortshared_1_0_1_9_token_98:(ty=1,shape=[]),/layer3/layer3.2/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
    "device": "DPU"
   },
   {
@@ -1242,11 +2129,11 @@
    ],
    "input": [
     "/AveragePool_output_0_QuantizeLinear_Output",
-    "ortshared_1_0_1_6_token_71",
-    "/blks/blks.3/Relu_1_output_0_zero_point"
+    "ortshared_1_0_1_9_token_98",
+    "/layer3/layer3.2/Relu_1_output_0_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@93 [/AveragePool_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,1,1])] DequantizeLinear [/AveragePool_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,1,1]),ortshared_1_0_1_6_token_71:(ty=1,shape=[]),/blks/blks.3/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "comment": "@158 [/AveragePool_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,1,1])] DequantizeLinear [/AveragePool_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64,1,1]),ortshared_1_0_1_9_token_98:(ty=1,shape=[]),/layer3/layer3.2/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
    "device": "DPU"
   },
   {
@@ -1255,10 +2142,10 @@
    ],
    "input": [
     "/AveragePool_output_0_DequantizeLinear_Output",
-    "ortshared_7_1_2_0_token_70"
+    "ortshared_7_1_2_0_token_90"
    ],
    "opType": "Reshape",
-   "comment": "@94 [/Reshape_output_0:(ty=1,shape=[-1,64])] Reshape [/AveragePool_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,1,1]),ortshared_7_1_2_0_token_70:(ty=7,shape=[2])]",
+   "comment": "@159 [/Reshape_output_0:(ty=1,shape=[-1,64])] Reshape [/AveragePool_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64,1,1]),ortshared_7_1_2_0_token_90:(ty=7,shape=[2])]",
    "device": "DPU"
   },
   {
@@ -1267,11 +2154,11 @@
    ],
    "input": [
     "/Reshape_output_0",
-    "ortshared_1_0_1_6_token_71",
-    "/blks/blks.3/Relu_1_output_0_zero_point"
+    "ortshared_1_0_1_9_token_98",
+    "/layer3/layer3.2/Relu_1_output_0_zero_point"
    ],
    "opType": "QuantizeLinear",
-   "comment": "@95 [/Reshape_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64])] QuantizeLinear [/Reshape_output_0:(ty=1,shape=[-1,64]),ortshared_1_0_1_6_token_71:(ty=1,shape=[]),/blks/blks.3/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "comment": "@160 [/Reshape_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64])] QuantizeLinear [/Reshape_output_0:(ty=1,shape=[-1,64]),ortshared_1_0_1_9_token_98:(ty=1,shape=[]),/layer3/layer3.2/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
    "device": "DPU"
   },
   {
@@ -1280,11 +2167,11 @@
    ],
    "input": [
     "/Reshape_output_0_QuantizeLinear_Output",
-    "ortshared_1_0_1_6_token_71",
-    "/blks/blks.3/Relu_1_output_0_zero_point"
+    "ortshared_1_0_1_9_token_98",
+    "/layer3/layer3.2/Relu_1_output_0_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@96 [/Reshape_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64])] DequantizeLinear [/Reshape_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64]),ortshared_1_0_1_6_token_71:(ty=1,shape=[]),/blks/blks.3/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
+   "comment": "@161 [/Reshape_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64])] DequantizeLinear [/Reshape_output_0_QuantizeLinear_Output:(ty=2,shape=[-1,64]),ortshared_1_0_1_9_token_98:(ty=1,shape=[]),/layer3/layer3.2/Relu_1_output_0_zero_point:(ty=2,shape=[])]",
    "device": "DPU"
   },
   {
@@ -1293,11 +2180,11 @@
    ],
    "input": [
     "linear.weight_quantized",
-    "ortshared_1_0_1_5_token_69",
+    "ortshared_1_0_1_5_token_94",
     "linear.weight_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@2 [linear.weight_DequantizeLinear_Output:(ty=1,shape=[10,64])] DequantizeLinear [linear.weight_quantized:(ty=3,shape=[10,64]),ortshared_1_0_1_5_token_69:(ty=1,shape=[]),linear.weight_zero_point:(ty=3,shape=[])]",
+   "comment": "@2 [linear.weight_DequantizeLinear_Output:(ty=1,shape=[10,64])] DequantizeLinear [linear.weight_quantized:(ty=3,shape=[10,64]),ortshared_1_0_1_5_token_94:(ty=1,shape=[]),linear.weight_zero_point:(ty=3,shape=[])]",
    "device": "DPU"
   },
   {
@@ -1306,11 +2193,11 @@
    ],
    "input": [
     "linear.bias_quantized",
-    "ortshared_1_0_1_5_token_69",
+    "ortshared_1_0_1_5_token_94",
     "linear.bias_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@1 [linear.bias_DequantizeLinear_Output:(ty=1,shape=[10])] DequantizeLinear [linear.bias_quantized:(ty=3,shape=[10]),ortshared_1_0_1_5_token_69:(ty=1,shape=[]),linear.bias_zero_point:(ty=3,shape=[])]",
+   "comment": "@1 [linear.bias_DequantizeLinear_Output:(ty=1,shape=[10])] DequantizeLinear [linear.bias_quantized:(ty=3,shape=[10]),ortshared_1_0_1_5_token_94:(ty=1,shape=[]),linear.bias_zero_point:(ty=3,shape=[])]",
    "device": "DPU"
   },
   {
@@ -1323,7 +2210,7 @@
     "linear.bias_DequantizeLinear_Output"
    ],
    "opType": "Gemm",
-   "comment": "@97 [output_QuantizeLinear_Input:(ty=1,shape=[-1,10])] Gemm [/Reshape_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64]),linear.weight_DequantizeLinear_Output:(ty=1,shape=[10,64]),linear.bias_DequantizeLinear_Output:(ty=1,shape=[10])]",
+   "comment": "@162 [output_QuantizeLinear_Input:(ty=1,shape=[-1,10])] Gemm [/Reshape_output_0_DequantizeLinear_Output:(ty=1,shape=[-1,64]),linear.weight_DequantizeLinear_Output:(ty=1,shape=[10,64]),linear.bias_DequantizeLinear_Output:(ty=1,shape=[10])]",
    "device": "DPU"
   },
   {
@@ -1332,11 +2219,11 @@
    ],
    "input": [
     "output_QuantizeLinear_Input",
-    "ortshared_1_0_1_4_token_68",
+    "ortshared_1_0_1_2_token_91",
     "output_zero_point"
    ],
    "opType": "QuantizeLinear",
-   "comment": "@98 [output_QuantizeLinear_Output:(ty=2,shape=[-1,10])] QuantizeLinear [output_QuantizeLinear_Input:(ty=1,shape=[-1,10]),ortshared_1_0_1_4_token_68:(ty=1,shape=[]),output_zero_point:(ty=2,shape=[])]",
+   "comment": "@163 [output_QuantizeLinear_Output:(ty=2,shape=[-1,10])] QuantizeLinear [output_QuantizeLinear_Input:(ty=1,shape=[-1,10]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),output_zero_point:(ty=2,shape=[])]",
    "device": "DPU"
   },
   {
@@ -1345,11 +2232,11 @@
    ],
    "input": [
     "output_QuantizeLinear_Output",
-    "ortshared_1_0_1_4_token_68",
+    "ortshared_1_0_1_2_token_91",
     "output_zero_point"
    ],
    "opType": "DequantizeLinear",
-   "comment": "@99 [output:(ty=1,shape=[-1,10])] DequantizeLinear [output_QuantizeLinear_Output:(ty=2,shape=[-1,10]),ortshared_1_0_1_4_token_68:(ty=1,shape=[]),output_zero_point:(ty=2,shape=[])]",
+   "comment": "@164 [output:(ty=1,shape=[-1,10])] DequantizeLinear [output_QuantizeLinear_Output:(ty=2,shape=[-1,10]),ortshared_1_0_1_2_token_91:(ty=1,shape=[]),output_zero_point:(ty=2,shape=[])]",
    "device": "CPU"
   }
  ],
@@ -1373,15 +2260,15 @@
    ]
   },
   {
-   "name": "onnx::Conv_134_DequantizeLinear_Output",
+   "name": "onnx::Conv_234_DequantizeLinear_Output",
    "shape": [
-    "4"
+    "16"
    ]
   },
   {
-   "name": "onnx::Conv_133_DequantizeLinear_Output",
+   "name": "onnx::Conv_233_DequantizeLinear_Output",
    "shape": [
-    "4",
+    "16",
     "3",
     "3",
     "3"
@@ -1391,7 +2278,7 @@
    "name": "/conv1/Conv_output_0",
    "shape": [
     "-1",
-    "4",
+    "16",
     "32",
     "32"
    ]
@@ -1400,7 +2287,7 @@
    "name": "/Relu_output_0",
    "shape": [
     "-1",
-    "4",
+    "16",
     "32",
     "32"
    ]
@@ -1409,7 +2296,7 @@
    "name": "/Relu_output_0_QuantizeLinear_Output",
    "shape": [
     "-1",
-    "4",
+    "16",
     "32",
     "32"
    ]
@@ -1418,100 +2305,7 @@
    "name": "/Relu_output_0_DequantizeLinear_Output/duplicated",
    "shape": [
     "-1",
-    "4",
-    "32",
-    "32"
-   ]
-  },
-  {
-   "name": "onnx::Conv_137_DequantizeLinear_Output",
-   "shape": [
-    "8"
-   ]
-  },
-  {
-   "name": "onnx::Conv_136_DequantizeLinear_Output",
-   "shape": [
-    "8",
-    "4",
-    "3",
-    "3"
-   ]
-  },
-  {
-   "name": "/blks/blks.0/conv1/Conv_output_0",
-   "shape": [
-    "-1",
-    "8",
-    "32",
-    "32"
-   ]
-  },
-  {
-   "name": "/blks/blks.0/Relu_output_0",
-   "shape": [
-    "-1",
-    "8",
-    "32",
-    "32"
-   ]
-  },
-  {
-   "name": "/blks/blks.0/Relu_output_0_QuantizeLinear_Output",
-   "shape": [
-    "-1",
-    "8",
-    "32",
-    "32"
-   ]
-  },
-  {
-   "name": "/blks/blks.0/Relu_output_0_DequantizeLinear_Output",
-   "shape": [
-    "-1",
-    "8",
-    "32",
-    "32"
-   ]
-  },
-  {
-   "name": "onnx::Conv_140_DequantizeLinear_Output",
-   "shape": [
-    "8"
-   ]
-  },
-  {
-   "name": "onnx::Conv_139_DequantizeLinear_Output",
-   "shape": [
-    "8",
-    "8",
-    "3",
-    "3"
-   ]
-  },
-  {
-   "name": "/blks/blks.0/conv2/Conv_output_0",
-   "shape": [
-    "-1",
-    "8",
-    "32",
-    "32"
-   ]
-  },
-  {
-   "name": "/blks/blks.0/conv2/Conv_output_0_QuantizeLinear_Output",
-   "shape": [
-    "-1",
-    "8",
-    "32",
-    "32"
-   ]
-  },
-  {
-   "name": "/blks/blks.0/conv2/Conv_output_0_DequantizeLinear_Output",
-   "shape": [
-    "-1",
-    "8",
+    "16",
     "32",
     "32"
    ]
@@ -1520,328 +2314,613 @@
    "name": "/Relu_output_0_DequantizeLinear_Output",
    "shape": [
     "-1",
-    "4",
+    "16",
     "32",
     "32"
    ]
   },
   {
-   "name": "onnx::Conv_143_DequantizeLinear_Output",
+   "name": "onnx::Conv_237_DequantizeLinear_Output",
    "shape": [
-    "8"
+    "16"
    ]
   },
   {
-   "name": "onnx::Conv_142_DequantizeLinear_Output",
+   "name": "onnx::Conv_236_DequantizeLinear_Output",
    "shape": [
-    "8",
-    "4",
+    "16",
+    "16",
+    "3",
+    "3"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.0/conv1/Conv_output_0",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.0/Relu_output_0",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.0/Relu_output_0_QuantizeLinear_Output",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.0/Relu_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "onnx::Conv_240_DequantizeLinear_Output",
+   "shape": [
+    "16"
+   ]
+  },
+  {
+   "name": "onnx::Conv_239_DequantizeLinear_Output",
+   "shape": [
+    "16",
+    "16",
+    "3",
+    "3"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.0/conv2/Conv_output_0",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.0/conv2/Conv_output_0_QuantizeLinear_Output",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.0/conv2/Conv_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.0/Add_output_0",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.0/Relu_1_output_0",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.0/Relu_1_output_0_QuantizeLinear_Output",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.0/Relu_1_output_0_DequantizeLinear_Output/duplicated",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.0/Relu_1_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "onnx::Conv_243_DequantizeLinear_Output",
+   "shape": [
+    "16"
+   ]
+  },
+  {
+   "name": "onnx::Conv_242_DequantizeLinear_Output",
+   "shape": [
+    "16",
+    "16",
+    "3",
+    "3"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.1/conv1/Conv_output_0",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.1/Relu_output_0",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.1/Relu_output_0_QuantizeLinear_Output",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.1/Relu_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "onnx::Conv_246_DequantizeLinear_Output",
+   "shape": [
+    "16"
+   ]
+  },
+  {
+   "name": "onnx::Conv_245_DequantizeLinear_Output",
+   "shape": [
+    "16",
+    "16",
+    "3",
+    "3"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.1/conv2/Conv_output_0",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.1/conv2/Conv_output_0_QuantizeLinear_Output",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.1/conv2/Conv_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.1/Add_output_0",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.1/Relu_1_output_0",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.1/Relu_1_output_0_QuantizeLinear_Output",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.1/Relu_1_output_0_DequantizeLinear_Output/duplicated",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.1/Relu_1_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "onnx::Conv_249_DequantizeLinear_Output",
+   "shape": [
+    "16"
+   ]
+  },
+  {
+   "name": "onnx::Conv_248_DequantizeLinear_Output",
+   "shape": [
+    "16",
+    "16",
+    "3",
+    "3"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.2/conv1/Conv_output_0",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.2/Relu_output_0",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.2/Relu_output_0_QuantizeLinear_Output",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.2/Relu_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "onnx::Conv_252_DequantizeLinear_Output",
+   "shape": [
+    "16"
+   ]
+  },
+  {
+   "name": "onnx::Conv_251_DequantizeLinear_Output",
+   "shape": [
+    "16",
+    "16",
+    "3",
+    "3"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.2/conv2/Conv_output_0",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.2/conv2/Conv_output_0_QuantizeLinear_Output",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.2/conv2/Conv_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.2/Add_output_0",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.2/Relu_1_output_0",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.2/Relu_1_output_0_QuantizeLinear_Output",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.2/Relu_1_output_0_DequantizeLinear_Output/duplicated",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "onnx::Conv_255_DequantizeLinear_Output",
+   "shape": [
+    "32"
+   ]
+  },
+  {
+   "name": "onnx::Conv_254_DequantizeLinear_Output",
+   "shape": [
+    "32",
+    "16",
+    "3",
+    "3"
+   ]
+  },
+  {
+   "name": "/layer2/layer2.0/conv1/Conv_output_0",
+   "shape": [
+    "-1",
+    "32",
+    "16",
+    "16"
+   ]
+  },
+  {
+   "name": "/layer2/layer2.0/Relu_output_0",
+   "shape": [
+    "-1",
+    "32",
+    "16",
+    "16"
+   ]
+  },
+  {
+   "name": "/layer2/layer2.0/Relu_output_0_QuantizeLinear_Output",
+   "shape": [
+    "-1",
+    "32",
+    "16",
+    "16"
+   ]
+  },
+  {
+   "name": "/layer2/layer2.0/Relu_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "32",
+    "16",
+    "16"
+   ]
+  },
+  {
+   "name": "onnx::Conv_258_DequantizeLinear_Output",
+   "shape": [
+    "32"
+   ]
+  },
+  {
+   "name": "onnx::Conv_257_DequantizeLinear_Output",
+   "shape": [
+    "32",
+    "32",
+    "3",
+    "3"
+   ]
+  },
+  {
+   "name": "/layer2/layer2.0/conv2/Conv_output_0",
+   "shape": [
+    "-1",
+    "32",
+    "16",
+    "16"
+   ]
+  },
+  {
+   "name": "/layer2/layer2.0/conv2/Conv_output_0_QuantizeLinear_Output",
+   "shape": [
+    "-1",
+    "32",
+    "16",
+    "16"
+   ]
+  },
+  {
+   "name": "/layer2/layer2.0/conv2/Conv_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "32",
+    "16",
+    "16"
+   ]
+  },
+  {
+   "name": "/layer1/layer1.2/Relu_1_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "16",
+    "32",
+    "32"
+   ]
+  },
+  {
+   "name": "onnx::Conv_261_DequantizeLinear_Output",
+   "shape": [
+    "32"
+   ]
+  },
+  {
+   "name": "onnx::Conv_260_DequantizeLinear_Output",
+   "shape": [
+    "32",
+    "16",
     "1",
     "1"
    ]
   },
   {
-   "name": "/blks/blks.0/shortcut/shortcut.0/Conv_output_0",
+   "name": "/layer2/layer2.0/identity/identity.0/Conv_output_0",
    "shape": [
     "-1",
-    "8",
     "32",
-    "32"
+    "16",
+    "16"
    ]
   },
   {
-   "name": "/blks/blks.0/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output",
+   "name": "/layer2/layer2.0/identity/identity.0/Conv_output_0_QuantizeLinear_Output",
    "shape": [
     "-1",
-    "8",
     "32",
-    "32"
+    "16",
+    "16"
    ]
   },
   {
-   "name": "/blks/blks.0/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output",
+   "name": "/layer2/layer2.0/identity/identity.0/Conv_output_0_DequantizeLinear_Output",
    "shape": [
     "-1",
-    "8",
     "32",
-    "32"
+    "16",
+    "16"
    ]
   },
   {
-   "name": "/blks/blks.0/Add_output_0",
+   "name": "/layer2/layer2.0/Add_output_0",
    "shape": [
     "-1",
-    "8",
     "32",
-    "32"
+    "16",
+    "16"
    ]
   },
   {
-   "name": "/blks/blks.0/Relu_1_output_0",
+   "name": "/layer2/layer2.0/Relu_1_output_0",
    "shape": [
     "-1",
-    "8",
     "32",
-    "32"
+    "16",
+    "16"
    ]
   },
   {
-   "name": "/blks/blks.0/Relu_1_output_0_QuantizeLinear_Output",
+   "name": "/layer2/layer2.0/Relu_1_output_0_QuantizeLinear_Output",
    "shape": [
     "-1",
-    "8",
     "32",
-    "32"
+    "16",
+    "16"
    ]
   },
   {
-   "name": "/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output/duplicated",
+   "name": "/layer2/layer2.0/Relu_1_output_0_DequantizeLinear_Output/duplicated",
    "shape": [
     "-1",
-    "8",
     "32",
-    "32"
-   ]
-  },
-  {
-   "name": "onnx::Conv_146_DequantizeLinear_Output",
-   "shape": [
+    "16",
     "16"
    ]
   },
   {
-   "name": "onnx::Conv_145_DequantizeLinear_Output",
-   "shape": [
-    "16",
-    "8",
-    "3",
-    "3"
-   ]
-  },
-  {
-   "name": "/blks/blks.1/conv1/Conv_output_0",
+   "name": "/layer2/layer2.0/Relu_1_output_0_DequantizeLinear_Output",
    "shape": [
     "-1",
-    "16",
-    "16",
-    "16"
-   ]
-  },
-  {
-   "name": "/blks/blks.1/Relu_output_0",
-   "shape": [
-    "-1",
-    "16",
-    "16",
-    "16"
-   ]
-  },
-  {
-   "name": "/blks/blks.1/Relu_output_0_QuantizeLinear_Output",
-   "shape": [
-    "-1",
-    "16",
-    "16",
-    "16"
-   ]
-  },
-  {
-   "name": "/blks/blks.1/Relu_output_0_DequantizeLinear_Output",
-   "shape": [
-    "-1",
-    "16",
-    "16",
-    "16"
-   ]
-  },
-  {
-   "name": "onnx::Conv_149_DequantizeLinear_Output",
-   "shape": [
-    "16"
-   ]
-  },
-  {
-   "name": "onnx::Conv_148_DequantizeLinear_Output",
-   "shape": [
-    "16",
-    "16",
-    "3",
-    "3"
-   ]
-  },
-  {
-   "name": "/blks/blks.1/conv2/Conv_output_0",
-   "shape": [
-    "-1",
-    "16",
-    "16",
-    "16"
-   ]
-  },
-  {
-   "name": "/blks/blks.1/conv2/Conv_output_0_QuantizeLinear_Output",
-   "shape": [
-    "-1",
-    "16",
-    "16",
-    "16"
-   ]
-  },
-  {
-   "name": "/blks/blks.1/conv2/Conv_output_0_DequantizeLinear_Output",
-   "shape": [
-    "-1",
-    "16",
-    "16",
-    "16"
-   ]
-  },
-  {
-   "name": "/blks/blks.0/Relu_1_output_0_DequantizeLinear_Output",
-   "shape": [
-    "-1",
-    "8",
     "32",
-    "32"
-   ]
-  },
-  {
-   "name": "onnx::Conv_152_DequantizeLinear_Output",
-   "shape": [
-    "16"
-   ]
-  },
-  {
-   "name": "onnx::Conv_151_DequantizeLinear_Output",
-   "shape": [
-    "16",
-    "8",
-    "1",
-    "1"
-   ]
-  },
-  {
-   "name": "/blks/blks.1/shortcut/shortcut.0/Conv_output_0",
-   "shape": [
-    "-1",
-    "16",
     "16",
     "16"
    ]
   },
   {
-   "name": "/blks/blks.1/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output",
-   "shape": [
-    "-1",
-    "16",
-    "16",
-    "16"
-   ]
-  },
-  {
-   "name": "/blks/blks.1/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output",
-   "shape": [
-    "-1",
-    "16",
-    "16",
-    "16"
-   ]
-  },
-  {
-   "name": "/blks/blks.1/Add_output_0",
-   "shape": [
-    "-1",
-    "16",
-    "16",
-    "16"
-   ]
-  },
-  {
-   "name": "/blks/blks.1/Relu_1_output_0",
-   "shape": [
-    "-1",
-    "16",
-    "16",
-    "16"
-   ]
-  },
-  {
-   "name": "/blks/blks.1/Relu_1_output_0_QuantizeLinear_Output",
-   "shape": [
-    "-1",
-    "16",
-    "16",
-    "16"
-   ]
-  },
-  {
-   "name": "/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output/duplicated",
-   "shape": [
-    "-1",
-    "16",
-    "16",
-    "16"
-   ]
-  },
-  {
-   "name": "onnx::Conv_155_DequantizeLinear_Output",
+   "name": "onnx::Conv_264_DequantizeLinear_Output",
    "shape": [
     "32"
    ]
   },
   {
-   "name": "onnx::Conv_154_DequantizeLinear_Output",
-   "shape": [
-    "32",
-    "16",
-    "3",
-    "3"
-   ]
-  },
-  {
-   "name": "/blks/blks.2/conv1/Conv_output_0",
-   "shape": [
-    "-1",
-    "32",
-    "8",
-    "8"
-   ]
-  },
-  {
-   "name": "/blks/blks.2/Relu_output_0",
-   "shape": [
-    "-1",
-    "32",
-    "8",
-    "8"
-   ]
-  },
-  {
-   "name": "/blks/blks.2/Relu_output_0_QuantizeLinear_Output",
-   "shape": [
-    "-1",
-    "32",
-    "8",
-    "8"
-   ]
-  },
-  {
-   "name": "/blks/blks.2/Relu_output_0_DequantizeLinear_Output",
-   "shape": [
-    "-1",
-    "32",
-    "8",
-    "8"
-   ]
-  },
-  {
-   "name": "onnx::Conv_158_DequantizeLinear_Output",
-   "shape": [
-    "32"
-   ]
-  },
-  {
-   "name": "onnx::Conv_157_DequantizeLinear_Output",
+   "name": "onnx::Conv_263_DequantizeLinear_Output",
    "shape": [
     "32",
     "32",
@@ -1850,127 +2929,265 @@
    ]
   },
   {
-   "name": "/blks/blks.2/conv2/Conv_output_0",
+   "name": "/layer2/layer2.1/conv1/Conv_output_0",
    "shape": [
     "-1",
     "32",
-    "8",
-    "8"
-   ]
-  },
-  {
-   "name": "/blks/blks.2/conv2/Conv_output_0_QuantizeLinear_Output",
-   "shape": [
-    "-1",
-    "32",
-    "8",
-    "8"
-   ]
-  },
-  {
-   "name": "/blks/blks.2/conv2/Conv_output_0_DequantizeLinear_Output",
-   "shape": [
-    "-1",
-    "32",
-    "8",
-    "8"
-   ]
-  },
-  {
-   "name": "/blks/blks.1/Relu_1_output_0_DequantizeLinear_Output",
-   "shape": [
-    "-1",
-    "16",
     "16",
     "16"
    ]
   },
   {
-   "name": "onnx::Conv_161_DequantizeLinear_Output",
+   "name": "/layer2/layer2.1/Relu_output_0",
+   "shape": [
+    "-1",
+    "32",
+    "16",
+    "16"
+   ]
+  },
+  {
+   "name": "/layer2/layer2.1/Relu_output_0_QuantizeLinear_Output",
+   "shape": [
+    "-1",
+    "32",
+    "16",
+    "16"
+   ]
+  },
+  {
+   "name": "/layer2/layer2.1/Relu_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "32",
+    "16",
+    "16"
+   ]
+  },
+  {
+   "name": "onnx::Conv_267_DequantizeLinear_Output",
    "shape": [
     "32"
    ]
   },
   {
-   "name": "onnx::Conv_160_DequantizeLinear_Output",
+   "name": "onnx::Conv_266_DequantizeLinear_Output",
    "shape": [
+    "32",
+    "32",
+    "3",
+    "3"
+   ]
+  },
+  {
+   "name": "/layer2/layer2.1/conv2/Conv_output_0",
+   "shape": [
+    "-1",
     "32",
     "16",
-    "1",
-    "1"
+    "16"
    ]
   },
   {
-   "name": "/blks/blks.2/shortcut/shortcut.0/Conv_output_0",
+   "name": "/layer2/layer2.1/conv2/Conv_output_0_QuantizeLinear_Output",
    "shape": [
     "-1",
     "32",
-    "8",
-    "8"
+    "16",
+    "16"
    ]
   },
   {
-   "name": "/blks/blks.2/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output",
+   "name": "/layer2/layer2.1/conv2/Conv_output_0_DequantizeLinear_Output",
    "shape": [
     "-1",
     "32",
-    "8",
-    "8"
+    "16",
+    "16"
    ]
   },
   {
-   "name": "/blks/blks.2/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output",
+   "name": "/layer2/layer2.1/Add_output_0",
    "shape": [
     "-1",
     "32",
-    "8",
-    "8"
+    "16",
+    "16"
    ]
   },
   {
-   "name": "/blks/blks.2/Add_output_0",
+   "name": "/layer2/layer2.1/Relu_1_output_0",
    "shape": [
     "-1",
     "32",
-    "8",
-    "8"
+    "16",
+    "16"
    ]
   },
   {
-   "name": "/blks/blks.2/Relu_1_output_0",
+   "name": "/layer2/layer2.1/Relu_1_output_0_QuantizeLinear_Output",
    "shape": [
     "-1",
     "32",
-    "8",
-    "8"
+    "16",
+    "16"
    ]
   },
   {
-   "name": "/blks/blks.2/Relu_1_output_0_QuantizeLinear_Output",
+   "name": "/layer2/layer2.1/Relu_1_output_0_DequantizeLinear_Output/duplicated",
    "shape": [
     "-1",
     "32",
-    "8",
-    "8"
+    "16",
+    "16"
    ]
   },
   {
-   "name": "/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output/duplicated",
+   "name": "/layer2/layer2.1/Relu_1_output_0_DequantizeLinear_Output",
    "shape": [
     "-1",
     "32",
-    "8",
-    "8"
+    "16",
+    "16"
    ]
   },
   {
-   "name": "onnx::Conv_164_DequantizeLinear_Output",
+   "name": "onnx::Conv_270_DequantizeLinear_Output",
+   "shape": [
+    "32"
+   ]
+  },
+  {
+   "name": "onnx::Conv_269_DequantizeLinear_Output",
+   "shape": [
+    "32",
+    "32",
+    "3",
+    "3"
+   ]
+  },
+  {
+   "name": "/layer2/layer2.2/conv1/Conv_output_0",
+   "shape": [
+    "-1",
+    "32",
+    "16",
+    "16"
+   ]
+  },
+  {
+   "name": "/layer2/layer2.2/Relu_output_0",
+   "shape": [
+    "-1",
+    "32",
+    "16",
+    "16"
+   ]
+  },
+  {
+   "name": "/layer2/layer2.2/Relu_output_0_QuantizeLinear_Output",
+   "shape": [
+    "-1",
+    "32",
+    "16",
+    "16"
+   ]
+  },
+  {
+   "name": "/layer2/layer2.2/Relu_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "32",
+    "16",
+    "16"
+   ]
+  },
+  {
+   "name": "onnx::Conv_273_DequantizeLinear_Output",
+   "shape": [
+    "32"
+   ]
+  },
+  {
+   "name": "onnx::Conv_272_DequantizeLinear_Output",
+   "shape": [
+    "32",
+    "32",
+    "3",
+    "3"
+   ]
+  },
+  {
+   "name": "/layer2/layer2.2/conv2/Conv_output_0",
+   "shape": [
+    "-1",
+    "32",
+    "16",
+    "16"
+   ]
+  },
+  {
+   "name": "/layer2/layer2.2/conv2/Conv_output_0_QuantizeLinear_Output",
+   "shape": [
+    "-1",
+    "32",
+    "16",
+    "16"
+   ]
+  },
+  {
+   "name": "/layer2/layer2.2/conv2/Conv_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "32",
+    "16",
+    "16"
+   ]
+  },
+  {
+   "name": "/layer2/layer2.2/Add_output_0",
+   "shape": [
+    "-1",
+    "32",
+    "16",
+    "16"
+   ]
+  },
+  {
+   "name": "/layer2/layer2.2/Relu_1_output_0",
+   "shape": [
+    "-1",
+    "32",
+    "16",
+    "16"
+   ]
+  },
+  {
+   "name": "/layer2/layer2.2/Relu_1_output_0_QuantizeLinear_Output",
+   "shape": [
+    "-1",
+    "32",
+    "16",
+    "16"
+   ]
+  },
+  {
+   "name": "/layer2/layer2.2/Relu_1_output_0_DequantizeLinear_Output/duplicated",
+   "shape": [
+    "-1",
+    "32",
+    "16",
+    "16"
+   ]
+  },
+  {
+   "name": "onnx::Conv_276_DequantizeLinear_Output",
    "shape": [
     "64"
    ]
   },
   {
-   "name": "onnx::Conv_163_DequantizeLinear_Output",
+   "name": "onnx::Conv_275_DequantizeLinear_Output",
    "shape": [
     "64",
     "32",
@@ -1979,100 +3196,100 @@
    ]
   },
   {
-   "name": "/blks/blks.3/conv1/Conv_output_0",
+   "name": "/layer3/layer3.0/conv1/Conv_output_0",
    "shape": [
     "-1",
     "64",
-    "4",
-    "4"
-   ]
-  },
-  {
-   "name": "/blks/blks.3/Relu_output_0",
-   "shape": [
-    "-1",
-    "64",
-    "4",
-    "4"
-   ]
-  },
-  {
-   "name": "/blks/blks.3/Relu_output_0_QuantizeLinear_Output",
-   "shape": [
-    "-1",
-    "64",
-    "4",
-    "4"
-   ]
-  },
-  {
-   "name": "/blks/blks.3/Relu_output_0_DequantizeLinear_Output",
-   "shape": [
-    "-1",
-    "64",
-    "4",
-    "4"
-   ]
-  },
-  {
-   "name": "onnx::Conv_167_DequantizeLinear_Output",
-   "shape": [
-    "64"
-   ]
-  },
-  {
-   "name": "onnx::Conv_166_DequantizeLinear_Output",
-   "shape": [
-    "64",
-    "64",
-    "3",
-    "3"
-   ]
-  },
-  {
-   "name": "/blks/blks.3/conv2/Conv_output_0",
-   "shape": [
-    "-1",
-    "64",
-    "4",
-    "4"
-   ]
-  },
-  {
-   "name": "/blks/blks.3/conv2/Conv_output_0_QuantizeLinear_Output",
-   "shape": [
-    "-1",
-    "64",
-    "4",
-    "4"
-   ]
-  },
-  {
-   "name": "/blks/blks.3/conv2/Conv_output_0_DequantizeLinear_Output",
-   "shape": [
-    "-1",
-    "64",
-    "4",
-    "4"
-   ]
-  },
-  {
-   "name": "/blks/blks.2/Relu_1_output_0_DequantizeLinear_Output",
-   "shape": [
-    "-1",
-    "32",
     "8",
     "8"
    ]
   },
   {
-   "name": "onnx::Conv_170_DequantizeLinear_Output",
+   "name": "/layer3/layer3.0/Relu_output_0",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.0/Relu_output_0_QuantizeLinear_Output",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.0/Relu_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "onnx::Conv_279_DequantizeLinear_Output",
    "shape": [
     "64"
    ]
   },
   {
-   "name": "onnx::Conv_169_DequantizeLinear_Output",
+   "name": "onnx::Conv_278_DequantizeLinear_Output",
+   "shape": [
+    "64",
+    "64",
+    "3",
+    "3"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.0/conv2/Conv_output_0",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.0/conv2/Conv_output_0_QuantizeLinear_Output",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.0/conv2/Conv_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer2/layer2.2/Relu_1_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "32",
+    "16",
+    "16"
+   ]
+  },
+  {
+   "name": "onnx::Conv_282_DequantizeLinear_Output",
+   "shape": [
+    "64"
+   ]
+  },
+  {
+   "name": "onnx::Conv_281_DequantizeLinear_Output",
    "shape": [
     "64",
     "32",
@@ -2081,66 +3298,342 @@
    ]
   },
   {
-   "name": "/blks/blks.3/shortcut/shortcut.0/Conv_output_0",
+   "name": "/layer3/layer3.0/identity/identity.0/Conv_output_0",
    "shape": [
     "-1",
     "64",
-    "4",
-    "4"
+    "8",
+    "8"
    ]
   },
   {
-   "name": "/blks/blks.3/shortcut/shortcut.0/Conv_output_0_QuantizeLinear_Output",
+   "name": "/layer3/layer3.0/identity/identity.0/Conv_output_0_QuantizeLinear_Output",
    "shape": [
     "-1",
     "64",
-    "4",
-    "4"
+    "8",
+    "8"
    ]
   },
   {
-   "name": "/blks/blks.3/shortcut/shortcut.0/Conv_output_0_DequantizeLinear_Output",
+   "name": "/layer3/layer3.0/identity/identity.0/Conv_output_0_DequantizeLinear_Output",
    "shape": [
     "-1",
     "64",
-    "4",
-    "4"
+    "8",
+    "8"
    ]
   },
   {
-   "name": "/blks/blks.3/Add_output_0",
+   "name": "/layer3/layer3.0/Add_output_0",
    "shape": [
     "-1",
     "64",
-    "4",
-    "4"
+    "8",
+    "8"
    ]
   },
   {
-   "name": "/blks/blks.3/Relu_1_output_0",
+   "name": "/layer3/layer3.0/Relu_1_output_0",
    "shape": [
     "-1",
     "64",
-    "4",
-    "4"
+    "8",
+    "8"
    ]
   },
   {
-   "name": "/blks/blks.3/Relu_1_output_0_QuantizeLinear_Output",
+   "name": "/layer3/layer3.0/Relu_1_output_0_QuantizeLinear_Output",
    "shape": [
     "-1",
     "64",
-    "4",
-    "4"
+    "8",
+    "8"
    ]
   },
   {
-   "name": "/blks/blks.3/Relu_1_output_0_DequantizeLinear_Output",
+   "name": "/layer3/layer3.0/Relu_1_output_0_DequantizeLinear_Output/duplicated",
    "shape": [
     "-1",
     "64",
-    "4",
-    "4"
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.0/Relu_1_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "onnx::Conv_285_DequantizeLinear_Output",
+   "shape": [
+    "64"
+   ]
+  },
+  {
+   "name": "onnx::Conv_284_DequantizeLinear_Output",
+   "shape": [
+    "64",
+    "64",
+    "3",
+    "3"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.1/conv1/Conv_output_0",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.1/Relu_output_0",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.1/Relu_output_0_QuantizeLinear_Output",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.1/Relu_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "onnx::Conv_288_DequantizeLinear_Output",
+   "shape": [
+    "64"
+   ]
+  },
+  {
+   "name": "onnx::Conv_287_DequantizeLinear_Output",
+   "shape": [
+    "64",
+    "64",
+    "3",
+    "3"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.1/conv2/Conv_output_0",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.1/conv2/Conv_output_0_QuantizeLinear_Output",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.1/conv2/Conv_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.1/Add_output_0",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.1/Relu_1_output_0",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.1/Relu_1_output_0_QuantizeLinear_Output",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.1/Relu_1_output_0_DequantizeLinear_Output/duplicated",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.1/Relu_1_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "onnx::Conv_291_DequantizeLinear_Output",
+   "shape": [
+    "64"
+   ]
+  },
+  {
+   "name": "onnx::Conv_290_DequantizeLinear_Output",
+   "shape": [
+    "64",
+    "64",
+    "3",
+    "3"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.2/conv1/Conv_output_0",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.2/Relu_output_0",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.2/Relu_output_0_QuantizeLinear_Output",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.2/Relu_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "onnx::Conv_294_DequantizeLinear_Output",
+   "shape": [
+    "64"
+   ]
+  },
+  {
+   "name": "onnx::Conv_293_DequantizeLinear_Output",
+   "shape": [
+    "64",
+    "64",
+    "3",
+    "3"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.2/conv2/Conv_output_0",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.2/conv2/Conv_output_0_QuantizeLinear_Output",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.2/conv2/Conv_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.2/Add_output_0",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.2/Relu_1_output_0",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.2/Relu_1_output_0_QuantizeLinear_Output",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
+   ]
+  },
+  {
+   "name": "/layer3/layer3.2/Relu_1_output_0_DequantizeLinear_Output",
+   "shape": [
+    "-1",
+    "64",
+    "8",
+    "8"
    ]
   },
   {
@@ -2227,14 +3720,6 @@
   }
  ],
  "subgraphStat": [
-  {
-   "device": "CPU",
-   "count": 1
-  },
-  {
-   "device": "IPU",
-   "count": 1
-  },
   {
    "device": "Actually running on IPU",
    "count": 1
