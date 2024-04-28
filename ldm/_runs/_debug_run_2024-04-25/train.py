@@ -24,7 +24,9 @@ def train():
                 model=AE_CNN_bottleneck(in_dim=512, in_channel=1, time_step=50, dec=None),
                 config_dict=config_dict)
 
-    print(trainer.generate(batch=torch.rand(10, 1, 512).cuda()).shape)
+    # print(trainer.generate(batch=torch.rand(1, 1, 512).cuda()).shape)
+
+    trainer.training_step(torch.rand(1, 512, dtype=torch.float32).cuda(), batch_idx=0)
 
 
 if __name__ == "__main__":

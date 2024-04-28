@@ -1,7 +1,3 @@
-# import pdb
-
-# import hydra.utils
-# import pytorch_lightning as pl
 import torch
 from typing import Any
 import numpy as np
@@ -11,8 +7,6 @@ from .ddpm import DDPM
 
 class AE_DDPM(DDPM):
     def __init__(self, ae_model, model, config_dict):
-        # ae_model =  hydra.utils.instantiate(config.system.ae_model)
-        # input_dim = config.system.ae_model.in_dim
         self.ae_model = ae_model
         input_dim = self.ae_model.in_dim
         input_noise = torch.randn((1, input_dim))
@@ -22,10 +16,13 @@ class AE_DDPM(DDPM):
         # model.in_dim = latent_dim[-1] * latent_dim[-2]
         super(AE_DDPM, self).__init__(config_dict)
         self.save_hyperparameters()
+        self.current_epoch = 0
         self.split_epoch = 30000
         self.loss_func = nn.MSELoss()
+        self.optimizers = self.configure_optimizers()
 
     def ae_forward(self, batch, **kwargs):
+        self.ae_model.to(batch.device)
         output = self.ae_model(batch)
         #debug
         print("AEDDPM output.shape:", output.shape)
@@ -33,20 +30,22 @@ class AE_DDPM(DDPM):
         #debug
         loss = self.loss_func(batch, output, **kwargs)
         # self.log('epoch', self.current_epoch)
-        self.log('ae_loss', loss.cpu().detach().mean().item(), on_epoch=True, prog_bar=True, logger=True)
+        # self.log('ae_loss', loss.cpu().detach().mean().item(), on_epoch=True, prog_bar=True, logger=True)
         return loss
 
     def training_step(self, batch, batch_idx, **kwargs):
-        ddpm_optimizer, ae_optimizer = self.optimizers()
+        ddpm_optimizer, ae_optimizer = self.optimizers
         if  self.current_epoch < self.split_epoch:
             loss = self.ae_forward(batch, **kwargs)
             ae_optimizer.zero_grad()
-            self.manual_backward(loss)
+            # self.manual_backward(loss)
+            loss.backward()
             ae_optimizer.step()
         else:
             loss = self.forward(batch, **kwargs)
             ddpm_optimizer.zero_grad()
-            self.manual_backward(loss)
+            # self.manual_backward(loss)
+            loss.backward()
             ddpm_optimizer.step()
 
         if hasattr(self, 'lr_scheduler'):
@@ -102,13 +101,16 @@ class AE_DDPM(DDPM):
             return dict
 
     def configure_optimizers(self, **kwargs):
-        ae_parmas = self.ae_model.parameters()
+        ae_params = self.ae_model.parameters()
         ddpm_params = self.model.parameters()
 
-        self.ddpm_optimizer = hydra.utils.instantiate(self.train_cfg.optimizer, ddpm_params)
-        self.ae_optimizer = hydra.utils.instantiate(self.train_cfg.optimizer, ae_parmas)
+        # self.ddpm_optimizer = hydra.utils.instantiate(self.train_cfg.optimizer, ddpm_params)
+        # self.ae_optimizer = hydra.utils.instantiate(self.train_cfg.optimizer, ae_parmas)
 
-        if 'lr_scheduler' in self.train_cfg and self.train_cfg.lr_scheduler is not None:
-            self.lr_scheduler = hydra.utils.instantiate(self.train_cfg.lr_scheduler)
+        self.ddpm_optimizer = torch.optim.AdamW(params=ddpm_params, lr=1e-3)
+        self.ae_optimizer = torch.optim.AdamW(params=ae_params, lr=1e-3)
+
+        # if 'lr_scheduler' in self.train_cfg and self.train_cfg.lr_scheduler is not None:
+        #     self.lr_scheduler = hydra.utils.instantiate(self.train_cfg.lr_scheduler)
 
         return self.ddpm_optimizer, self.ae_optimizer
