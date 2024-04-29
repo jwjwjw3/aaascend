@@ -7,6 +7,7 @@ from typing import Any
 import numpy as np
 import torch.nn as nn
 from .ddpm_utils import *
+from .model_utils import *
 
 # from core.utils.ddpm import *
 # from core.utils.utils import *
@@ -59,7 +60,7 @@ class DDPM(object):
         #TODO
         pass
 
-    def generate(self, batch, num=10, history=False):
+    def generate(self, batch, num=1, history=False):
         model = self.model.ema if hasattr(self.model, 'ema') else self.model
         model.eval()
         shape = (num, 1, batch.shape[1] * batch.shape[2])
@@ -116,8 +117,8 @@ class DDPM(object):
         print("generated models accuracy:", accs)
         print("generated models mean accuracy:", np.mean(accs))
         print("generated models best accuracy:", best_acc)
-        self.log('best_g_acc', best_acc)
-        self.log('mean_g_acc', np.mean(accs).item())
+        # self.log('best_g_acc', best_acc)
+        # self.log('mean_g_acc', np.mean(accs).item())
         return {'best_g_acc': best_acc, 'mean_g_acc': np.mean(accs).item()}
 
     def training_step(self, batch, batch_idx, **kwargs):
@@ -131,9 +132,9 @@ class DDPM(object):
         return {'loss': loss}
 
     def test_step(self, batch, batch_idx, **kwargs: Any):
-        # generate 100 models
+        # generate models
         batch = self.pre_process(batch)
-        outputs = self.generate(batch, 100)
+        outputs = self.generate(batch, 50)
         params = self.post_process(outputs)
         accs = []
         for i in range(params.shape[0]):
@@ -145,9 +146,9 @@ class DDPM(object):
         print("generated models mean accuracy:", np.mean(accs))
         print("generated models best accuracy:", best_acc)
         print("generated models median accuracy:", np.median(accs))
-        self.log('best_g_acc', best_acc)
-        self.log('mean_g_acc', np.mean(accs).item())
-        self.log('med_g_acc', np.median(accs).item())
+        # self.log('best_g_acc', best_acc)
+        # self.log('mean_g_acc', np.mean(accs).item())
+        # self.log('med_g_acc', np.median(accs).item())
         return {'best_g_acc': best_acc, 'mean_g_acc': np.mean(accs).item(), 'med_g_acc': np.median(accs).item()}
 
     def test_g_model(self, input):
@@ -157,8 +158,16 @@ class DDPM(object):
         target_num = 0
         for name, module in net.named_parameters():
             if name in train_layer:
+                #debug
+                # print("name:", name)
+                #debug
                 target_num += torch.numel(module)
         params_num = torch.squeeze(param).shape[0]  # + 30720
+        #debug
+        # print("params_num:", params_num)
+        # print("target_num:", target_num)
+        # print("param.shape:", param.shape)
+        #debug
         assert (target_num == params_num)
         param = torch.squeeze(param)
         model = partial_reverse_tomodel(param, net, train_layer).to(param.device)
@@ -168,7 +177,7 @@ class DDPM(object):
         total = 0
         output_list = []
         with torch.no_grad():
-            for data, target in self.test_loader:
+            for data, target in self.testloader:
                 data, target = data.cuda(), target.cuda()
                 output = model(data)
                 target = target.to(torch.int64)
@@ -220,7 +229,7 @@ class DDPM(object):
             accumulate(self.model.ema,
                        self.model.model if isinstance(self.model.model, nn.DataParallel) else self.model.model, 0.9999)
 
-        self.log('train_loss', loss)
+        # self.log('train_loss', loss)
         return loss
 
 

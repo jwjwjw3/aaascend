@@ -161,19 +161,19 @@ class ODEncoder2Decoder(nn.Module):
         return torch.randn_like(x) * noise_factor + x * (1 - noise_factor)
 
     def forward(self, x, **kwargs):
-        #debug
-        print("#####################################################")
-        print("forward shape:", x.shape)
-        #debug
+        # #debug
+        # print("#####################################################")
+        # print("forward shape:", x.shape)
+        # #debug
         x = self.add_noise(x, self.input_noise_factor)
         x = self.encode(x)
         x = self.add_noise(x, self.latent_noise_factor)
         x = torch.clamp(x, -1, 1)
         x = self.decode(x)
-        #debug
-        print("output shape:", x.shape)
-        print("#####################################################")
-        #debug
+        # #debug
+        # print("output shape:", x.shape)
+        # print("#####################################################")
+        # #debug
         return x
 
 
