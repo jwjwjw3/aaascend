@@ -9,8 +9,6 @@ import torch.nn as nn
 from .ddpm_utils import *
 from .model_utils import *
 
-# from core.utils.ddpm import *
-# from core.utils.utils import *
 
 class DDPM(object):
     def __init__(self, config_dict, dtype=torch.float32):

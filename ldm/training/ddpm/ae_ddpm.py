@@ -9,12 +9,7 @@ from .ddpm import DDPM
 class AE_DDPM(DDPM):
     def __init__(self, ae_model, model, trainloader, testloader, config_dict, device='cuda:0'):
         self.ae_model = ae_model
-        # input_dim = self.ae_model.in_dim
-        # input_noise = torch.randn((1, input_dim))
-        # latent_dim = ae_model.encode(input_noise).shape
-        # config.system.model.arch.model.in_dim = latent_dim[-1] * latent_dim[-2]
         self.model = model
-        # model.in_dim = latent_dim[-1] * latent_dim[-2]
         self.trainloader = trainloader
         self.testloader = testloader
         self.device = device
@@ -32,8 +27,6 @@ class AE_DDPM(DDPM):
         # print("AEDDPM output.shape:", output.shape)
         #debug
         loss = self.loss_func(batch, output, **kwargs)
-        # self.log('epoch', self.current_epoch)
-        # self.log('ae_loss', loss.cpu().detach().mean().item(), on_epoch=True, prog_bar=True, logger=True)
         return loss
 
     def train(self, num_epochs, print_info=True):
@@ -60,13 +53,11 @@ class AE_DDPM(DDPM):
         if  self.current_epoch < self.split_epoch:
             loss = self.ae_forward(batch, **kwargs)
             ae_optimizer.zero_grad()
-            # self.manual_backward(loss)
             loss.backward()
             ae_optimizer.step()
         else:
             loss = self.forward(batch, **kwargs)
             ddpm_optimizer.zero_grad()
-            # self.manual_backward(loss)
             loss.backward()
             ddpm_optimizer.step()
 
@@ -125,6 +116,4 @@ class AE_DDPM(DDPM):
         ddpm_params = self.model.parameters()
         self.ddpm_optimizer = torch.optim.AdamW(params=ddpm_params, lr=1e-3)
         self.ae_optimizer = torch.optim.AdamW(params=ae_params, lr=1e-3)
-        # if 'lr_scheduler' in self.train_cfg and self.train_cfg.lr_scheduler is not None:
-        #     self.lr_scheduler = hydra.utils.instantiate(self.train_cfg.lr_scheduler)
         return self.ddpm_optimizer, self.ae_optimizer
