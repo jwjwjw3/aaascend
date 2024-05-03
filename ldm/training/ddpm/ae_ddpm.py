@@ -9,9 +9,9 @@ from .ddpm import DDPM
 class AE_DDPM(DDPM):
     def __init__(self, ae_model, model, trainloader, testloader, config_dict, device='cuda:0'):
         self.ae_model = ae_model
-        input_dim = self.ae_model.in_dim
-        input_noise = torch.randn((1, input_dim))
-        latent_dim = ae_model.encode(input_noise).shape
+        # input_dim = self.ae_model.in_dim
+        # input_noise = torch.randn((1, input_dim))
+        # latent_dim = ae_model.encode(input_noise).shape
         # config.system.model.arch.model.in_dim = latent_dim[-1] * latent_dim[-2]
         self.model = model
         # model.in_dim = latent_dim[-1] * latent_dim[-2]
@@ -99,10 +99,12 @@ class AE_DDPM(DDPM):
             # print('---------------------------------')
             # print('Test the AE model')
             ae_rec_accs = []
-            latent = self.ae_model.encode(good_param)
-            # print("latent shape:{}".format(latent.shape))
-            ae_params = self.ae_model.decode(latent)
-            # print("ae params shape:{}".format(ae_params.shape))
+            # latent = self.ae_model.encode(good_param)
+            # # print("latent shape:{}".format(latent.shape))
+            # ae_params = self.ae_model.decode(latent)
+            ae_params = self.ae_model(good_param)
+            ae_params = self.ae_model(torch.rand(good_param.shape, dtype=good_param.dtype, device=good_param.device))
+            # ae_params = -10*torch.rand(good_param.shape, dtype=good_param.dtype, device=good_param.device)
             ae_params = ae_params.cpu()
             for i, param in enumerate(ae_params):
                 param = param.to(batch.device)

@@ -60,7 +60,6 @@ class Block(nn.Module):
         mlp_hidden_dim = int(dim * mlp_ratio)
         self.mlp = Mlp(in_features=dim, hidden_features=mlp_hidden_dim, act_layer=act_layer, drop=drop)
 
-        
     def forward(self, x):
         x = x + self.drop_path(self.attn(self.norm1(x)))
         x = x + self.drop_path(self.mlp(self.norm2(x)))
@@ -70,7 +69,7 @@ class Block(nn.Module):
 class PatchEmbed(nn.Module):
     """ 2D Image to Patch Embedding
     """
-    def __init__(self, img_size=224, patch_size=16, in_chans=3, embed_dim=768, norm_layer=None, flatten=True):
+    def __init__(self, img_size=28, patch_size=16, in_chans=3, embed_dim=768, norm_layer=None, flatten=True):
         super().__init__()
         img_size = to_2tuple(img_size)
         patch_size = to_2tuple(patch_size)
@@ -135,9 +134,8 @@ class GlobalPosEmbed(nn.Module):
     
 
 class ResFormer(nn.Module):
-    """ Vision Transformer with support for patch or hybrid CNN input stage
-    """
-    def __init__(self, img_size= (224, ), patch_size= 16, in_chans=3, num_classes=1000, embed_dim=768, depth=12,
+    """ Vision Transformer with support for patch or hybrid CNN input stage"""
+    def __init__(self, img_size=(28,), patch_size=16, in_chans=3, num_classes=1000, embed_dim=768, depth=12,
                  num_heads=12, mlp_ratio=4., qkv_bias=True, representation_size=None, 
                  drop_rate=0., attn_drop_rate=0., drop_path_rate=0., embed_layer=PatchEmbed, norm_layer=None,
                  act_layer=None, weight_init='', use_checkpoint = False):
@@ -172,7 +170,7 @@ class ResFormer(nn.Module):
                 attn_drop=attn_drop_rate, drop_path=dpr[i], norm_layer=norm_layer, act_layer=act_layer)
             for i in range(depth)])
         self.norm = norm_layer(embed_dim)
-          
+        
         self.depth = depth
         
         if representation_size:
@@ -188,38 +186,31 @@ class ResFormer(nn.Module):
         self.head_res = None
         self.init_weights(weight_init)
 
-    def forward_features(self, x, distillation_target = 'logit'):
+    def forward_features(self, x, distillation_target='logit'):
         x = self.patch_embed(x)
         cls_token = self.cls_token.expand(x.shape[0], -1, -1)  # stole cls_tokens impl from Phil Wang, thanks
         x = torch.cat((cls_token, x), dim=1)
         x = self.pos_drop(self.pos_embed(x))
-
         if self.use_checkpoint:
-            for i  in range(self.depth):
+            for i in range(self.depth):
                 x = checkpoint.checkpoint(self.blocks[i], x)
         else:
             x = self.blocks(x)
-            
         x = self.norm(x)
-        
         if distillation_target == 'gap':
             return  self.pre_logits(x[:, 0]), F.adaptive_avg_pool1d(x[:, self.num_tokens:].transpose(1,2), (1,)).flatten(1).squeeze(-1)
         else:
             return self.pre_logits(x[:, 0]), None
         
     
-    def forward(self, x, distillation_target = 'logit'):
+    def forward(self, x, distillation_target='logit'):
         x_distill = None
         x, x_distill = self.forward_features(x, distillation_target)
-        
         if distillation_target == 'cls' :
             x_distill = x
-    
         x = self.head(x)
-        
         if distillation_target == 'logit' :
             x_distill = x
-        
         #debug
         # if self.training:
         #     return x, x_distill
@@ -260,7 +251,7 @@ class ResFormer(nn.Module):
                         break
         return no_weight_decay_params
 
-def _init_vit_weights(module: nn.Module, name: str = '', head_bias: float = 0., jax_impl: bool = False):
+def _init_vit_weights(module: nn.Module, name: str='', head_bias: float=0., jax_impl: bool=False):
     """ ViT weight initialization
     * When called without n, head_bias, jax_impl args it will behave exactly the same
       as my original init for compatibility with prev hparam / downstream use cases (ie DeiT).

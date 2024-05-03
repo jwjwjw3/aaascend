@@ -8,6 +8,7 @@ from training.ddpm.ae_ddpm import AE_DDPM
 from training.dataset.parametersDataset import ParametersDatset
 from diffResFormer.encoder import small
 from diffResFormer.unet import AE_CNN_bottleneck
+from diffResFormer.BNResFormer import BNResFormer
 
 #debug
 from models import *
@@ -28,9 +29,9 @@ def train():
 
     raw_data = torch.load("./_scratch_folder/data.pt")
     params_dataset = raw_data['pdata']
-    dataset_train = ParametersDatset(params_dataset, 160, split='train')
+    dataset_train = ParametersDatset(params_dataset, 200, split='train')
     # dataset_test = ParametersDatset(params_dataset, 160, split='test')
-    train_batch_size = 8
+    train_batch_size = 60
     test_batch_size = 1000
     train_loader = torch.utils.data.DataLoader(
         dataset_train, 
@@ -65,10 +66,9 @@ def train():
     target_model = ResNet34()
     target_model.load_state_dict(torch.load("./_scratch_folder/resnet34_cifar10.ckpt"))
     trainer = AE_DDPM(
-                ae_model=small(in_dim=2048, input_noise_factor=0.1, latent_noise_factor=0.1), 
-                # model=AE_CNN_bottleneck(in_dim=2048, in_channel=1, time_step=50, dec=None),
+                ae_model=BNResFormer(input_dim=1, output_dim=1, depth=1),
                 model=target_model,
-                trainloader =  train_loader,
+                trainloader = train_loader,
                 testloader = valid_loader,
                 config_dict=config_dict)
     
