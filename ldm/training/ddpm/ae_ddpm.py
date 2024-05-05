@@ -7,49 +7,62 @@ from tqdm import tqdm
 from .ddpm import DDPM
 
 class AE_DDPM(DDPM):
-    def __init__(self, ae_model, model, trainloader, testloader, config_dict, device='cuda:0'):
+    def __init__(self, ae_model, all_target_models, train_archs, test_archs, all_train_layers, all_trainloaders, testloader, config_dict, device='cuda:0'):
         self.ae_model = ae_model
-        self.model = model
-        self.trainloader = trainloader
+        self.all_target_models = all_target_models
+        self.train_archs = train_archs
+        self.test_archs = test_archs
+        self.all_train_layers = all_train_layers
+        self.cur_model_arch = self.train_archs[0]
+        self.all_trainloaders = all_trainloaders
         self.testloader = testloader
         self.device = device
         super(AE_DDPM, self).__init__(config_dict)
-        self.save_hyperparameters()
         self.current_epoch = 0
         self.split_epoch = 30000
         self.loss_func = nn.MSELoss()
         self.optimizers = self.configure_optimizers()
+        self.save_hyperparameters()
+
+    def save_hyperparameters(self):
+        return torch.save(self.ae_model.state_dict, "ae_model_"+str(self.current_epoch)+".pth")
 
     def ae_forward(self, batch, **kwargs):
         self.ae_model.to(batch.device)
         output = self.ae_model(batch)
-        #debug
-        # print("AEDDPM output.shape:", output.shape)
-        #debug
         loss = self.loss_func(batch, output, **kwargs)
         return loss
 
     def train(self, num_epochs, print_info=True):
         for _ in range(num_epochs):
             self.current_epoch += 1
-            epoch_train_losses, epoch_valid_acc = [], []
-            for i, data in tqdm(enumerate(self.trainloader), total=len(self.trainloader)):
-                data = data.to(self.device)
-                batch_train_loss = self.training_step(data)['loss'].detach().cpu().numpy()
-                batch_valid_acc = self.validation_step(data)
-                epoch_train_losses.append(batch_train_loss)
-                epoch_valid_acc.append(batch_valid_acc)
-            if print_info:
-                print("epoch: ", self.current_epoch, 
-                      ", train loss:", np.mean(epoch_train_losses),
-                      ", validation acc (best):", np.mean([acc['best_g_acc'] for acc in epoch_valid_acc]),
-                      ", validation acc (mean):", np.mean([acc['mean_g_acc'] for acc in epoch_valid_acc])
-                    )
+            for arch_name in self.train_archs:
+                self.cur_model_arch = arch_name
+                #debug
+                self.ddpm_optimizer = torch.optim.AdamW(params=self.get_cur_model().parameters(), lr=1e-3)
+                print('arch_name:', arch_name)
+                # print(self.get_cur_model())
+                #debug
+                epoch_arch_train_losses, epoch_arch_valid_acc = [], []
+                trainloader = self.all_trainloaders[arch_name]
+                for i, data in tqdm(enumerate(trainloader), total=len(trainloader)):
+                    data = data.to(self.device)
+                    batch_train_loss = self.training_step(data)['loss'].detach().cpu().numpy()
+                    batch_valid_acc = self.validation_step(data)
+                    epoch_arch_train_losses.append(batch_train_loss)
+                    epoch_arch_valid_acc.append(batch_valid_acc)
+                if print_info:
+                    print("epoch: ", self.current_epoch, 
+                        ", NN arch:", arch_name,
+                        ", train loss:", np.mean(epoch_arch_train_losses),
+                        ", validation acc (best):", np.mean([acc['best_g_acc'] for acc in epoch_arch_valid_acc]),
+                        ", validation acc (mean):", np.mean([acc['mean_g_acc'] for acc in epoch_arch_valid_acc])
+                        )
 
-            
 
     def training_step(self, batch, **kwargs):
-        ddpm_optimizer, ae_optimizer = self.optimizers
+        ddpm_optimizers, ae_optimizer = self.optimizers
+        ddpm_optimizer = ddpm_optimizers[self.cur_model_arch]
         if  self.current_epoch < self.split_epoch:
             loss = self.ae_forward(batch, **kwargs)
             ae_optimizer.zero_grad()
@@ -113,7 +126,10 @@ class AE_DDPM(DDPM):
 
     def configure_optimizers(self, **kwargs):
         ae_params = self.ae_model.parameters()
-        ddpm_params = self.model.parameters()
-        self.ddpm_optimizer = torch.optim.AdamW(params=ddpm_params, lr=1e-3)
+        self.ddpm_optimizers = {
+            arch_name: torch.optim.AdamW(
+                params=self.all_target_models[arch_name].parameters(), lr=1e-3)
+            for arch_name in self.all_target_models.keys()
+        }
         self.ae_optimizer = torch.optim.AdamW(params=ae_params, lr=1e-3)
-        return self.ddpm_optimizer, self.ae_optimizer
+        return self.ddpm_optimizers, self.ae_optimizer

@@ -30,7 +30,7 @@ def train():
     dataset_train = ResNetParamsDataset(model_arch_name="ResNet18_2222_4", 
         train_layer=['blks.7.bn1.weight', 'blks.7.bn1.bias', 'blks.7.bn2.weight', 'blks.7.bn2.bias'], 
         k=180, split='train')
-    train_batch_size = 60
+    train_batch_size = 180
     test_batch_size = 1000
     params_train_loader = torch.utils.data.DataLoader(
         dataset_train, 
@@ -59,7 +59,8 @@ def train():
     target_model = ResNet18_2222_4() 
     target_model.load_state_dict(torch.load("../../../resnet_params_data/models/ResNet18_2222_4/ResNet18_2222_4_seed_190.ckpt"))
     trainer = AE_DDPM(
-                ae_model=BNResFormer(input_dim=1, output_dim=1, depth=5),
+                ae_model=BNResFormer(input_dim=1, output_dim=1, input_mlp_dims=[4, 12], embed_dim=24,
+                    depth=8, num_heads=6, mlp_ratio=4., qkv_bias=True, in_out_bias=True),
                 model=target_model,
                 trainloader = params_train_loader,
                 testloader = cifar10_test_loader,

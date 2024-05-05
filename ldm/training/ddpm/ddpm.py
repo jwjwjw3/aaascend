@@ -14,7 +14,6 @@ class DDPM(object):
     def __init__(self, config_dict, dtype=torch.float32):
         super(DDPM, self).__init__()
         self.dtype = dtype
-        self.save_hyperparameters()
         betas = config_dict["beta_schedule"]
         self.n_timestep = betas["n_timestep"]
         betas = make_beta_schedule(**betas)
@@ -54,12 +53,14 @@ class DDPM(object):
         self.posterior_mean_coef1 = (betas * torch.sqrt(alphas_cumprod_prev) / (1 - alphas_cumprod))
         self.posterior_mean_coef2 = ((1 - alphas_cumprod_prev) * torch.sqrt(alphas) / (1 - alphas_cumprod))
 
-    def save_hyperparameters(self):
-        #TODO
-        pass
+    def get_cur_model(self):
+        return self.all_target_models[self.cur_model_arch]
+
+    def get_cur_train_layer(self):
+        return self.all_train_layers[self.cur_model_arch]
 
     def generate(self, batch, num=1, history=False):
-        model = self.model.ema if hasattr(self.model, 'ema') else self.model
+        model = self.get_cur_model()
         model.eval()
         shape = (num, 1, batch.shape[1] * batch.shape[2])
         sample = self.progressive_samples_fn_simple(
@@ -150,8 +151,8 @@ class DDPM(object):
         return {'best_g_acc': best_acc, 'mean_g_acc': np.mean(accs).item(), 'med_g_acc': np.median(accs).item()}
 
     def test_g_model(self, input):
-        net = self.model
-        train_layer = self.train_layer
+        net = self.get_cur_model()
+        train_layer = self.get_cur_train_layer()
         param = input
         target_num = 0
         for name, module in net.named_parameters():
@@ -191,7 +192,7 @@ class DDPM(object):
 
     def forward(self, batch, **kwargs):
         batch = self.pre_process(batch)
-        model = self.model
+        model = self.get_cur_model()
         time = (torch.rand(batch.shape[0]) * self.n_timestep).type(torch.int64).to(batch.device)
 
         noise = None
@@ -222,10 +223,10 @@ class DDPM(object):
 
         loss = losses.mean()
 
-        # todo: ema is a insert
-        if hasattr(self.model, 'ema'):
-            accumulate(self.model.ema,
-                       self.model.model if isinstance(self.model.model, nn.DataParallel) else self.model.model, 0.9999)
+        # # todo: ema is a insert
+        # if hasattr(self.model, 'ema'):
+        #     accumulate(self.model.ema,
+        #                self.model.model if isinstance(self.model.model, nn.DataParallel) else self.model.model, 0.9999)
 
         # self.log('train_loss', loss)
         return loss
