@@ -53,14 +53,14 @@ class DDPM(object):
         self.posterior_mean_coef1 = (betas * torch.sqrt(alphas_cumprod_prev) / (1 - alphas_cumprod))
         self.posterior_mean_coef2 = ((1 - alphas_cumprod_prev) * torch.sqrt(alphas) / (1 - alphas_cumprod))
 
-    def get_cur_model(self):
+    def get_cur_models(self):
         return self.all_target_models[self.cur_model_arch]
 
     def get_cur_train_layer(self):
         return self.all_train_layers[self.cur_model_arch]
 
     def generate(self, batch, num=1, history=False):
-        model = self.get_cur_model()
+        model = self.get_cur_models()[0]
         model.eval()
         shape = (num, 1, batch.shape[1] * batch.shape[2])
         sample = self.progressive_samples_fn_simple(
@@ -151,85 +151,82 @@ class DDPM(object):
         return {'best_g_acc': best_acc, 'mean_g_acc': np.mean(accs).item(), 'med_g_acc': np.median(accs).item()}
 
     def test_g_model(self, input):
-        net = self.get_cur_model()
+        nets = self.get_cur_models()
         train_layer = self.get_cur_train_layer()
         param = input
-        target_num = 0
-        for name, module in net.named_parameters():
-            if name in train_layer:
-                #debug
-                # print("name:", name)
-                #debug
-                target_num += torch.numel(module)
-        params_num = torch.squeeze(param).shape[0]  # + 30720
-        #debug
-        # print("params_num:", params_num)
-        # print("target_num:", target_num)
-        # print("param.shape:", param.shape)
-        #debug
-        assert (target_num == params_num)
-        param = torch.squeeze(param)
-        model = partial_reverse_tomodel(param, net, train_layer).to(param.device)
-        model.eval()
-        test_loss = 0
-        correct = 0
-        total = 0
-        output_list = []
-        with torch.no_grad():
-            for data, target in self.testloader:
-                data, target = data.cuda(), target.cuda()
-                output = model(data)
-                target = target.to(torch.int64)
-                test_loss += F.cross_entropy(output, target, size_average=False).item()  # sum up batch loss
-                total += data.shape[0]
-                pred = torch.max(output, 1)[1]
-                output_list += pred.cpu().numpy().tolist()
-                correct += pred.eq(target.view_as(pred)).sum().item()
-        test_loss /= total
-        acc = 100. * correct / total
-        del model
-        return acc, test_loss, output_list
+        all_accs, all_test_losses, all_output_lists = [], [], []
+        for net in nets:
+            target_num = 0
+            for name, module in net.named_parameters():
+                if name in train_layer:
+                    target_num += torch.numel(module)
+            params_num = torch.squeeze(param).shape[0]
+            assert (target_num == params_num)
+            param = torch.squeeze(param)
+            model = partial_reverse_tomodel(param, net, train_layer).to(param.device)
+            model.eval()
+            test_loss = 0
+            correct = 0
+            total = 0
+            output_list = []
+            with torch.no_grad():
+                for data, target in self.testloader:
+                    data, target = data.cuda(), target.cuda()
+                    output = model(data)
+                    target = target.to(torch.int64)
+                    test_loss += F.cross_entropy(output, target, size_average=False).item()  # sum up batch loss
+                    total += data.shape[0]
+                    pred = torch.max(output, 1)[1]
+                    output_list += pred.cpu().numpy().tolist()
+                    correct += pred.eq(target.view_as(pred)).sum().item()
+            test_loss /= total
+            acc = 100. * correct / total
+            del model
+            all_accs.append(acc)
+            all_test_losses.append(test_loss)
+            all_output_lists.append(output_list)
+        return all_accs, all_test_losses, all_output_lists
 
-    def forward(self, batch, **kwargs):
-        batch = self.pre_process(batch)
-        model = self.get_cur_model()
-        time = (torch.rand(batch.shape[0]) * self.n_timestep).type(torch.int64).to(batch.device)
+    # def forward(self, batch, **kwargs):
+    #     batch = self.pre_process(batch)
+    #     model = self.get_cur_model()
+    #     time = (torch.rand(batch.shape[0]) * self.n_timestep).type(torch.int64).to(batch.device)
 
-        noise = None
-        lab = None
-        if noise is None:
-            noise = torch.randn_like(batch)
-        x_t = self.q_sample(batch, time, noise=noise)
+    #     noise = None
+    #     lab = None
+    #     if noise is None:
+    #         noise = torch.randn_like(batch)
+    #     x_t = self.q_sample(batch, time, noise=noise)
 
-        # todo: loss using criterion, so we can change it
-        if self.loss_type == 'kl':
-            # the variational bound
-            losses = self._vb_terms_bpd(model=model, x_0=batch, x_t=x_t, t=time, clip_denoised=False, return_pred_x0=False)
+    #     # todo: loss using criterion, so we can change it
+    #     if self.loss_type == 'kl':
+    #         # the variational bound
+    #         losses = self._vb_terms_bpd(model=model, x_0=batch, x_t=x_t, t=time, clip_denoised=False, return_pred_x0=False)
 
-        elif self.loss_type == 'mse':
-            # unweighted MSE
-            assert self.model_var_type != 'learned'
-            target = {
-                'xprev': self.q_posterior_mean_variance(x_0=batch, x_t=x_t, t=time)[0],
-                'xstart': batch,
-                'eps': noise
-            }[self.model_mean_type]
+    #     elif self.loss_type == 'mse':
+    #         # unweighted MSE
+    #         assert self.model_var_type != 'learned'
+    #         target = {
+    #             'xprev': self.q_posterior_mean_variance(x_0=batch, x_t=x_t, t=time)[0],
+    #             'xstart': batch,
+    #             'eps': noise
+    #         }[self.model_mean_type]
 
-            model_output = model(x_t, time, cond=lab)
-            losses       = torch.mean((target - model_output).view(batch.shape[0], -1)**2, dim=1)
+    #         model_output = model(x_t, time, cond=lab)
+    #         losses       = torch.mean((target - model_output).view(batch.shape[0], -1)**2, dim=1)
 
-        else:
-            raise NotImplementedError(self.loss_type)
+    #     else:
+    #         raise NotImplementedError(self.loss_type)
 
-        loss = losses.mean()
+    #     loss = losses.mean()
 
-        # # todo: ema is a insert
-        # if hasattr(self.model, 'ema'):
-        #     accumulate(self.model.ema,
-        #                self.model.model if isinstance(self.model.model, nn.DataParallel) else self.model.model, 0.9999)
+    #     # # todo: ema is a insert
+    #     # if hasattr(self.model, 'ema'):
+    #     #     accumulate(self.model.ema,
+    #     #                self.model.model if isinstance(self.model.model, nn.DataParallel) else self.model.model, 0.9999)
 
-        # self.log('train_loss', loss)
-        return loss
+    #     # self.log('train_loss', loss)
+    #     return loss
 
 
     # def register(self, name, tensor):

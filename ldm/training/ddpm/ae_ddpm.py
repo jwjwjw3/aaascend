@@ -1,3 +1,4 @@
+import os
 import torch
 from typing import Any
 import numpy as np
@@ -25,8 +26,9 @@ class AE_DDPM(DDPM):
         self.optimizers = self.configure_optimizers()
         self.save_hyperparameters()
 
-    def save_hyperparameters(self):
-        return torch.save(self.ae_model.state_dict, "ae_model_"+str(self.current_epoch)+".pth")
+    def save_hyperparameters(self, folder_path='./_analysis/ae_model_params'):
+        os.makedirs(folder_path, exist_ok=True)
+        return torch.save(self.ae_model.state_dict, os.path.join(folder_path, "ae_model_"+str(self.current_epoch)+".pth"))
 
     def ae_forward(self, batch, **kwargs):
         self.ae_model.to(batch.device)
@@ -45,7 +47,7 @@ class AE_DDPM(DDPM):
             self.current_epoch += 1
             for arch_name in self.train_archs:
                 self.cur_model_arch = arch_name
-                self.ddpm_optimizer = torch.optim.AdamW(params=self.get_cur_model().parameters(), lr=1e-3)
+                # self.ddpm_optimizer = torch.optim.AdamW(params=self.get_cur_model().parameters(), lr=1e-3)
                 epoch_arch_train_losses, epoch_arch_valid_acc = [], []
                 trainloader = self.all_trainloaders[arch_name]
                 for data in trainloader:
@@ -75,11 +77,12 @@ class AE_DDPM(DDPM):
                         ", acc (best): {:.5}".format(np.mean([acc['best_g_acc'] for acc in epoch_test_arch_valid_acc])),
                         ", acc (mean): {:.5}".format(np.mean([acc['mean_g_acc'] for acc in epoch_test_arch_valid_acc]))
                         )
+            self.save_hyperparameters()
             print("")
 
     def train_arch_foreach_epoch(self, num_epochs, print_info):
         for arch_name in self.train_archs:
-            self.ddpm_optimizer = torch.optim.AdamW(params=self.get_cur_model().parameters(), lr=1e-3)
+            # self.ddpm_optimizer = torch.optim.AdamW(params=self.get_cur_model().parameters(), lr=1e-3)
             self.cur_model_arch = arch_name
             for _ in range(num_epochs):
                 self.current_epoch += 1
@@ -103,17 +106,17 @@ class AE_DDPM(DDPM):
 
     def training_step(self, batch, **kwargs):
         ddpm_optimizers, ae_optimizer = self.optimizers
-        ddpm_optimizer = ddpm_optimizers[self.cur_model_arch]
-        if  self.current_epoch < self.split_epoch:
-            loss = self.ae_forward(batch, **kwargs)
-            ae_optimizer.zero_grad()
-            loss.backward()
-            ae_optimizer.step()
-        else:
-            loss = self.forward(batch, **kwargs)
-            ddpm_optimizer.zero_grad()
-            loss.backward()
-            ddpm_optimizer.step()
+        # ddpm_optimizer = ddpm_optimizers[self.cur_model_arch]
+        # if  self.current_epoch < self.split_epoch:
+        loss = self.ae_forward(batch, **kwargs)
+        ae_optimizer.zero_grad()
+        loss.backward()
+        ae_optimizer.step()
+        # else:
+        #     loss = self.forward(batch, **kwargs)
+        #     ddpm_optimizer.zero_grad()
+        #     loss.backward()
+        #     ddpm_optimizer.step()
 
         if hasattr(self, 'lr_scheduler'):
             self.lr_scheduler.step()
@@ -132,11 +135,11 @@ class AE_DDPM(DDPM):
         if self.current_epoch < self.split_epoch:
             # todo
             # good_param = batch[:10]
-            good_param = batch
-            input_accs = []
-            for i, param in enumerate(good_param):
-                acc, test_loss, output_list = self.test_g_model(param)
-                input_accs.append(acc)
+            good_param = torch.unsqueeze(batch[0], 0)   # only one net's parameters
+            # input_accs = []
+            # for i, param in enumerate(good_param):
+            #     acc, test_loss, output_list = self.test_g_model(param)
+            #     input_accs.append(acc)
             # print("input model accuracy:{}".format(input_accs))
             # """
             # AE reconstruction parameters
@@ -144,33 +147,23 @@ class AE_DDPM(DDPM):
             # print('---------------------------------')
             # print('Test the AE model')
             ae_rec_accs = []
-            # latent = self.ae_model.encode(good_param)
-            # # print("latent shape:{}".format(latent.shape))
-            # ae_params = self.ae_model.decode(latent)
-            # ae_params = self.ae_model(good_param)
-            ae_params = self.ae_model(torch.rand(good_param.shape, dtype=good_param.dtype, device=good_param.device))
-            # ae_params = -10*torch.rand(good_param.shape, dtype=good_param.dtype, device=good_param.device)
-            ae_params = ae_params.cpu()
+            rand_param = torch.rand(good_param.shape, dtype=good_param.dtype, device=good_param.device)
+            ae_params = self.ae_model(rand_param).cpu()
             for i, param in enumerate(ae_params):
                 param = param.to(batch.device)
-                acc, test_loss, output_list = self.test_g_model(param)
-                ae_rec_accs.append(acc)
+                all_accs, all_test_losses, all_output_lists = self.test_g_model(param)
+                ae_rec_accs.extend(all_accs)
 
-            best_ae = max(ae_rec_accs)
-            # print(f'AE reconstruction models accuracy:{ae_rec_accs}')
-            # print(f'AE reconstruction models best accuracy:{best_ae}')
-            # print('---------------------------------')
-            return {"best_g_acc": best_ae, "mean_g_acc": np.mean(ae_rec_accs)}
+            return {"best_g_acc": max(ae_rec_accs), "mean_g_acc": np.mean(ae_rec_accs)}
         else:
-            dict = super(AE_DDPM, self).validation_step(batch, **kwargs)
-            return dict
+            return super(AE_DDPM, self).validation_step(batch, **kwargs)
 
     def configure_optimizers(self, **kwargs):
         ae_params = self.ae_model.parameters()
         self.ddpm_optimizers = {
             arch_name: torch.optim.AdamW(
-                params=self.all_target_models[arch_name].parameters(), lr=1e-3)
+                params=self.all_target_models[arch_name][0].parameters(), lr=1e-3)
             for arch_name in self.all_target_models.keys()
         }
-        self.ae_optimizer = torch.optim.AdamW(params=ae_params, lr=1e-3)
+        self.ae_optimizer = torch.optim.AdamW(params=ae_params, lr=2e-4)
         return self.ddpm_optimizers, self.ae_optimizer

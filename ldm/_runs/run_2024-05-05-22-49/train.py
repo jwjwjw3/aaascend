@@ -24,7 +24,7 @@ DDPM_CONFIG_DICT = {
     "loss_type": "mse",
 }
 
-train_batch_size = 180
+train_batch_size = 30
 test_batch_size = 1000
 
 
@@ -49,7 +49,7 @@ def train():
                         batch_size=train_batch_size, shuffle=True)
         for arch_name in list(ALL_ARCH_TRAINABLE_BN_LAYERS.keys())
     }
-    all_target_models = {arch_name: all_params_datasets[arch_name].model for arch_name in all_params_datasets.keys()}
+    all_target_models = {arch_name: all_params_datasets[arch_name].models for arch_name in all_params_datasets.keys()}
     all_train_layers = {arch_name: all_params_datasets[arch_name].train_layer for arch_name in all_params_datasets.keys()}
 
     cifar10_valid_transforms = torchvision.transforms.Compose([
@@ -67,12 +67,12 @@ def train():
         cifar10_test_dataset, 
         batch_size=test_batch_size,
         shuffle=False,
-        sampler=SubsetRandomSampler([i for i in range(100)]),
+        sampler=SubsetRandomSampler([i for i in range(10000)]),
     )
 
     trainer = AE_DDPM(
-                ae_model=BNResFormer(input_dim=1, output_dim=1, input_mlp_dims=[4, 8], embed_dim=8,
-                    depth=4, num_heads=4, mlp_ratio=4., qkv_bias=True, in_out_bias=True),
+                ae_model=BNResFormer(input_dim=1, output_dim=1, input_mlp_dims=[16, 16], embed_dim=16,
+                    depth=8, num_heads=16, mlp_ratio=16., qkv_bias=True, in_out_bias=True),
                 all_target_models=all_target_models,
                 train_archs=train_archs,
                 test_archs=test_archs,

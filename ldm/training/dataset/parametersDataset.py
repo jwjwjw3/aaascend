@@ -23,13 +23,12 @@ class ParametersDatset(VisionDataset):
 
 class ResNetParamsDataset(VisionDataset):
     def __init__(self, model_arch_name, train_layer, k, 
-            split='train', transform=None, target_transform=None, default_model_index=199):
+            split='train', transform=None, target_transform=None, test_model_indices=[i for i in range(180, 200)]):
         # exmaple: model_arch_name="ResNet18_2222_4", 
         # train_layer=['blks.7.bn1.weight', 'blks.7.bn1.bias', 'blks.7.bn2.weight', 'blks.7.bn2.bias']
         super(ResNetParamsDataset, self).__init__(root=None, transform=transform, target_transform=target_transform)
         # load default neural network model
-        self.model = eval(model_arch_name+"()")
-        self.load_model_from_index(model_arch_name=model_arch_name, index=default_model_index)
+        self.load_models_by_indices(model_arch_name=model_arch_name, indices=test_model_indices)
         # configure trainable layer names list
         self.train_layer = train_layer
         # load all trainable layers' data
@@ -54,11 +53,15 @@ class ResNetParamsDataset(VisionDataset):
         all_train_params = torch.stack(all_train_params, dim=0)
         return all_train_params
 
-    def load_model_from_index(self, model_arch_name, index):
-        model_ckpt_path = os.path.join(
-            RESNET_UTILS_PATH,  "../models/", model_arch_name, model_arch_name+"_seed_"+str(index)+".ckpt"
-        )
-        self.model.load_state_dict(torch.load(model_ckpt_path))
+    def load_models_by_indices(self, model_arch_name, indices):
+        self.models = []
+        for i in indices:
+            cur_model = eval(model_arch_name+"()")
+            model_ckpt_path = os.path.join(
+                RESNET_UTILS_PATH,  "../models/", model_arch_name, model_arch_name+"_seed_"+str(i)+".ckpt"
+            )
+            cur_model.load_state_dict(torch.load(model_ckpt_path))
+            self.models.append(cur_model)
 
     def __getitem__(self, item):
         return self.data[item]
