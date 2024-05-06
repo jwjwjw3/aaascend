@@ -86,10 +86,19 @@ class PatchEmbed(nn.Module):
         self.norm = norm_layer(embed_dim) if norm_layer else nn.Identity()
 
     def forward(self, x):
+        #debug
+        print("patch_embed in shape:", x.shape)
+        #debug
         x = self.proj(x)
+        #debug
+        print("after proj shape:", x.shape)
+        #debug
         if self.flatten:
             x = x.flatten(2).transpose(1, 2)  # BCHW -> BNC
         x = self.norm(x)
+        #debug
+        print("patch_embed out shape:", x.shape)
+        #debug
         return x
     
     def flops(self):
@@ -110,6 +119,9 @@ class GlobalPosEmbed(nn.Module):
             scale = 2 * math.pi
         self.scale = scale
         self.embed_layer = nn.Conv2d(embed_dim, embed_dim, kernel_size=3, padding= 1, groups = embed_dim)
+        #debug
+        print("embed_dim:", embed_dim)
+        #debug
         
     def forward(self, x):
         b, n, c = x.shape
@@ -131,7 +143,9 @@ class GlobalPosEmbed(nn.Module):
         pos = self.embed_layer(pos).reshape(b, c, -1).transpose(1, 2)
         pos_cls = torch.zeros((b, 1, c), device = x.device)
         pos =  torch.cat((pos_cls, pos),dim=1)
-        return pos + x
+        print("b:", b, "n:", n, "c:", c, "patch_n:", patch_n, "y_embed.shape:", y_embed.shape, "x_embed.shape:", x_embed.shape)
+        print("pos.shape:", pos.shape)
+        return pos + x, pos
     
 
 class ResFormer(nn.Module):

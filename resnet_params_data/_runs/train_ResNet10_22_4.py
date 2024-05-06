@@ -7,7 +7,7 @@ model_name = "ResNet10_22_4"
 all_models_folder = "../models"
 dataset_folder = "../cifar10_dataset"
 
-for seed in range(100):
+for seed in range(200, 500):
     cur_model_folder = os.path.join(all_models_folder, model_name)
     cur_log_filename = "trainlog_"+model_name+"_seed_"+str(seed)+".torch"
     if not os.path.isfile(os.path.join(cur_model_folder, cur_log_filename)):
