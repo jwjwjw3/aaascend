@@ -7,7 +7,7 @@ from tqdm import tqdm
 from .ddpm import DDPM
 
 class AE_DDPM(DDPM):
-    def __init__(self, ae_model, all_target_models, train_archs, test_archs, all_train_layers, all_trainloaders, testloader, config_dict, device='cuda:0'):
+    def __init__(self, ae_model, all_target_models, train_archs, test_archs, train_epoch_foreach_arch_bool, all_train_layers, all_trainloaders, testloader, config_dict, device='cuda:0'):
         self.ae_model = ae_model
         self.all_target_models = all_target_models
         self.train_archs = train_archs
@@ -16,6 +16,7 @@ class AE_DDPM(DDPM):
         self.cur_model_arch = self.train_archs[0]
         self.all_trainloaders = all_trainloaders
         self.testloader = testloader
+        self.train_epoch_foreach_arch_bool = train_epoch_foreach_arch_bool  # True: each epoch has all archs; False: each arch completes all epochs one by one
         self.device = device
         super(AE_DDPM, self).__init__(config_dict)
         self.current_epoch = 0
@@ -34,30 +35,70 @@ class AE_DDPM(DDPM):
         return loss
 
     def train(self, num_epochs, print_info=True):
+        if self.train_epoch_foreach_arch_bool:
+            return self.train_epoch_foreach_arch(num_epochs=num_epochs, print_info=print_info)
+        else:
+            return self.train_arch_foreach_epoch(num_epochs=num_epochs, print_info=print_info)
+
+    def train_epoch_foreach_arch(self, num_epochs, print_info):
         for _ in range(num_epochs):
             self.current_epoch += 1
             for arch_name in self.train_archs:
                 self.cur_model_arch = arch_name
-                #debug
                 self.ddpm_optimizer = torch.optim.AdamW(params=self.get_cur_model().parameters(), lr=1e-3)
-                print('arch_name:', arch_name)
-                # print(self.get_cur_model())
-                #debug
                 epoch_arch_train_losses, epoch_arch_valid_acc = [], []
                 trainloader = self.all_trainloaders[arch_name]
-                for i, data in tqdm(enumerate(trainloader), total=len(trainloader)):
+                for data in trainloader:
                     data = data.to(self.device)
                     batch_train_loss = self.training_step(data)['loss'].detach().cpu().numpy()
                     batch_valid_acc = self.validation_step(data)
                     epoch_arch_train_losses.append(batch_train_loss)
                     epoch_arch_valid_acc.append(batch_valid_acc)
                 if print_info:
-                    print("epoch: ", self.current_epoch, 
+                    print("epoch:", self.current_epoch, 
                         ", NN arch:", arch_name,
-                        ", train loss:", np.mean(epoch_arch_train_losses),
-                        ", validation acc (best):", np.mean([acc['best_g_acc'] for acc in epoch_arch_valid_acc]),
-                        ", validation acc (mean):", np.mean([acc['mean_g_acc'] for acc in epoch_arch_valid_acc])
+                        ", train loss: {:.5}".format(np.mean(epoch_arch_train_losses)),
+                        ", acc (best): {:.5}".format(np.mean([acc['best_g_acc'] for acc in epoch_arch_valid_acc])),
+                        ", acc (mean): {:.5}".format(np.mean([acc['mean_g_acc'] for acc in epoch_arch_valid_acc]))
                         )
+            for arch_name in self.test_archs:
+                self.cur_model_arch = arch_name
+                epoch_test_arch_valid_acc = []
+                trainloader = self.all_trainloaders[arch_name]
+                for data in trainloader:
+                    data = data.to(self.device)
+                    batch_valid_acc = self.validation_step(data)
+                    epoch_test_arch_valid_acc.append(batch_valid_acc)
+                if print_info:
+                    print("epoch:", self.current_epoch, 
+                        ", test NN arch:", arch_name,
+                        ", acc (best): {:.5}".format(np.mean([acc['best_g_acc'] for acc in epoch_test_arch_valid_acc])),
+                        ", acc (mean): {:.5}".format(np.mean([acc['mean_g_acc'] for acc in epoch_test_arch_valid_acc]))
+                        )
+            print("")
+
+    def train_arch_foreach_epoch(self, num_epochs, print_info):
+        for arch_name in self.train_archs:
+            self.ddpm_optimizer = torch.optim.AdamW(params=self.get_cur_model().parameters(), lr=1e-3)
+            self.cur_model_arch = arch_name
+            for _ in range(num_epochs):
+                self.current_epoch += 1
+                epoch_arch_train_losses, epoch_arch_valid_acc = [], []
+                trainloader = self.all_trainloaders[arch_name]
+                for data in trainloader:
+                    data = data.to(self.device)
+                    batch_train_loss = self.training_step(data)['loss'].detach().cpu().numpy()
+                    batch_valid_acc = self.validation_step(data)
+                    epoch_arch_train_losses.append(batch_train_loss)
+                    epoch_arch_valid_acc.append(batch_valid_acc)
+                if print_info:
+                    print("epoch:", self.current_epoch, 
+                        ", NN arch:", arch_name,
+                        ", train loss: {:.5}".format(np.mean(epoch_arch_train_losses)),
+                        ", validation acc (best): {:.5}".format(np.mean([acc['best_g_acc'] for acc in epoch_arch_valid_acc])),
+                        ", validation acc (mean): {:.5}".format(np.mean([acc['mean_g_acc'] for acc in epoch_arch_valid_acc]))
+                        )
+            print("")
 
 
     def training_step(self, batch, **kwargs):
@@ -106,7 +147,7 @@ class AE_DDPM(DDPM):
             # latent = self.ae_model.encode(good_param)
             # # print("latent shape:{}".format(latent.shape))
             # ae_params = self.ae_model.decode(latent)
-            ae_params = self.ae_model(good_param)
+            # ae_params = self.ae_model(good_param)
             ae_params = self.ae_model(torch.rand(good_param.shape, dtype=good_param.dtype, device=good_param.device))
             # ae_params = -10*torch.rand(good_param.shape, dtype=good_param.dtype, device=good_param.device)
             ae_params = ae_params.cpu()

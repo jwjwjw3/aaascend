@@ -68,7 +68,7 @@ class Block(nn.Module):
     
 class BNResFormer(nn.Module):
     def __init__(self, input_dim,  output_dim, input_mlp_dims=[4, 8], embed_dim=12,
-                 depth=8, num_heads=4, mlp_ratio=4., qkv_bias=True, in_out_bias=True,
+                 depth=8, num_heads=4, add_pos_emb=True, mlp_ratio=4., qkv_bias=True, in_out_bias=True,
                  drop_rate=0., attn_drop_rate=0., drop_path_rate=0., norm_layer=None,
                  act_layer=None, weight_init='', flat_output=True):
         super().__init__()
@@ -76,6 +76,9 @@ class BNResFormer(nn.Module):
         act_layer = act_layer or nn.GELU
         self.flat_output = flat_output
         # init input encoding MLP layers
+        self.add_pos_emb = add_pos_emb
+        if self.add_pos_emb:
+            input_dim = input_dim + 1
         self.input_mlp = self.init_mlp([input_dim, *input_mlp_dims, embed_dim], bias=in_out_bias, last_activation=True)
         # init transformer blocks
         dpr = [x.item() for x in torch.linspace(0, drop_path_rate, depth)]  # stochastic depth decay rule
@@ -100,7 +103,12 @@ class BNResFormer(nn.Module):
         return nn.Sequential(*mlp_layers)
 
     def forward(self, x):
-        if len(x.shape) < 3:
+        if self.add_pos_emb:
+            _pos_emb = torch.linspace(-1, 1, 4).repeat_interleave(int(x.shape[1]/4))
+            _pos_emb = torch.tile(_pos_emb, (x.shape[0], 1)).to(x.device)
+            assert len(x.shape) == 2
+            x = torch.stack([x, _pos_emb], dim=2)
+        elif len(x.shape) < 3:
             x = torch.unsqueeze(x, -1)
         x = self.input_mlp(x)
         x = self.blocks(x)
@@ -108,9 +116,6 @@ class BNResFormer(nn.Module):
         x = self.output_mlp(x)
         if self.flat_output:
             x = torch.squeeze(x, dim=2)
-        #debug
-        # return torch.zeros(x.shape, dtype=x.dtype, device=x.device, requires_grad=True)
-        #debug
         return x         
     
     def init_weights(self, mode=''):
