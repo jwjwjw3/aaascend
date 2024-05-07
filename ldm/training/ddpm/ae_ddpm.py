@@ -1,4 +1,4 @@
-import os
+import os, time
 import torch
 from typing import Any
 import numpy as np
@@ -19,6 +19,7 @@ class AE_DDPM(DDPM):
         self.testloader = testloader
         self.train_epoch_foreach_arch_bool = train_epoch_foreach_arch_bool  # True: each epoch has all archs; False: each arch completes all epochs one by one
         self.device = device
+        self.ae_model.to(self.device)
         super(AE_DDPM, self).__init__(config_dict)
         self.current_epoch = 0
         self.split_epoch = 30000
@@ -63,22 +64,47 @@ class AE_DDPM(DDPM):
                         ", acc (best): {:.5}".format(np.mean([acc['best_g_acc'] for acc in epoch_arch_valid_acc])),
                         ", acc (mean): {:.5}".format(np.mean([acc['mean_g_acc'] for acc in epoch_arch_valid_acc]))
                         )
-            for arch_name in self.test_archs:
-                self.cur_model_arch = arch_name
-                epoch_test_arch_valid_acc = []
-                trainloader = self.all_trainloaders[arch_name]
-                for data in trainloader:
-                    data = data.to(self.device)
-                    batch_valid_acc = self.validation_step(data)
-                    epoch_test_arch_valid_acc.append(batch_valid_acc)
-                if print_info:
-                    print("epoch:", self.current_epoch, 
-                        ", test NN arch:", arch_name,
-                        ", acc (best): {:.5}".format(np.mean([acc['best_g_acc'] for acc in epoch_test_arch_valid_acc])),
-                        ", acc (mean): {:.5}".format(np.mean([acc['mean_g_acc'] for acc in epoch_test_arch_valid_acc]))
-                        )
+            self.test_acc_archs(print_info=print_info)
             self.save_hyperparameters()
             print("")
+
+    def test_acc_archs(self, print_info):
+        for arch_name in self.test_archs:
+            self.cur_model_arch = arch_name
+            epoch_test_arch_valid_acc = []
+            trainloader = self.all_trainloaders[arch_name]
+            for data in trainloader:
+                data = data.to(self.device)
+                batch_valid_acc = self.validation_step(data)
+                epoch_test_arch_valid_acc.append(batch_valid_acc)
+            if print_info:
+                print("epoch:", self.current_epoch, 
+                    ", test NN arch:", arch_name,
+                    ", acc (best): {:.5}".format(np.mean([acc['best_g_acc'] for acc in epoch_test_arch_valid_acc])),
+                    ", acc (mean): {:.5}".format(np.mean([acc['mean_g_acc'] for acc in epoch_test_arch_valid_acc]))
+                    )
+
+
+    def ae_g_model_speedtest(self, print_info):
+        for arch_name in self.test_archs:
+            self.cur_model_arch = arch_name
+            epoch_test_arch_valid_acc = []
+            trainloader = self.all_trainloaders[arch_name]
+            i = 0
+            start_time = time.time()
+            for data in trainloader:
+                data = data.to(self.device)
+                _ = self.ae_forward(data)
+                i += 1
+            avg_forward_time = (time.time() - start_time) / i
+            num_arch_total_params = sum([p.numel() for p in self.all_target_models[arch_name][0].parameters()])
+            num_trainable_params = data.shape[1]
+            # print(num_arch_total_params, num_trainable_params)
+            avg_forward_time = avg_forward_time * num_arch_total_params / num_trainable_params
+            if print_info:
+                print("test NN arch:", arch_name,
+                    ", mean forward time (s):", avg_forward_time
+                    )
 
     def train_arch_foreach_epoch(self, num_epochs, print_info):
         for arch_name in self.train_archs:
