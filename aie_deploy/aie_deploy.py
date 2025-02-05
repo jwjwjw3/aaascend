@@ -6,6 +6,7 @@ import numpy as np
 from PIL import Image
 from pathlib import Path
 import vai_q_onnx
+import argparse
 
 import torch
 from torch.utils.data import DataLoader, Dataset
@@ -25,6 +26,10 @@ def unpickle(file):
         dict = pickle.load(fo, encoding='latin1')
     return dict
 
+parser = argparse.ArgumentParser()
+parser.add_argument('--model', type=str, default ='ResNet10_1111_8.U8S8.onnx')
+args = parser.parse_args()
+
 datafile = r'./data/cifar-10-batches-py/test_batch'
 metafile = r'./data/cifar-10-batches-py/batches.meta'
 
@@ -40,46 +45,47 @@ if not os.path.exists(dirname):
    os.mkdir(dirname)
 
 quant_dir = './models/quant'
-models = os.listdir(quant_dir)
 
 ipu_time = []
-for model_name in models:
-    quantized_model_path = quant_dir + '/' + model_name
-    print(quantized_model_path.encode('unicode_escape'))
-    model = onnx.load(quantized_model_path.encode('unicode_escape'))
 
-    providers = ['VitisAIExecutionProvider']
-    cache_dir = 'cache'
-    if os.path.exists(cache_dir):
-        shutil.rmtree(cache_dir)
-    cache_key = 'modelcachekey'
-    provider_options = [{
-                    'config_file': 'vaip_config.json',
-                    'cacheDir': str(cache_dir),
-                    'cacheKey': str(cache_key)
-                }]
+quantized_model_path = quant_dir + '/' + args.model
+print(quantized_model_path.encode('unicode_escape'))
+model = onnx.load(quantized_model_path.encode('unicode_escape'))
 
-    session = ort.InferenceSession(model.SerializeToString(), providers=providers,
-                                provider_options=provider_options)
+providers = ['VitisAIExecutionProvider']
+cache_dir = 'cache'
+if os.path.exists(cache_dir):
+    shutil.rmtree(cache_dir)
+cache_key = 'modelcachekey'
+provider_options = [{
+                'config_file': 'vaip_config.json',
+                'cacheDir': str(cache_dir),
+                'cacheKey': str(cache_key)
+            }]
 
-    elapsed = 0
-    correct = 0
-    for i in range(10000): 
-        im = images[i]
-        image_array = np.array(im).astype(np.float32)
-        image_array = image_array/255
-        input_data = np.expand_dims(image_array, axis=0)
+session = ort.InferenceSession(model.SerializeToString(), providers=providers,
+                            provider_options=provider_options)
 
-        ts = perf_counter()
+elapsed = 0
+correct = 0
+for i in range(10000): 
+    im = images[i]
+    image_array = np.array(im).astype(np.float32)
+    image_array = image_array/255
+    input_data = np.expand_dims(image_array, axis=0)
+    
+    outputs = session.run(None, {'input': input_data})
+    ts = perf_counter()
+    for i in range(3):
         outputs = session.run(None, {'input': input_data})
-        elapsed += perf_counter() - ts
+    elapsed += (perf_counter() - ts)/3
 
-        output_array = outputs[0]
-        predicted_class = np.argmax(output_array)
-        predicted_label = metadata['label_names'][predicted_class]
-        label = metadata['label_names'][labels[i]]
-        if predicted_class == labels[i]:
-            correct += 1
-    ipu_time.append(elapsed)
-    print(f"Model: {model_name}, Accuracy: {correct/10000}, Time: {elapsed}")
+    output_array = outputs[0]
+    predicted_class = np.argmax(output_array)
+    predicted_label = metadata['label_names'][predicted_class]
+    label = metadata['label_names'][labels[i]]
+    if predicted_class == labels[i]:
+        correct += 1
+ipu_time.append(elapsed)
+print(f"Model: {args.model}, Accuracy: {correct/10000}, Time: {elapsed}")
     

@@ -252,8 +252,8 @@
      }
     ],
     "xcompilerAttrs": {
-     "preassign": {
-      "boolValue": false
+     "opt_level": {
+      "intValue": 3
      },
      "debug_mode": {
       "stringValue": "performance"
@@ -261,23 +261,23 @@
      "concat_skip_code_gen": {
       "boolValue": false
      },
-     "opt_level": {
-      "intValue": 3
-     },
-     "prefetch": {
-      "boolValue": true
-     },
-     "profile": {
-      "intValue": 0
-     },
-     "dpu_subgraph_num": {
-      "intValue": 32
-     },
      "disable_std_quant": {
       "boolValue": false
      },
      "dump_subgraph_ops": {
       "boolValue": false
+     },
+     "profile": {
+      "intValue": 0
+     },
+     "preassign": {
+      "boolValue": false
+     },
+     "prefetch": {
+      "boolValue": true
+     },
+     "dpu_subgraph_num": {
+      "intValue": 32
      }
     },
     "minimumNumOfConv": 2
